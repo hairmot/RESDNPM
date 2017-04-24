@@ -1,24 +1,32 @@
 import validation from './validation.js';
+import getPlUploader from '../shared/getPlUploader.js';
+import evidenceMode from './evidenceMode.js';
 
 export default {
-    addChangedHandlers : function addChangedHandlers() {
+    addChangeHandlers : function addInputChangeHandlers() {
+        
         $('input, select, textarea').on('keyup change', function() {
-            validation.validate();
+            validation.validatePage();
         });
 
-         $('input[data-evidenceavailable]').on('change', function() {
-                if($(this).prop('checked'))
+        $('input[data-evidenceavailable]').on('change', function() {
+           evidenceMode();
+         });
+
+         $('input[title="Next"]').on('click', function() {
+                
+                if(validation.validatePage() === 0 && validation.validateEvidence())
                 {
-                    $('.evidenceReason').css('display','inherit');
-                    $('input[data-evidencereason]').prop('disabled', false).addClass('sv-mandatory');
+                    toastr.success('Page Valid!');
                 }
                 else
                 {
-                     $('.evidenceReason').css('display','none');
-                     $('input[data-evidencereason]').prop('disabled', true).val('').removeClass('sv-mandatory');
+                    toastr.warning('required inputs are invalid');
                 }
-         });
+                return false;
+        });
     }
 
-   
+
+
 }

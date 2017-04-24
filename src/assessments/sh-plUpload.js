@@ -1,3 +1,5 @@
+import plUploader from '../shared/plUpload.js'
+
 export default {
 
     addUploadHandlers : function addUploadHandlers(){

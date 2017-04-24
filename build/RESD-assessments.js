@@ -177,6 +177,13 @@ exports.default = {
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
+
+var _plUpload = require('../shared/plUpload.js');
+
+var _plUpload2 = _interopRequireDefault(_plUpload);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 exports.default = {
 
     addUploadHandlers: function addUploadHandlers() {
@@ -225,7 +232,7 @@ exports.default = {
     }
 };
 
-},{}],6:[function(require,module,exports){
+},{"../shared/plUpload.js":7}],6:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -256,7 +263,20 @@ exports.default = {
         }
 };
 
-},{"../shared/validator":7}],7:[function(require,module,exports){
+},{"../shared/validator":8}],7:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+exports.default = getPlUploader = function getPlUploader() {
+    return Object.keys(uploader).map(function (a) {
+        return uploader[a];
+    })[0];
+};
+
+},{}],8:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -265,7 +285,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = {
     validateSelects: function validateSelects(selects) {
         selects.map(function (a) {
-            return a.val() == 0 ? a.parent().addClass('sv-mandatory') : a.parent().removeClass('sv-mandatory');
+            return a.text() == "Please select" ? a.parent().addClass('sv-mandatory') : a.parent().removeClass('sv-mandatory');
         });
     },
 
