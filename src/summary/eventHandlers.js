@@ -24,6 +24,7 @@ export default {
                 {
                     toastr.warning('required inputs are invalid');
                 }
+                return false;
         });
     }
 

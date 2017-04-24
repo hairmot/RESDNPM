@@ -37,7 +37,7 @@ function waitForInputs(id)
         $('.upnotes').val($('#mhdCode').html());
         uploader().start();
     }
-        else
+    else
     {
         setTimeout( function() {waitForInputs(id)}, 100 );
     }

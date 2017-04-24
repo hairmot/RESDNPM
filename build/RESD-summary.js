@@ -71,6 +71,7 @@ exports.default = {
             } else {
                 toastr.warning('required inputs are invalid');
             }
+            return false;
         });
     }
 
