@@ -178,9 +178,9 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _plUpload = require('../shared/plUpload.js');
+var _getPlUploader = require('../shared/getPlUploader.js');
 
-var _plUpload2 = _interopRequireDefault(_plUpload);
+var _getPlUploader2 = _interopRequireDefault(_getPlUploader);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -189,15 +189,12 @@ exports.default = {
     addUploadHandlers: function addUploadHandlers() {
         $('.add').on('click', function (e) {
             e.preventDefault();
-            Object.keys(uploader).map(function (a) {
-                return uploader[a];
-            })[0].bind("UploadComplete", function () {
+            var uploader = (0, _getPlUploader2.default)();
+            uploader.bind("UploadComplete", function () {
                 $('input[data-continue]').prop('disabled', false).val('Continue');
                 toastr.success('All files finished uploading');
             });
-            Object.keys(uploader).map(function (a) {
-                return uploader[a];
-            })[0].bind("UploadFile", function () {
+            uploader.bind("UploadFile", function () {
                 $('input[data-continue]').prop('disabled', true).val('Files Uploading');
                 toastr.info('Files uploading');
             });
@@ -206,33 +203,30 @@ exports.default = {
     },
 
     addFileHandlers: function addFileHandlers() {
+        var _this = this;
         $('.fileBrowse').on('change', function () {
-            var pageUploader = Object.keys(uploader).map(function (a) {
-                return uploader[a];
-            })[0];
-            pageUploader.addFile(this.files[0]);
+            (0, _getPlUploader2.default)().addFile(this.files[0]);
             var id = $(this).attr('id');
             $(this).next().removeClass('sv-btn-default').addClass('sv-btn-success').val('Uploaded').prop('disabled', true);
             waitForInputs(id);
         });
-    },
-
-    waitforInputs: function waitForInputs(id) {
-        if ($('.updesc').length > 0) {
-            $('.updesc').val(id);
-            $('.upnotes').val($('#mhdCode').html());
-            Object.keys(uploader).map(function (a) {
-                return uploader[a];
-            })[0].start();
-        } else {
-            setTimeout(function () {
-                waitForInputs(id);
-            }, 100);
-        }
     }
 };
 
-},{"../shared/plUpload.js":7}],6:[function(require,module,exports){
+
+function waitForInputs(id) {
+    if ($('.updesc').length > 0) {
+        $('.updesc').val(id);
+        $('.upnotes').val($('#mhdCode').html());
+        (0, _getPlUploader2.default)().start();
+    } else {
+        setTimeout(function () {
+            waitForInputs(id);
+        }, 100);
+    }
+}
+
+},{"../shared/getPlUploader.js":7}],6:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -270,7 +264,7 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-exports.default = getPlUploader = function getPlUploader() {
+exports.default = function () {
     return Object.keys(uploader).map(function (a) {
         return uploader[a];
     })[0];

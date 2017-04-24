@@ -67,10 +67,10 @@ exports.default = {
 
             if (_validation2.default.validatePage() === 0 && _validation2.default.validateEvidence()) {
                 toastr.success('Page Valid!');
+                return true;
             } else {
                 toastr.warning('required inputs are invalid');
             }
-            return false;
         });
     }
 

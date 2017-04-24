@@ -18,12 +18,12 @@ export default {
                 if(validation.validatePage() === 0 && validation.validateEvidence())
                 {
                     toastr.success('Page Valid!');
+                    return true;
                 }
                 else
                 {
                     toastr.warning('required inputs are invalid');
                 }
-                return false;
         });
     }
 
