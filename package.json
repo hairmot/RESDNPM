@@ -4,8 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "process": "browserify -t babelify ./src/index.js -o ./build/RESD.js",
-    "watch": "watch \"npm run process\" ./src/"
+    "build-assessments": "browserify -t babelify ./src/assessments/index.js -o ./build/RESD-assessments.js",
+    "build-summary": "browserify -t babelify ./src/summary/index.js -o ./build/RESD-summary.js",
+    "watch-assessments": "watch \"npm run build-assessments\" ./src/assessments/",
+    "watch-summary": "watch \"npm run build-summary\" ./src/summary/"
   },
   "keywords": [],
   "author": "SHU",

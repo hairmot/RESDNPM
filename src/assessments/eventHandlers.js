@@ -1,4 +1,4 @@
-import validator from './validator';
+import validator from './validation.js';
 import ajaxFunctions from  './ajaxFunctions.js';
 import rowsSelected from './rowsSelected.js';
 
