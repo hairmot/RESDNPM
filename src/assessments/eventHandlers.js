@@ -1,6 +1,7 @@
 import validator from './validation.js';
 import ajaxFunctions from  './ajaxFunctions.js';
 import rowsSelected from './rowsSelected.js';
+import toastr from 'toastr';
 
 export default {
 //on each input change - check validation, display message on save button.
@@ -53,25 +54,25 @@ export default {
 				}
 			});
 
-			 if (rowsValidated > 0)
+			 if (rowsValidated > 0 )
 			 {
 				if(result)
 				{
-				 	return result;
+				 	//return result;
+					 result = true;
 				}
 				else
-				{
-				    toastr.warning('No valid tasks selected');
-					return result;
+				{				   
+					result = false;
 				}
 
 			 } 
 			 else
 			 {
 				   toastr.warning('No valid tasks selected');
-				   return false;
+				   result = false;
 			};
-
+			return result;
 		});
 	}, 
 

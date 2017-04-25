@@ -1,5 +1,6 @@
 import eventHandlers from './eventHandlers.js';
 import evidenceMode from './evidenceMode.js';
+import css from '../shared/css/toastr.css';
 
 function RESDInit() {
     //bind all event handlers

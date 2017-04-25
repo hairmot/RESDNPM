@@ -1,4 +1,5 @@
-import plUploader from '../shared/getPlUploader.js'
+import plUploader from '../shared/js/getPlUploader.js'
+import toastr from 'toastr';
 
 export default {
 
@@ -24,21 +25,21 @@ export default {
             plUploader().addFile(this.files[0]);
             var id = $(this).attr('id');
             $(this).next().removeClass('sv-btn-default').addClass('sv-btn-success').val('Uploaded').prop('disabled',true);
-            waitForInputs(id);
+            waitForSitsInputsToAppear(id);
         });
     }
 }
 
-function waitForInputs(id)
+function waitForSitsInputsToAppear(id)
 {
-    if($('.updesc').length > 0)
-    {
+    if($('.updesc').length > 0) {
+        //populate the additional sits inputs to get data into DOC
         $('.updesc').val(id);
         $('.upnotes').val($('#mhdCode').html());
-        uploader().start();
+        $('.upkeyw').val($('#stuCode').html());
+        plUploader().start();
     }
-    else
-    {
-        setTimeout( function() {waitForInputs(id)}, 100 );
+    else {
+        setTimeout( function() {waitForSitsInputsToAppear(id)}, 100 );
     }
 }

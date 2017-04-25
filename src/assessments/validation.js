@@ -1,4 +1,4 @@
-import validator from '../shared/validator'; 
+import validator from '../shared/js/validator'; 
 
 export default {
     validateRow: function validateRow(row) {

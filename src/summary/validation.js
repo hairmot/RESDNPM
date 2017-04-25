@@ -1,4 +1,5 @@
-import validator from '../shared/validator'; 
+import validator from '../shared/js/validator'; 
+import toastr from 'toastr';
 
 export default {
     validatePage: function validate() {

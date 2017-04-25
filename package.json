@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build-assessments": "browserify -t babelify ./src/assessments/index.js -o ./build/RESD-assessments.js",
-    "build-summary": "browserify -t babelify ./src/summary/index.js -o ./build/RESD-summary.js",
+    "build-assessments": "browserify -t babelify -t browserify-css ./src/assessments/index.js -o ./build/RESD-assessments.js",
+    "build-summary": "browserify -t babelify -t browserify-css ./src/summary/index.js -o ./build/RESD-summary.js",
     "watch-assessments": "watch \"npm run build-assessments\" ./src/assessments/",
     "watch-summary": "watch \"npm run build-summary\" ./src/summary/"
   },
@@ -14,7 +14,15 @@
   "license": "ISC",
   "devDependencies": {
     "babel-preset-es2015": "^6.24.1",
-    "babelify": "^7.3.0"
+    "babelify": "^7.3.0",
+    "jquery": "^3.2.1"
   },
-  "dependencies": {}
+  "dependencies": {
+    "toastr": "^2.1.2"
+  },
+  "browserify-css": {
+        "autoInject": true,
+        "minify": true,
+        "rootDir": "."
+    }
 }

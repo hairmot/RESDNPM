@@ -1,6 +1,7 @@
 import validation from './validation.js';
-import getPlUploader from '../shared/getPlUploader.js';
+import getPlUploader from '../shared/js/getPlUploader.js';
 import evidenceMode from './evidenceMode.js';
+import toastr from 'toastr';
 
 export default {
     addChangeHandlers : function addInputChangeHandlers() {
@@ -17,17 +18,14 @@ export default {
                 
                 if(validation.validatePage() === 0 && validation.validateEvidence())
                 {
-                    toastr.success('Page Valid!');
+                    toastr.success('Page Valid');
                     return true;
                 }
                 else
                 {
-                    toastr.warning('required inputs are invalid');
+                    toastr.warning('Required inputs are invalid');
                 }
                 return false;
         });
     }
-
-
-
 }
