@@ -7,7 +7,9 @@
     "build-assessments": "browserify -t babelify -t browserify-css ./src/assessments/index.js -o ./build/RESD-assessments.js",
     "build-summary": "browserify -t babelify -t browserify-css ./src/summary/index.js -o ./build/RESD-summary.js",
     "watch-assessments": "watch \"npm run build-assessments\" ./src/assessments/",
-    "watch-summary": "watch \"npm run build-summary\" ./src/summary/"
+    "watch-summary": "watch \"npm run build-summary\" ./src/summary/",
+    "serve" : "serve -s ./build",
+    "all" : "npm-run-all --parallel watch-assessments watch-summary serve"
   },
   "keywords": [],
   "author": "SHU",

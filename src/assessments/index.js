@@ -7,13 +7,21 @@ import styles from './css/styles.css'
 
 //attach handlers when js is initialised
 function RESDInit() {
-	eventHandlers.addRowChangeHandlers();
-	eventHandlers.addSaveHandlers();
+
+	//trigger validation when rows change
+	eventHandlers.addValidationOnRowChange();
+
+	//add ajax save on rows
+	eventHandlers.addIndividualRowSaveHandlers();
+
+	//trigger overall page validation when continue is clicked 
 	eventHandlers.addContinueHandler();
-	shplUpload.addUploadHandlers();
-	shplUpload.addFileHandlers();
-	rowsSelected.updateRowsSelected('body','#selectedRows');
-	rowsSelected.updateSectionRowsSelected();
+
+	//hook up individual file upload controls with the plupload instance on page
+	shplUpload.bindFileUploaders();
+
+	//update selected row counters - for page load
+	rowsSelected.updateCounters();
 }
 
 sits_attach_event("window","load",function() {

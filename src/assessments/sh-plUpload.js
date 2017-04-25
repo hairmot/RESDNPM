@@ -2,7 +2,10 @@ import plUploader from '../shared/js/getPlUploader.js'
 import toastr from 'toastr';
 
 export default {
-
+    bindFileUploaders : function bindFileUploaders() {
+        this.addUploadHandlers();
+        this.addFileHandlers();
+    },
     addUploadHandlers : function addUploadHandlers(){
         $('.add').on('click', function(e) {
             e.preventDefault();

@@ -10811,7 +10811,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 exports.default = {
 	//on each input change - check validation, display message on save button.
-	addRowChangeHandlers: function addRowChangeHandlers() {
+	addValidationOnRowChange: function addValidationOnRowChange() {
 		$('.requestRow input:not([type="file"]), .requestRow select').on("change keyup", function () {
 			if (_validation2.default.validateRow($(this).closest('.requestRow'))) {
 				$(this).closest('.requestRow').find('.save').first().val('Save Changes').removeClass('sv-btn-success sv-btn-primary sv-btn-danger').addClass('sv-btn-warning').prop('disabled', false);
@@ -10832,7 +10832,7 @@ exports.default = {
 						_toastr2.default.warning('One or more selections invalid. Please check your inputs');
 						result = false;
 					} else {
-						if ($(e).find('.save').hasClass('sv-btn-primary') || $(e).find('.save').hasClass('sv-btn-success')) {} else {
+						if ($(e).find('.save').hasClass('sv-btn-default') || $(e).find('.save').hasClass('sv-btn-success')) {} else {
 							_toastr2.default.warning('One of your selections has not been saved');
 							result = false;
 						}
@@ -10861,7 +10861,7 @@ exports.default = {
 	},
 
 	//populate ajax input, serialize form and submit. Update message in save button
-	addSaveHandlers: function addSaveHandlers() {
+	addIndividualRowSaveHandlers: function addIndividualRowSaveHandlers() {
 		$('.save').click(function (e) {
 			e.preventDefault();
 			var _this = this;
@@ -10874,8 +10874,7 @@ exports.default = {
 				_ajaxFunctions2.default.submitFormAsync(function () {
 					$(_this).removeClass('sv-btn-primary sv-btn-warning  sv-btn-danger progress-striped progress active').addClass('sv-btn-success').val('Saved!');
 					_toastr2.default.success('Saved data');
-					_rowsSelected2.default.updateRowsSelected('body', '#selectedRows');
-					_rowsSelected2.default.updateSectionRowsSelected();
+					_rowsSelected2.default.updateCounters();
 				});
 			}
 		});
@@ -10914,13 +10913,21 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 //attach handlers when js is initialised
 function RESDInit() {
-	_eventHandlers2.default.addRowChangeHandlers();
-	_eventHandlers2.default.addSaveHandlers();
+
+	//trigger validation when rows change
+	_eventHandlers2.default.addValidationOnRowChange();
+
+	//add ajax save on rows
+	_eventHandlers2.default.addIndividualRowSaveHandlers();
+
+	//trigger overall page validation when continue is clicked 
 	_eventHandlers2.default.addContinueHandler();
-	_shPlUpload2.default.addUploadHandlers();
-	_shPlUpload2.default.addFileHandlers();
-	_rowsSelected2.default.updateRowsSelected('body', '#selectedRows');
-	_rowsSelected2.default.updateSectionRowsSelected();
+
+	//hook up individual file upload controls with the plupload instance on page
+	_shPlUpload2.default.bindFileUploaders();
+
+	//update selected row counters - for page load
+	_rowsSelected2.default.updateCounters();
 }
 
 sits_attach_event("window", "load", function () {
@@ -10939,7 +10946,10 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 exports.default = {
-
+    updateCounters: function updateCounters() {
+        this.updateRowsSelected('body', '#selectedRows');
+        this.updateSectionRowsSelected();
+    },
     updateSectionRowsSelected: function updateSectionRowsSelected() {
         var _this = this;
         $('#accordion > div').each(function (i, e) {
@@ -10954,7 +10964,7 @@ exports.default = {
     validRowsSelected: function validRowsSelected(element) {
         var count = 0;
         $(element).find('.requestRow').each(function (i, e) {
-            if ($(e).find('.save').hasClass('sv-btn-success') || $(e).find('.save').hasClass('sv-btn-primary')) {
+            if ($(e).find('.save').hasClass('sv-btn-success') || $(e).find('.save').hasClass('sv-btn-default')) {
                 if ($(e).find('.selected').first().prop('checked')) {
                     count++;
                 }
@@ -10982,7 +10992,10 @@ var _toastr2 = _interopRequireDefault(_toastr);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = {
-
+    bindFileUploaders: function bindFileUploaders() {
+        this.addUploadHandlers();
+        this.addFileHandlers();
+    },
     addUploadHandlers: function addUploadHandlers() {
         $('.add').on('click', function (e) {
             e.preventDefault();

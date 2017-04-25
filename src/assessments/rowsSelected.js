@@ -1,5 +1,8 @@
 export default {
-    
+    updateCounters: function updateCounters() {
+        this.updateRowsSelected('body','#selectedRows');
+	    this.updateSectionRowsSelected();
+    },
     updateSectionRowsSelected: function updateSectionRowsSelected() {
         var _this = this;
         $('#accordion > div').each(function(i,e) {
@@ -14,7 +17,7 @@ export default {
     validRowsSelected: function validRowsSelected(element) {
         var count = 0;
         $(element).find('.requestRow').each(function(i,e) {		
-            if($(e).find('.save').hasClass('sv-btn-success') || $(e).find('.save').hasClass('sv-btn-primary'))
+            if($(e).find('.save').hasClass('sv-btn-success') || $(e).find('.save').hasClass('sv-btn-default'))
             {
                 if($(e).find('.selected').first().prop('checked'))
                 {

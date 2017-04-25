@@ -5,7 +5,7 @@ import toastr from 'toastr';
 
 export default {
 //on each input change - check validation, display message on save button.
-	addRowChangeHandlers: function addRowChangeHandlers() {
+	addValidationOnRowChange: function addValidationOnRowChange() {
 		$('.requestRow input:not([type="file"]), .requestRow select').on("change keyup", function() {
 			if (validator.validateRow($(this).closest('.requestRow')))
 			{
@@ -33,7 +33,7 @@ export default {
 					}
 					else
 					{
-						if($(e).find('.save').hasClass('sv-btn-primary') || $(e).find('.save').hasClass('sv-btn-success'))
+						if($(e).find('.save').hasClass('sv-btn-default') || $(e).find('.save').hasClass('sv-btn-success'))
 						{
 							
 						}
@@ -77,7 +77,7 @@ export default {
 	}, 
 
 	//populate ajax input, serialize form and submit. Update message in save button
-	addSaveHandlers: function addSaveHandlers() {
+	addIndividualRowSaveHandlers: function addIndividualRowSaveHandlers() {
 		$('.save').click(function (e) {
 			e.preventDefault();
 			var _this = this;
@@ -98,8 +98,7 @@ export default {
 				ajaxFunctions.submitFormAsync(function() {
 					$(_this).removeClass('sv-btn-primary sv-btn-warning  sv-btn-danger progress-striped progress active').addClass('sv-btn-success').val('Saved!');
 					toastr.success('Saved data');
-					rowsSelected.updateRowsSelected('body','#selectedRows');	
-					rowsSelected.updateSectionRowsSelected();			
+					rowsSelected.updateCounters();		
 				});			
 			}
 		});
