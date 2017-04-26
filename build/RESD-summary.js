@@ -10841,7 +10841,6 @@ exports.default = {
         $('input[title="Next"]').on('click', function () {
 
             if (_validation2.default.validatePage() === 0 && _validation2.default.validateEvidence()) {
-                _toastr2.default.success('Page Valid');
                 return true;
             } else {
                 _toastr2.default.warning('Required inputs are invalid');

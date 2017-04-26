@@ -22,6 +22,16 @@ function RESDInit() {
 
 	//update selected row counters - for page load
 	rowsSelected.updateCounters();
+
+	(function cleanUpRows(){ //remove at some point - just for demo purposes
+		$('table.sv-table-striped tbody').each(function(i,e) {
+			if($(e).find('td').length === 0)
+			{
+				$(e).parent().css('display','none');
+				$(e).parent().parent().parent().parent().parent().css('display','none').prev().css('display','none');
+			}
+		});
+	}());
 }
 
 sits_attach_event("window","load",function() {
@@ -31,6 +41,7 @@ sits_attach_event("window","load",function() {
 							active : 'none',
 							heightStyle: 'content'
 						});
+	$( "#accordion" ).fadeIn("slow");
 });
 
 

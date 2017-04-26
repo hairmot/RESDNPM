@@ -17,8 +17,7 @@ export default {
          $('input[title="Next"]').on('click', function() {
                 
                 if(validation.validatePage() === 0 && validation.validateEvidence())
-                {
-                    toastr.success('Page Valid');
+                {                    
                     return true;
                 }
                 else

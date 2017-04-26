@@ -10783,7 +10783,7 @@ exports.default = {
 };
 
 },{}],5:[function(require,module,exports){
-var css = "#accordion h3{color:#fff;background-color:#621b40;border-bottom-color:#fff}@media (max-width:767px){.tablesaw-stack td .tablesaw-cell-content{max-width:50%;display:inline-block}.tablesaw-stack td .tablesaw-cell-label{word-break:break-word;width:50%}}input[type=checkbox]{width:22px;height:22px;-webkit-border-radius:11px;-moz-border-radius:11px;border-radius:11px;border:1px solid #bbb}"; (require("browserify-css").createStyle(css, { "href": "src\\assessments\\css\\styles.css" }, { "insertAt": "bottom" })); module.exports = css;
+var css = "#accordion h3{color:#fff;background-color:#621b40;border-bottom-color:#fff}@media (max-width:767px){.tablesaw-stack td .tablesaw-cell-content{max-width:50%;display:inline-block}.tablesaw-stack td .tablesaw-cell-label{word-break:break-word;width:50%}}input[type=checkbox]{width:22px;height:22px;-webkit-border-radius:11px;-moz-border-radius:11px;border-radius:11px;border:1px solid #bbb}body{overflow-y:scroll}"; (require("browserify-css").createStyle(css, { "href": "src\\assessments\\css\\styles.css" }, { "insertAt": "bottom" })); module.exports = css;
 },{"browserify-css":1}],6:[function(require,module,exports){
 'use strict';
 
@@ -10879,7 +10879,6 @@ exports.default = {
 			}
 		});
 	}
-
 };
 
 },{"./ajaxFunctions.js":4,"./rowsSelected.js":8,"./validation.js":10,"toastr":3}],7:[function(require,module,exports){
@@ -10928,6 +10927,16 @@ function RESDInit() {
 
 	//update selected row counters - for page load
 	_rowsSelected2.default.updateCounters();
+
+	(function cleanUpRows() {
+		//remove at some point - just for demo purposes
+		$('table.sv-table-striped tbody').each(function (i, e) {
+			if ($(e).find('td').length === 0) {
+				$(e).parent().css('display', 'none');
+				$(e).parent().parent().parent().parent().parent().css('display', 'none').prev().css('display', 'none');
+			}
+		});
+	})();
 }
 
 sits_attach_event("window", "load", function () {
@@ -10937,6 +10946,7 @@ sits_attach_event("window", "load", function () {
 		active: 'none',
 		heightStyle: 'content'
 	});
+	$("#accordion").fadeIn("slow");
 });
 
 },{"../shared/css/fancyLoadingButton.css":11,"../shared/css/toastr.css":12,"./css/styles.css":5,"./eventHandlers.js":6,"./rowsSelected.js":8,"./sh-plUpload.js":9}],8:[function(require,module,exports){
