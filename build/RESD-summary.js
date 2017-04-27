@@ -10773,6 +10773,38 @@ var css = ".toast-title{font-weight:700}.toast-message{-ms-word-wrap:break-word;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
+        value: true
+});
+
+exports.default = function () {
+        $('body').on("click", function () {
+                Object.keys(uploader).map(function (a) {
+                        return uploader[a].bind("QueueChanged", function () {
+                                return uploader[a].start();
+                        });
+                });
+        });
+};
+
+},{}],6:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+				value: true
+});
+
+exports.default = function (limit, selector, outputSelector) {
+				$('' + outputSelector).html(limit - $('' + selector).val().length);
+				$('' + selector).on("keyup", function () {
+								var remaining = 1500 - $(this).val().length;
+								$('' + outputSelector).html(remaining);
+				});
+};
+
+},{}],7:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
@@ -10782,7 +10814,7 @@ exports.default = function () {
     })[0];
 };
 
-},{}],6:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -10802,7 +10834,7 @@ exports.default = {
     }
 };
 
-},{}],7:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -10850,7 +10882,7 @@ exports.default = {
     }
 };
 
-},{"../shared/js/getPlUploader.js":5,"./evidenceMode.js":8,"./validation.js":10,"toastr":3}],8:[function(require,module,exports){
+},{"../shared/js/getPlUploader.js":7,"./evidenceMode.js":10,"./validation.js":12,"toastr":3}],10:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -10859,16 +10891,18 @@ Object.defineProperty(exports, "__esModule", {
 
 exports.default = function () {
     if ($('input[data-evidenceavailable]').prop('checked')) {
-        $('.evidenceReason').css('display', 'inherit');
+        $('.evidenceReason').fadeIn();
         $('input[data-evidencereason]').prop('disabled', false);
         $('input[data-evidencereason]').val() === "" ? $('input[data-evidencereason]').addClass('sv-mandatory') : $('input[data-evidencereason]').removeClass('sv-mandatory');
+        $('[id^="PLUP_uploader"]').hide();
     } else {
-        $('.evidenceReason').css('display', 'none');
+        $('[id^="PLUP_uploader"]').fadeIn();
+        $('.evidenceReason').fadeOut();
         $('input[data-evidencereason]').prop('disabled', true).val('').removeClass('sv-mandatory');
     }
 };
 
-},{}],9:[function(require,module,exports){
+},{}],11:[function(require,module,exports){
 'use strict';
 
 var _eventHandlers = require('./eventHandlers.js');
@@ -10883,6 +10917,14 @@ var _toastr = require('../shared/css/toastr.css');
 
 var _toastr2 = _interopRequireDefault(_toastr);
 
+var _autoUploader = require('../shared/js/autoUploader.js');
+
+var _autoUploader2 = _interopRequireDefault(_autoUploader);
+
+var _charactersRemaining = require('../shared/js/charactersRemaining.js');
+
+var _charactersRemaining2 = _interopRequireDefault(_charactersRemaining);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function RESDInit() {
@@ -10891,13 +10933,15 @@ function RESDInit() {
         return _eventHandlers2.default[a]();
     });
     (0, _evidenceMode2.default)();
+    (0, _autoUploader2.default)();
+    (0, _charactersRemaining2.default)(1500, '[data-remchar]', '#remChar');
 }
 
 sits_attach_event("window", "load", function () {
     RESDInit();
 });
 
-},{"../shared/css/toastr.css":4,"./eventHandlers.js":7,"./evidenceMode.js":8}],10:[function(require,module,exports){
+},{"../shared/css/toastr.css":4,"../shared/js/autoUploader.js":5,"../shared/js/charactersRemaining.js":6,"./eventHandlers.js":9,"./evidenceMode.js":10}],12:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -10942,4 +10986,4 @@ exports.default = {
 
 };
 
-},{"../shared/js/validator":6,"toastr":3}]},{},[9]);
+},{"../shared/js/validator":8,"toastr":3}]},{},[11]);

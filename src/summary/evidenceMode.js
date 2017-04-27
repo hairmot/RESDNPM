@@ -1,14 +1,16 @@
  export default function() {     
      if($('input[data-evidenceavailable]').prop('checked'))
             {
-                $('.evidenceReason').css('display','inherit');
+                $('.evidenceReason').fadeIn();
                 $('input[data-evidencereason]').prop('disabled', false);
                 $('input[data-evidencereason]').val() === "" ? $('input[data-evidencereason]').addClass('sv-mandatory') : 
                 $('input[data-evidencereason]').removeClass('sv-mandatory');
+                $('[id^="PLUP_uploader"]').hide();
             }
             else
             {
-                $('.evidenceReason').css('display','none');
+                $('[id^="PLUP_uploader"]').fadeIn();
+                $('.evidenceReason').fadeOut();
                 $('input[data-evidencereason]').prop('disabled', true).val('').removeClass('sv-mandatory');
             }
  }
