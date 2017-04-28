@@ -1,19 +1,21 @@
 import validator from './validation.js';
-import ajaxFunctions from  './ajaxFunctions.js';
+import saveTask from  './saveTask.js';
 import rowsSelected from './rowsSelected.js';
 import toastr from 'toastr';
 
 export default {
 //on each input change - check validation, display message on save button.
-	addValidationOnRowChange: function addValidationOnRowChange() {
+	addValidationOnRowChange: function addValidationOnRowChange() {	
 		$('.requestRow input:not([type="file"]), .requestRow select').on("change keyup", function() {
-			if (validator.validateRow($(this).closest('.requestRow')))
+			var requestRow = $(this).closest('.requestRow')
+			$(requestRow).find('.add').removeClass('sv-mandatory');
+			if (validator.validateRow(requestRow))
 			{
-				$(this).closest('.requestRow').find('.save').first().val('Save Changes').removeClass('sv-btn-success sv-btn-primary sv-btn-danger').addClass('sv-btn-warning').prop('disabled',false);
+				$(requestRow).find('.save').first().val('Save Changes').removeClass('sv-btn-success sv-btn-primary sv-btn-danger').addClass('sv-btn-warning').prop('disabled',false);
 			}
 			else
 			{
-				$(this).closest('.requestRow').find('.save').first().val('Validation Errors').removeClass('sv-btn-success sv-btn-primary sv-btn-warning').addClass('sv-btn-danger').prop('disabled',true);
+				$(requestRow).find('.save').first().val('Validation Errors').removeClass('sv-btn-success sv-btn-primary sv-btn-warning').addClass('sv-btn-danger').prop('disabled',true);
 			}
 		});
 	},
@@ -35,7 +37,8 @@ export default {
 					{
 						if($(e).find('.save').hasClass('sv-btn-default') || $(e).find('.save').hasClass('sv-btn-success'))
 						{
-							
+							validator.validateEvidence(e) ? result = true : (result = false, toastr.warning('Please upload Evidence'));
+					
 						}
 						else
 						{
@@ -83,6 +86,7 @@ export default {
 			var _this = this;
 			
 			var toSave = $(this).closest('.requestRow');
+			
 			if(validator.validateRow(toSave)) {
 				var toSaveText = [
 					toSave.find('.mapCode').html(),
@@ -95,7 +99,7 @@ export default {
 				];
 				$('[data-ajaxinput]').text(toSaveText.join('~'));			
 				$(_this).prop('disabled','true').val('Saving...').addClass('progress-striped progress active').css('height','34px').css('margin-bottom',0);
-				ajaxFunctions.submitFormAsync(function() {
+				saveTask(function() {
 					$(_this).removeClass('sv-btn-primary sv-btn-warning  sv-btn-danger progress-striped progress active').addClass('sv-btn-success').val('Saved!');
 					toastr.success('Saved data');
 					rowsSelected.updateCounters();		

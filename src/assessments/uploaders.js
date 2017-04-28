@@ -1,48 +1,38 @@
 import plUploader from '../shared/js/getPlUploader.js'
 import toastr from 'toastr';
-import evidence from './evidence.js';
+import evidenceState from './evidenceState.js';
+
+var initPlUploadCheck = 0;
 
 export default {
-    init: function init() {
-        this.bindFileUploaders();
-        this.bindFileDeleters();
-        this.bindFileViewers();  
-    },
-    bindFileUploaders : function bindFileUploaders() {
-        this.addUploadHandlers();
-        this.addFileHandlers();
-    },
-    bindFileDeleters : function bindFileViewers() {
+    bindFileDeleteButtons : function bindFileDeleteButtons() {
         $('.deleteEvidence').on('click', function(e) {
             e.preventDefault();
             var id = $(this).data('file');
             $("a[href*='SIW_FILE_LOAD']:contains('" + id +  "')").closest('.sv-form-group').find('.rspdeleter').click();
         });
     },
-    bindFileViewers : function bindFileViewers() {
+    bindFileViewButtons : function bindFileViewButtons() {
         $('.viewEvidence').on('click', function(e) {
             e.preventDefault();
             var id = $(this).data('file');
             $("a[href*='SIW_FILE_LOAD']:contains('" + id +  "')")[0].click();
         });
     },
-    addUploadHandlers : function addUploadHandlers(){
+    bindFileUploadButtons : function bindFileUploadButtons(){
         $('.add').on('click', function(e) {
             e.preventDefault();
-            var uploader = plUploader();
-            uploader.bind("UploadComplete", function() {
-                $('input[data-continue]').prop('disabled',false).val('Continue');
-                toastr.success('All files finished uploading');
-            });
-            uploader.bind("UploadFile", function() {
-                $('input[data-continue]').prop('disabled',true).val('Files Uploading');
-                toastr.info('Files uploading');
-            });
+            if (initPlUploadCheck === 0)
+            {
+                initPlUpload();
+                initPlUploadCheck++;
+            }
+            $(this).prev().val('');
             $(this).prev().click();
         });
     },
 
-    addFileHandlers: function addFileHandlers() {
+    bindHiddenFileInputs: function bindHiddenFileInputs() {
         var _this = this;
         $('.fileBrowse').on('change',function() {
             var id = $(this).attr('id');
@@ -56,14 +46,29 @@ export default {
 function waitForSitsInputsToAppear(id)
 {
     if($('.updesc').length > 0) {
-        //populate the additional sits inputs to get data into DOC
-        $('.upname').val(id);
-        $('.updesc').val(id);
-        $('.upnotes').val($('#mhdCode').html());
-        $('.upkeyw').val($('#stuCode').html());
-        plUploader().start();
+        populateUploadFields(id);
     }
     else {
         setTimeout( function() {waitForSitsInputsToAppear(id)}, 100 );
     }
+}
+
+function populateUploadFields(id) {
+    $('.upname').val(id);
+    $('.updesc').val(id);
+    $('.upnotes').val($('#mhdCode').html());
+    $('.upkeyw').val($('#stuCode').html());
+    plUploader().start();
+}
+
+function initPlUpload() {
+                var uploader = plUploader();
+                uploader.bind("UploadComplete", function() {
+                    $('input[data-continue]').prop('disabled',false).val('Continue');
+                    toastr.success('All files finished uploading');
+                });
+                uploader.bind("UploadFile", function() {
+                    $('input[data-continue]').prop('disabled',true).val('Files Uploading');
+                    toastr.info('Files uploading');
+                });
 }
