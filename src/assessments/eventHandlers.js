@@ -9,12 +9,10 @@ export default {
 		$('.requestRow input:not([type="file"]), .requestRow select').on("change keyup", function() {
 			var requestRow = $(this).closest('.requestRow')
 			$(requestRow).find('.add').removeClass('sv-mandatory');
-			if (validator.validateRow(requestRow))
-			{
+			if (validator.validateRow(requestRow)) {
 				$(requestRow).find('.save').first().val('Save Changes').removeClass('sv-btn-success sv-btn-primary sv-btn-danger').addClass('sv-btn-warning').prop('disabled',false);
 			}
-			else
-			{
+			else {
 				$(requestRow).find('.save').first().val('Validation Errors').removeClass('sv-btn-success sv-btn-primary sv-btn-warning').addClass('sv-btn-danger').prop('disabled',true);
 			}
 		});
@@ -25,30 +23,26 @@ export default {
 		$('input[data-continue]').on('click', function (e){
 			var rowsValidated = 0;
 			var result = true;
+			var evidenceWarning = 0;
 			$('.requestRow').each(function(i,e) {
 				if($(e).find('.selected').first().prop('checked')) {
 					rowsValidated++;
-					if(!validator.validateRow(e))
-					{
+					if(!validator.validateRow(e)) {
 						toastr.warning('One or more selections invalid. Please check your inputs');
 						result = false;
 					}
-					else
-					{
-						if($(e).find('.save').hasClass('sv-btn-default') || $(e).find('.save').hasClass('sv-btn-success'))
-						{
-							validator.validateEvidence(e) ? result = true : (result = false, toastr.warning('Please upload Evidence'));
+					else {
+						if($(e).find('.save').hasClass('sv-btn-default') || $(e).find('.save').hasClass('sv-btn-success')) {
+							validator.validateEvidence(e) ? result = true : (result = false, evidenceWarning = 1);
 					
-						}
-						else
-						{
+						} 
+						else {
 							toastr.warning('One of your selections has not been saved');
 							result = false;
 						}
 					}	
 				}
-				else
-				{
+				else {
 					if($(e).find('.save').hasClass('sv-btn-warning'))
 					{
 						result = false;
@@ -57,24 +51,21 @@ export default {
 				}
 			});
 
-			 if (rowsValidated > 0 )
-			 {
-				if(result)
-				{
+			 if (rowsValidated > 0 )  {
+				if(result) {
 				 	//return result;
 					 result = true;
 				}
-				else
-				{				   
+				else {				   
 					result = false;
 				}
 
 			 } 
-			 else
-			 {
+			 else {
 				   toastr.warning('No valid tasks selected');
 				   result = false;
 			};
+			evidenceWarning === 1 ? toastr.warning('Please upload evidence for selected tasks') : true;
 			return result;
 		});
 	}, 

@@ -10812,6 +10812,7 @@ exports.default = {
 		$('input[data-continue]').on('click', function (e) {
 			var rowsValidated = 0;
 			var result = true;
+			var evidenceWarning = 0;
 			$('.requestRow').each(function (i, e) {
 				if ($(e).find('.selected').first().prop('checked')) {
 					rowsValidated++;
@@ -10820,7 +10821,7 @@ exports.default = {
 						result = false;
 					} else {
 						if ($(e).find('.save').hasClass('sv-btn-default') || $(e).find('.save').hasClass('sv-btn-success')) {
-							_validation2.default.validateEvidence(e) ? result = true : (result = false, _toastr2.default.warning('Please upload Evidence'));
+							_validation2.default.validateEvidence(e) ? result = true : (result = false, evidenceWarning = 1);
 						} else {
 							_toastr2.default.warning('One of your selections has not been saved');
 							result = false;
@@ -10845,6 +10846,7 @@ exports.default = {
 				_toastr2.default.warning('No valid tasks selected');
 				result = false;
 			};
+			evidenceWarning === 1 ? _toastr2.default.warning('Please upload evidence for selected tasks') : true;
 			return result;
 		});
 	},
