@@ -66,6 +66,7 @@ function initPlUpload() {
                 uploader.bind("UploadComplete", function() {
                     $('input[data-continue]').prop('disabled',false).val('Continue');
                     toastr.success('All files finished uploading');
+                    $.get($('.syncDocs').attr('href'), function(done) {});
                 });
                 uploader.bind("UploadFile", function() {
                     $('input[data-continue]').prop('disabled',true).val('Files Uploading');

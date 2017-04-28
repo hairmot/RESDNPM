@@ -38,3 +38,5 @@ input[type=checkbox] {
 body{
 	overflow-y: scroll;
 }
+
+.syncDocs {display:none;}
