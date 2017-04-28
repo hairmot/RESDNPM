@@ -3,7 +3,8 @@ import rowsSelected from './rowsSelected.js';
 import eventHandlers from './eventHandlers.js';
 import toastrCss from '../shared/css/toastr.css';
 import fancyLoadingButton from '../shared/css/fancyLoadingButton.css';
-import styles from './css/styles.css'
+import styles from './css/styles.css';
+import evidence from './evidence.js';
 
 //attach handlers when js is initialised
 function RESDInit() {
@@ -18,21 +19,17 @@ function RESDInit() {
 	eventHandlers.addContinueHandler();
 
 	//hook up individual file upload controls with the plupload instance on page
-	shplUpload.bindFileUploaders();
+	shplUpload.init();
 
 	//update selected row counters - for page load
 	rowsSelected.updateCounters();
 
-	(function cleanUpRows(){ //remove at some point - just for demo purposes
-		$('table.sv-table-striped tbody').each(function(i,e) {
-			if($(e).find('td').length === 0)
-			{
-				$(e).parent().css('display','none');
-				$(e).parent().parent().parent().parent().parent().css('display','none').prev().css('display','none');
-			}
-		});
-	}());
+	//handle state of evidence for requests based on plUpload instance on page.
+	evidence.init();
 }
+
+
+
 
 sits_attach_event("window","load",function() {
 	RESDInit();
@@ -43,5 +40,3 @@ sits_attach_event("window","load",function() {
 						});
 	$( "#accordion" ).fadeIn("slow");
 });
-
-
