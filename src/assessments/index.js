@@ -28,7 +28,7 @@ sits_attach_event("window","load",function() {
 	RESDInit();
 	$( "#accordion" ).accordion({
 		collapsible : true,							
-		active : 'none',
+		active : enhanced === "Y" ? false : parseInt($('[data-accordion]').val()),
 		heightStyle: 'content'
 	}).fadeIn("slow");
 });

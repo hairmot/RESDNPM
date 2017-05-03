@@ -23,8 +23,6 @@ input[type=submit], button, .button, .button-secondary {
     -moz-transition:.1s background-color;
     -o-transition:.1s background-color;
     transition:.1s background-color;
-    padding:.375em .75em;
-    height: 40px;
 }
 
 .progress-striped {

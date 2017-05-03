@@ -1,8 +1,15 @@
+.requestRow td label {display:none;}
+input[type=checkbox] {
+ width: 22px; height: 22px;
+ -webkit-border-radius: 11px; -moz-border-radius: 11px; border-radius: 11px;
+ border: 1px solid #bbb;
+}
 #accordion h3 {
     color: #fff;
     background-color: #621b40;
     border-bottom-color: white;	
 }
+.progress {margin-bottom:0;}
 @media (max-width: 767px){
 
 	.tablesaw-stack td .tablesaw-cell-content {
@@ -13,28 +20,67 @@
 		word-break:break-word;
 		width:50%;
 	}
-	.sv-panel-body {padding-left:5px !important;padding-right:5px !important;} 
-	.sv-panel-body * {padding:0 !important;}
-	.ui-accordion-content {width:100%; padding:2px !important;}
-	.sv-panel-body .ui-accordion-header {padding:3px !important; padding-left:28px !important;}
-	.sv-btn {padding:12px 6px 12px 6px !important;}
+	.save {margin-bottom:20px;}
+	.progress {margin-bottom:20px;}
+ 
 }
-@media (min-width: 767px){
+
+.save {min-height:34px;}
+@media (min-width: 1220px){
 	.fixedWidth {
 		min-width:350px;max-width:350px;
 	}
 }
+.requestTable {
+	    border: 1px solid #ddd;
+}
+@media (max-width: 767px){
+	.data-tablesaw-hide {
+		display:none !important;
+	}
+	.requestRow {
+		background-color:white;
+	}
+	.requestTable {
+		border:none;
+		border-collapse:separate;
+		border-spacing:2px;
+		background-color:#621b40;
+	}
+	.requestTable thead {
+		display:none;
+	}
+	.sv-table-container {
+		border:none;
+	}
+	.taskType ::before {
+			content: "Task Type: ";
+	}
+	.selectedContainer {
+		display:inline-block;
+		width:20%;
+	}
+	.fixedWidth {padding-bottom:20px;}
+	#ui-id-2 > div > div > div > table > tbody > tr > td:nth-child(3) > div > div {text-align:center;}
+	
+	.requestRow td label {display:inline-block;}
+	.dateCell, .titleCell {width:50% !important; float:left !important;clear:none !important;font-weight:700;}
+}
+
+@media (max-width: 400px){
+	.dateCell, .titleCell {
+		width:100% !important;
+	}
+}
+
+
 
 .no-gutter > [class*='col-'] {
     padding-right:0;
     padding-left:0;
 }
 
-input[type=checkbox] {
- width: 22px; height: 22px;
- -webkit-border-radius: 11px; -moz-border-radius: 11px; border-radius: 11px;
- border: 1px solid #bbb;
-}
+
 body{
 	overflow-y: scroll;
 }

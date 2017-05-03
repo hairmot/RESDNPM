@@ -79,23 +79,48 @@ export default {
 			var toSave = $(this).closest('.requestRow');
 			
 			if(validator.validateRow(toSave)) {
-				var toSaveText = [
-					toSave.find('.mapCode').html(),
-					toSave.find('.mabSeqn').html(),
-					toSave.find('input[type="checkbox"]').prop('checked'),
-					toSave.find('.taskTitle').val(),
-					toSave.find('.dueDate').val(),
-					toSave.find('.taskType option:selected').val(),
-					toSave.find('.dissertation option:selected').val()
-				];
-				$('[data-ajaxinput]').text(toSaveText.join('~'));			
-				$(_this).prop('disabled','true').val('Saving...').addClass('progress-striped progress active').css('height','34px').css('margin-bottom',0);
-				saveTask(function() {
-					$(_this).removeClass('sv-btn-primary sv-btn-warning  sv-btn-danger progress-striped progress active').addClass('sv-btn-success').val('Saved!');
-					toastr.success('Saved data');
-					rowsSelected.updateCounters();		
-				});			
+				toSave.find('[data-ajaxinput]').each(function(i,e) {
+					populateAjaxField(e);
+				});		
+
+				
+				$(_this).prop('disabled','true').val('Saving...').addClass('progress-striped progress active');
+				if(enhanced === "Y")
+				{
+					saveTask(function() {
+						$(_this).removeClass('sv-btn-primary sv-btn-warning sv-btn-danger progress-striped progress active').addClass('sv-btn-success').val('Saved!');
+						toastr.success('Saved data');
+						rowsSelected.updateCounters();		
+					});		
+				}	
+				else
+				{
+					$('[data-accordion]').val($('#accordion').accordion("option").active);
+					$('#ajaxSubmit input[type="submit"]').first().click();
+				}
 			}
 		});
+	}
+}
+
+function populateAjaxField(name) {
+	var inputName = $(name).data('ajaxinput');
+	var nodeName = $(name).prop('tagName');
+	$('[data-' + inputName + ']').val(getFieldValue(name, nodeName));
+}
+
+function getFieldValue(field, type) {
+	switch(type) {
+		case "TD":
+			return $(field).html();
+			break;
+		case "INPUT":
+			return $(field).prop('checked') === true ? "Y" : "N";
+			break;
+		case "SELECT":
+			return $(field).find("option:selected").val();
+			break;
+		default:
+			return ;
 	}
 }
