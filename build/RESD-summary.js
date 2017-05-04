@@ -10790,15 +10790,20 @@ exports.default = function () {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
-				value: true
+		value: true
 });
 
 exports.default = function (limit, selector, outputSelector) {
-				$('' + outputSelector).html(limit - $('' + selector).val().length);
-				$('' + selector).on("keyup", function () {
-								var remaining = 1500 - $(this).val().length;
-								$('' + outputSelector).html(remaining);
-				});
+		var input = $('' + selector);
+		var output = $('' + outputSelector);
+		var remaining = limit - input.val().length;
+
+		output.html(remaining);
+		input.on("keyup", function () {
+				remaining = limit - input.val().length;
+				output.html(Math.max(0, remaining));
+				input.text(input.text().substring(0, limit));
+		});
 };
 
 },{}],7:[function(require,module,exports){
