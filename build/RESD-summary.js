@@ -10840,6 +10840,8 @@ exports.default = {
 };
 
 },{}],9:[function(require,module,exports){
+var css = "input[data-evidenceavailable]{transform:scale(2)}"; (require("browserify-css").createStyle(css, { "href": "src\\summary\\css\\styles.css" }, { "insertAt": "bottom" })); module.exports = css;
+},{"browserify-css":1}],10:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -10887,7 +10889,7 @@ exports.default = {
     }
 };
 
-},{"../shared/js/getPlUploader.js":7,"./evidenceMode.js":10,"./validation.js":12,"toastr":3}],10:[function(require,module,exports){
+},{"../shared/js/getPlUploader.js":7,"./evidenceMode.js":11,"./validation.js":13,"toastr":3}],11:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -10907,7 +10909,7 @@ exports.default = function () {
     }
 };
 
-},{}],11:[function(require,module,exports){
+},{}],12:[function(require,module,exports){
 'use strict';
 
 var _eventHandlers = require('./eventHandlers.js');
@@ -10930,6 +10932,10 @@ var _charactersRemaining = require('../shared/js/charactersRemaining.js');
 
 var _charactersRemaining2 = _interopRequireDefault(_charactersRemaining);
 
+var _styles = require('./css/styles.css');
+
+var _styles2 = _interopRequireDefault(_styles);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function RESDInit() {
@@ -10946,7 +10952,7 @@ sits_attach_event("window", "load", function () {
     RESDInit();
 });
 
-},{"../shared/css/toastr.css":4,"../shared/js/autoUploader.js":5,"../shared/js/charactersRemaining.js":6,"./eventHandlers.js":9,"./evidenceMode.js":10}],12:[function(require,module,exports){
+},{"../shared/css/toastr.css":4,"../shared/js/autoUploader.js":5,"../shared/js/charactersRemaining.js":6,"./css/styles.css":9,"./eventHandlers.js":10,"./evidenceMode.js":11}],13:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -10991,4 +10997,4 @@ exports.default = {
 
 };
 
-},{"../shared/js/validator":8,"toastr":3}]},{},[11]);
+},{"../shared/js/validator":8,"toastr":3}]},{},[12]);

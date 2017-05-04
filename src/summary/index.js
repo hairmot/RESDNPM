@@ -3,6 +3,7 @@ import evidenceMode from './evidenceMode.js';
 import css from '../shared/css/toastr.css';
 import autoUploader from '../shared/js/autoUploader.js';
 import charactersRemaining from '../shared/js/charactersRemaining.js';
+import styles from './css/styles.css';
 
 function RESDInit() {
     //bind all event handlers
