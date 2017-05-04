@@ -1,7 +1,7 @@
 var mocha = require('mocha');
 var expect = require('chai').expect;
-const jsdom = require("jsdom");
-const { JSDOM } = jsdom;
+var jsdom = require("jsdom");
+var { JSDOM } = jsdom;
 import validation from '../src/assessments/validation';
 import requestRow from './htmlTemplates/requestRow';
 
@@ -24,7 +24,7 @@ describe("Validation Tests", function(){
     })
 
      before(() => {
-        const dom = new JSDOM(requestRow);
+        var dom = new JSDOM(requestRow);
         $ = require('jquery')(dom.window);
         global.$ = $;    
 
