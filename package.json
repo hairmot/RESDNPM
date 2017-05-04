@@ -25,7 +25,7 @@
   "dependencies": {
     "jquery": "^3.2.1",
     "toastr": "^2.1.2"
-  },
+  }, 
   "browserify-css": {
     "autoInject": true,
     "minify": true,
