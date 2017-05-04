@@ -2,7 +2,7 @@ var mocha = require('mocha');
 var expect = require('chai').expect;
 const jsdom = require("jsdom");
 const { JSDOM } = jsdom;
-import charactersRemaining from '../src/shared/js/charactersRemaining';
+import charactersRemaining from '../../src/shared/js/charactersRemaining';
 
 describe("Characters Remaining Tests", function(){
 

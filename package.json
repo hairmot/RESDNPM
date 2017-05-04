@@ -10,7 +10,7 @@
     "watch-summary": "watch \"npm run build-summary\" ./src/summary/",
     "serve": "serve -s ./build",
     "all": "npm-run-all --parallel watch-assessments watch-summary serve",
-    "test": "mocha --compilers js:babel-core/register || exit 0"
+    "test": "mocha --recursive --compilers js:babel-core/register || exit 0"
   },
   "keywords": [],
   "author": "SHU",
