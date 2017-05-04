@@ -8,8 +8,9 @@
     "build-summary": "browserify -t babelify -t browserify-css ./src/summary/index.js -o ./build/RESD-summary.js",
     "watch-assessments": "watch \"npm run build-assessments\" ./src/assessments/",
     "watch-summary": "watch \"npm run build-summary\" ./src/summary/",
-    "serve" : "serve -s ./build",
-    "all" : "npm-run-all --parallel watch-assessments watch-summary serve"
+    "serve": "serve -s ./build",
+    "all": "npm-run-all --parallel watch-assessments watch-summary serve",
+    "test": "mocha --compilers js:babel-core/register || exit 0"
   },
   "keywords": [],
   "author": "SHU",
@@ -17,14 +18,16 @@
   "devDependencies": {
     "babel-preset-es2015": "^6.24.1",
     "babelify": "^7.3.0",
-    "jquery": "^3.2.1"
+    "chai": "^3.5.0",
+    "mocha": "^3.3.0"
   },
   "dependencies": {
+    "jquery": "^3.2.1",
     "toastr": "^2.1.2"
   },
   "browserify-css": {
-        "autoInject": true,
-        "minify": true,
-        "rootDir": "."
-    }
+    "autoInject": true,
+    "minify": true,
+    "rootDir": "."
+  }
 }
