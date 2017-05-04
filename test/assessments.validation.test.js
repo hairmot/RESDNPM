@@ -2,8 +2,8 @@ var mocha = require('mocha');
 var expect = require('chai').expect;
 var jsdom = require("jsdom");
 var { JSDOM } = jsdom;
-var  validation = require('../src/assessments/validation');
-var requestRow = ('./htmlTemplates/requestRow');
+import validation from '../src/assessments/validation';
+import requestRow from './htmlTemplates/requestRow';
 
 describe("Validation Tests", function(){  
     var $;
