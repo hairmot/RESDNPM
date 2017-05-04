@@ -14,8 +14,6 @@ describe("Validation Tests", function(){
             var result = validation.validateRow($('.requestRow').first());
             expect(result).to.equal(false);
         });
-
-
   
          it('passes a vaid assessment row', function() {
             var row = $('.requestRow').first();

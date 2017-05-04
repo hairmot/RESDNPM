@@ -19,6 +19,7 @@
     "babel-preset-es2015": "^6.24.1",
     "babelify": "^7.3.0",
     "chai": "^3.5.0",
+    "jsdom": "^10.1.0",
     "mocha": "^3.3.0"
   },
   "dependencies": {
