@@ -7,6 +7,7 @@ import styles from './css/styles.css';
 
 function RESDInit() {
     //bind all event handlers
+    $('input[value="Next"]').first().prop('disabled', true);
     Object.keys(eventHandlers).map(a => eventHandlers[a]());
     evidenceMode();
     autoUploader();

@@ -1,6 +1,6 @@
 export default {
     validateSelects: function validateSelects(selects) {
-        selects.map(a => a.text() == "Please select" ? a.parent().addClass('sv-mandatory') : a.parent().removeClass('sv-mandatory'));      
+        selects.map(a => a.val() == "" ? a.parent().addClass('sv-mandatory') : a.parent().removeClass('sv-mandatory'));      
     },
 
     validateInputs: function validateInputs(inputs) {

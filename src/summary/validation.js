@@ -1,16 +1,18 @@
 import validator from '../shared/js/validator'; 
-import toastr from 'toastr';
 
 export default {
-    validatePage: function validate() {
-        var circumstancesCategory = $('body').find('.circumstancesCategory select option:selected').first();
+    validatePage: function validatePage() {
+         return (this.validatePageInputs() && this.validateEvidence());          
+    },
+    validatePageInputs: function validate() {
+        var circumstancesCategory = $('body').find('[data-resdreason] option:selected').first();
         validator.validateSelects([circumstancesCategory]);
 
         var summaryText = $('textarea[data-remchar]').first();
         var evidenceReason = $('input[data-evidencereason]:visible').first();
         validator.validateInputs([summaryText, evidenceReason]);
         
-        return $('.sv-mandatory').length;
+        return $('.sv-mandatory').length === 0 ? true : false;
     }
     ,
     validateEvidence: function validateEvidence() {
@@ -25,7 +27,6 @@ export default {
             {return true} 
             else 
             {
-                toastr.warning('You need to upload evidence');
                 return false;
             }
         }

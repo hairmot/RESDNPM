@@ -10828,7 +10828,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = {
     validateSelects: function validateSelects(selects) {
         selects.map(function (a) {
-            return a.text() == "Please select" ? a.parent().addClass('sv-mandatory') : a.parent().removeClass('sv-mandatory');
+            return a.val() == "" ? a.parent().addClass('sv-mandatory') : a.parent().removeClass('sv-mandatory');
         });
     },
 
@@ -10870,7 +10870,11 @@ exports.default = {
     addChangeHandlers: function addInputChangeHandlers() {
 
         $('input, select, textarea').on('keyup change', function () {
-            _validation2.default.validatePage();
+            if (_validation2.default.validatePage()) {
+                $('input[value="Next"]').prop('disabled', false);
+            } else {
+                $('input[value="Next"]').prop('disabled', true);
+            }
         });
 
         $('input[data-evidenceavailable]').on('change', function () {
@@ -10878,13 +10882,7 @@ exports.default = {
         });
 
         $('input[title="Next"]').on('click', function () {
-
-            if (_validation2.default.validatePage() === 0 && _validation2.default.validateEvidence()) {
-                return true;
-            } else {
-                _toastr2.default.warning('Required inputs are invalid');
-            }
-            return false;
+            return _validation2.default.validatePage();
         });
     }
 };
@@ -10901,6 +10899,7 @@ exports.default = function () {
         $('.evidenceReason').fadeIn();
         $('input[data-evidencereason]').prop('disabled', false);
         $('input[data-evidencereason]').val() === "" ? $('input[data-evidencereason]').addClass('sv-mandatory') : $('input[data-evidencereason]').removeClass('sv-mandatory');
+        $('input[value="Next"]').prop('disabled', true);
         $('[id^="PLUP_uploader"]').hide();
     } else {
         $('[id^="PLUP_uploader"]').fadeIn();
@@ -10940,6 +10939,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function RESDInit() {
     //bind all event handlers
+    $('input[value="Next"]').first().prop('disabled', true);
     Object.keys(_eventHandlers2.default).map(function (a) {
         return _eventHandlers2.default[a]();
     });
@@ -10963,22 +10963,21 @@ var _validator = require('../shared/js/validator');
 
 var _validator2 = _interopRequireDefault(_validator);
 
-var _toastr = require('toastr');
-
-var _toastr2 = _interopRequireDefault(_toastr);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = {
-    validatePage: function validate() {
-        var circumstancesCategory = $('body').find('.circumstancesCategory select option:selected').first();
+    validatePage: function validatePage() {
+        return this.validatePageInputs() && this.validateEvidence();
+    },
+    validatePageInputs: function validate() {
+        var circumstancesCategory = $('body').find('[data-resdreason] option:selected').first();
         _validator2.default.validateSelects([circumstancesCategory]);
 
         var summaryText = $('textarea[data-remchar]').first();
         var evidenceReason = $('input[data-evidencereason]:visible').first();
         _validator2.default.validateInputs([summaryText, evidenceReason]);
 
-        return $('.sv-mandatory').length;
+        return $('.sv-mandatory').length === 0 ? true : false;
     },
 
     validateEvidence: function validateEvidence() {
@@ -10989,7 +10988,6 @@ exports.default = {
             if (files > 0) {
                 return true;
             } else {
-                _toastr2.default.warning('You need to upload evidence');
                 return false;
             }
         }
@@ -10997,4 +10995,4 @@ exports.default = {
 
 };
 
-},{"../shared/js/validator":8,"toastr":3}]},{},[12]);
+},{"../shared/js/validator":8}]},{},[12]);

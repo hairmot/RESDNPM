@@ -4,7 +4,8 @@
                 $('.evidenceReason').fadeIn();
                 $('input[data-evidencereason]').prop('disabled', false);
                 $('input[data-evidencereason]').val() === "" ? $('input[data-evidencereason]').addClass('sv-mandatory') : 
-                $('input[data-evidencereason]').removeClass('sv-mandatory');
+                    $('input[data-evidencereason]').removeClass('sv-mandatory');
+                $('input[value="Next"]').prop('disabled',true);
                 $('[id^="PLUP_uploader"]').hide();
             }
             else
