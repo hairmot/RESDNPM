@@ -11207,7 +11207,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = {
     validateSelects: function validateSelects(selects) {
         selects.map(function (a) {
-            return a.text() == "Please select" ? a.parent().addClass('sv-mandatory') : a.parent().removeClass('sv-mandatory');
+            return a.val() == "" ? a.parent().addClass('sv-mandatory') : a.parent().removeClass('sv-mandatory');
         });
     },
 

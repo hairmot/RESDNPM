@@ -4,10 +4,12 @@ import css from '../shared/css/toastr.css';
 import autoUploader from '../shared/js/autoUploader.js';
 import charactersRemaining from '../shared/js/charactersRemaining.js';
 import styles from './css/styles.css';
+import validation from './validation';
 
 function RESDInit() {
     //bind all event handlers
-    $('input[value="Next"]').first().prop('disabled', true);
+
+    validation.setNextButtonState();
     Object.keys(eventHandlers).map(a => eventHandlers[a]());
     evidenceMode();
     autoUploader();

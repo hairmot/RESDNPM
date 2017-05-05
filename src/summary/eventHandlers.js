@@ -3,24 +3,44 @@ import getPlUploader from '../shared/js/getPlUploader.js';
 import evidenceMode from './evidenceMode.js';
 import toastr from 'toastr';
 
+var uploaders = 0;
+
 export default {
+  
+
     addChangeHandlers : function addInputChangeHandlers() {
         
         $('input, select, textarea').on('keyup change', function() {
-            if(validation.validatePage()){
-                $('input[value="Next"]').prop('disabled', false);
-            } 
-            else {
-                $('input[value="Next"]').prop('disabled', true);
-            }            
+           validation.setNextButtonState();
         });
 
         $('input[data-evidenceavailable]').on('change', function() {
            evidenceMode();
+           validation.setNextButtonState();
          });
 
-         $('input[title="Next"]').on('click', function() {                
-               return validation.validatePage();
+         $('input[title="Next"]').on('click', function() {  
+                if(validation.validatePage()) {
+                  return true; 
+                }
+                else { 
+                    toastr.warning('Missing inputs');
+                    return false;
+                }
+        });
+
+        $('body').on('click', () => {
+            if(uploaders === 0) {
+                getPlUploader().bind("UploadComplete", function() {
+                   console.log(validation.setNextButtonState());
+                    
+                });
+                getPlUploader().bind("FilesRemoved", function() {
+                   console.log(validation.setNextButtonState());
+                    
+                });
+                uploaders = 1;
+            }
         });
     }
 }

@@ -10866,23 +10866,40 @@ var _toastr2 = _interopRequireDefault(_toastr);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var uploaders = 0;
+
 exports.default = {
+
     addChangeHandlers: function addInputChangeHandlers() {
 
         $('input, select, textarea').on('keyup change', function () {
-            if (_validation2.default.validatePage()) {
-                $('input[value="Next"]').prop('disabled', false);
-            } else {
-                $('input[value="Next"]').prop('disabled', true);
-            }
+            _validation2.default.setNextButtonState();
         });
 
         $('input[data-evidenceavailable]').on('change', function () {
             (0, _evidenceMode2.default)();
+            _validation2.default.setNextButtonState();
         });
 
         $('input[title="Next"]').on('click', function () {
-            return _validation2.default.validatePage();
+            if (_validation2.default.validatePage()) {
+                return true;
+            } else {
+                _toastr2.default.warning('Missing inputs');
+                return false;
+            }
+        });
+
+        $('body').on('click', function () {
+            if (uploaders === 0) {
+                (0, _getPlUploader2.default)().bind("UploadComplete", function () {
+                    console.log(_validation2.default.setNextButtonState());
+                });
+                (0, _getPlUploader2.default)().bind("FilesRemoved", function () {
+                    console.log(_validation2.default.setNextButtonState());
+                });
+                uploaders = 1;
+            }
         });
     }
 };
@@ -10896,19 +10913,32 @@ Object.defineProperty(exports, "__esModule", {
 
 exports.default = function () {
     if ($('input[data-evidenceavailable]').prop('checked')) {
-        $('.evidenceReason').fadeIn();
-        $('input[data-evidencereason]').prop('disabled', false);
-        $('input[data-evidencereason]').val() === "" ? $('input[data-evidencereason]').addClass('sv-mandatory') : $('input[data-evidencereason]').removeClass('sv-mandatory');
-        $('input[value="Next"]').prop('disabled', true);
-        $('[id^="PLUP_uploader"]').hide();
+        if (!_validation2.default.filesUploaded()) {
+            $('.evidenceReason').fadeIn();
+            $('input[data-evidencereason]').val() === "" ? $('input[data-evidencereason]').addClass('sv-mandatory') : $('input[data-evidencereason]').removeClass('sv-mandatory');
+            $('[id^="PLUP_uploader"]').hide();
+        } else {
+            _toastr2.default.warning('Please delete any uploaded evidence');
+            $('input[data-evidenceavailable]').prop('checked', false);
+        }
     } else {
         $('[id^="PLUP_uploader"]').fadeIn();
         $('.evidenceReason').fadeOut();
-        $('input[data-evidencereason]').prop('disabled', true).val('').removeClass('sv-mandatory');
+        $('input[data-evidencereason]').val('').removeClass('sv-mandatory');
     }
 };
 
-},{}],12:[function(require,module,exports){
+var _validation = require('./validation');
+
+var _validation2 = _interopRequireDefault(_validation);
+
+var _toastr = require('toastr');
+
+var _toastr2 = _interopRequireDefault(_toastr);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+},{"./validation":13,"toastr":3}],12:[function(require,module,exports){
 'use strict';
 
 var _eventHandlers = require('./eventHandlers.js');
@@ -10935,11 +10965,16 @@ var _styles = require('./css/styles.css');
 
 var _styles2 = _interopRequireDefault(_styles);
 
+var _validation = require('./validation');
+
+var _validation2 = _interopRequireDefault(_validation);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function RESDInit() {
     //bind all event handlers
-    $('input[value="Next"]').first().prop('disabled', true);
+
+    _validation2.default.setNextButtonState();
     Object.keys(_eventHandlers2.default).map(function (a) {
         return _eventHandlers2.default[a]();
     });
@@ -10952,7 +10987,7 @@ sits_attach_event("window", "load", function () {
     RESDInit();
 });
 
-},{"../shared/css/toastr.css":4,"../shared/js/autoUploader.js":5,"../shared/js/charactersRemaining.js":6,"./css/styles.css":9,"./eventHandlers.js":10,"./evidenceMode.js":11}],13:[function(require,module,exports){
+},{"../shared/css/toastr.css":4,"../shared/js/autoUploader.js":5,"../shared/js/charactersRemaining.js":6,"./css/styles.css":9,"./eventHandlers.js":10,"./evidenceMode.js":11,"./validation":13}],13:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -10977,19 +11012,29 @@ exports.default = {
         var evidenceReason = $('input[data-evidencereason]:visible').first();
         _validator2.default.validateInputs([summaryText, evidenceReason]);
 
-        return $('.sv-mandatory').length === 0 ? true : false;
+        return $('.sv-mandatory:visible').length === 0 ? true : false;
     },
 
     validateEvidence: function validateEvidence() {
         if ($('input[data-evidenceavailable]').prop('checked')) {
             return true;
         } else {
-            var files = $('.sv-plupfile').length;
-            if (files > 0) {
-                return true;
-            } else {
-                return false;
-            }
+            return this.filesUploaded();
+        }
+    },
+    filesUploaded: function filesUploaded() {
+        var files = $('.sv-plupfile').length;
+        return files > 0;
+    },
+    setNextButtonState: function setNextButtonState() {
+        var valid = this.validatePage();
+        console.log('validate page: ' + valid);
+        if (valid) {
+            $('input[value="Next"]').prop('disabled', false);
+            return true;
+        } else {
+            $('input[value="Next"]').prop('disabled', true);
+            return false;
         }
     }
 

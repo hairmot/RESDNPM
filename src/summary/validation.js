@@ -12,7 +12,7 @@ export default {
         var evidenceReason = $('input[data-evidencereason]:visible').first();
         validator.validateInputs([summaryText, evidenceReason]);
         
-        return $('.sv-mandatory').length === 0 ? true : false;
+        return $('.sv-mandatory:visible').length === 0 ? true : false;
     }
     ,
     validateEvidence: function validateEvidence() {
@@ -22,14 +22,24 @@ export default {
         }
         else
         {
-            var files = $('.sv-plupfile').length;
-            if(files > 0)
-            {return true} 
-            else 
-            {
-                return false;
-            }
+           return this.filesUploaded();
         }
+    },
+    filesUploaded: function filesUploaded() {
+        var files = $('.sv-plupfile').length;
+        return (files > 0);             
+    },
+    setNextButtonState : function setNextButtonState(){
+        var valid = this.validatePage();
+        console.log('validate page: ' + valid);
+         if(valid){
+                $('input[value="Next"]').prop('disabled', false);
+                return true;
+            } 
+            else {
+                $('input[value="Next"]').prop('disabled', true);
+                return false;
+            }            
     }
     
 }
