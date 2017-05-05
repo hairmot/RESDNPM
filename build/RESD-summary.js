@@ -10825,6 +10825,24 @@ exports.default = function () {
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
+
+exports.default = function () {
+    $('input[value="Save and Exit"]').on('click', function (e) {
+        var url = $('.saveAndExit').first().attr('href');
+        jQuery.ajax({
+            url: url,
+            async: false
+        });
+        return true;
+    });
+};
+
+},{}],9:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
 exports.default = {
     validateSelects: function validateSelects(selects) {
         selects.map(function (a) {
@@ -10839,9 +10857,9 @@ exports.default = {
     }
 };
 
-},{}],9:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
 var css = "input[data-evidenceavailable]{transform:scale(2)}"; (require("browserify-css").createStyle(css, { "href": "src\\summary\\css\\styles.css" }, { "insertAt": "bottom" })); module.exports = css;
-},{"browserify-css":1}],10:[function(require,module,exports){
+},{"browserify-css":1}],11:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -10893,10 +10911,10 @@ exports.default = {
         $('body').on('click', function () {
             if (uploaders === 0) {
                 (0, _getPlUploader2.default)().bind("UploadComplete", function () {
-                    console.log(_validation2.default.setNextButtonState());
+                    _validation2.default.setNextButtonState();
                 });
                 (0, _getPlUploader2.default)().bind("FilesRemoved", function () {
-                    console.log(_validation2.default.setNextButtonState());
+                    _validation2.default.setNextButtonState();
                 });
                 uploaders = 1;
             }
@@ -10904,7 +10922,7 @@ exports.default = {
     }
 };
 
-},{"../shared/js/getPlUploader.js":7,"./evidenceMode.js":11,"./validation.js":13,"toastr":3}],11:[function(require,module,exports){
+},{"../shared/js/getPlUploader.js":7,"./evidenceMode.js":12,"./validation.js":14,"toastr":3}],12:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -10938,7 +10956,7 @@ var _toastr2 = _interopRequireDefault(_toastr);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-},{"./validation":13,"toastr":3}],12:[function(require,module,exports){
+},{"./validation":14,"toastr":3}],13:[function(require,module,exports){
 'use strict';
 
 var _eventHandlers = require('./eventHandlers.js');
@@ -10969,6 +10987,10 @@ var _validation = require('./validation');
 
 var _validation2 = _interopRequireDefault(_validation);
 
+var _hiJackSaveAndExit = require('../shared/js/hiJackSaveAndExit');
+
+var _hiJackSaveAndExit2 = _interopRequireDefault(_hiJackSaveAndExit);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function RESDInit() {
@@ -10980,6 +11002,7 @@ function RESDInit() {
     });
     (0, _evidenceMode2.default)();
     (0, _autoUploader2.default)();
+    (0, _hiJackSaveAndExit2.default)();
     (0, _charactersRemaining2.default)(1500, '[data-remchar]', '#remChar');
 }
 
@@ -10987,7 +11010,7 @@ sits_attach_event("window", "load", function () {
     RESDInit();
 });
 
-},{"../shared/css/toastr.css":4,"../shared/js/autoUploader.js":5,"../shared/js/charactersRemaining.js":6,"./css/styles.css":9,"./eventHandlers.js":10,"./evidenceMode.js":11,"./validation":13}],13:[function(require,module,exports){
+},{"../shared/css/toastr.css":4,"../shared/js/autoUploader.js":5,"../shared/js/charactersRemaining.js":6,"../shared/js/hiJackSaveAndExit":8,"./css/styles.css":10,"./eventHandlers.js":11,"./evidenceMode.js":12,"./validation":14}],14:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -11040,4 +11063,4 @@ exports.default = {
 
 };
 
-},{"../shared/js/validator":8}]},{},[12]);
+},{"../shared/js/validator":9}]},{},[13]);

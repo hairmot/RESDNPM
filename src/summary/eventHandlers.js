@@ -32,11 +32,11 @@ export default {
         $('body').on('click', () => {
             if(uploaders === 0) {
                 getPlUploader().bind("UploadComplete", function() {
-                   console.log(validation.setNextButtonState());
+                   validation.setNextButtonState();
                     
                 });
                 getPlUploader().bind("FilesRemoved", function() {
-                   console.log(validation.setNextButtonState());
+                   validation.setNextButtonState();
                     
                 });
                 uploaders = 1;
