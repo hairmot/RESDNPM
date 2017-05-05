@@ -34,7 +34,9 @@ export default {
 					else {
 						if($(e).find('.save').hasClass('sv-btn-default') || $(e).find('.save').hasClass('sv-btn-success')) {
 							validator.validateEvidence(e) ? result = true : (result = false, evidenceWarning = 1);
-					
+							if(result){
+								result = validate24hours(e);
+							}
 						} 
 						else {
 							toastr.warning('One of your selections has not been saved');
@@ -66,6 +68,8 @@ export default {
 				   result = false;
 			};
 			evidenceWarning === 1 ? toastr.warning('Please upload evidence for selected tasks') : true;
+
+
 			return result;
 		});
 	}, 
@@ -123,4 +127,24 @@ function getFieldValue(field, type) {
 		default:
 			return ;
 	}
+}
+
+function validate24hours(row) {
+	return false;
+	
+}
+
+function formatDate(date) {
+  var monthNames = [
+    "January", "February", "March",
+    "April", "May", "June", "July",
+    "August", "September", "October",
+    "November", "December"
+  ];
+
+  var day = ("0" + date.getDate()).slice(-2);
+  var monthIndex = date.getMonth();
+  var year = date.getFullYear();
+
+  return day + '/' + monthNames[monthIndex] + '/' + year;
 }

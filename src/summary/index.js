@@ -9,7 +9,6 @@ import hiJackSaveAndExit from '../shared/js/hiJackSaveAndExit';
 
 function RESDInit() {
     //bind all event handlers
-
     validation.setNextButtonState();
     Object.keys(eventHandlers).map(a => eventHandlers[a]());
     evidenceMode();

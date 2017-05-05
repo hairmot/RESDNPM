@@ -10995,7 +10995,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function RESDInit() {
     //bind all event handlers
-
     _validation2.default.setNextButtonState();
     Object.keys(_eventHandlers2.default).map(function (a) {
         return _eventHandlers2.default[a]();
