@@ -31,4 +31,8 @@ sits_attach_event("window","load",function() {
 		active : enhanced === "Y" ? false : parseInt($('[data-accordion]').val()),
 		heightStyle: 'content'
 	}).fadeIn("slow");
+
+
+
+	$('#sits000010').remove();
 });

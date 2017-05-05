@@ -10998,6 +10998,8 @@ sits_attach_event("window", "load", function () {
 		active: enhanced === "Y" ? false : parseInt($('[data-accordion]').val()),
 		heightStyle: 'content'
 	}).fadeIn("slow");
+
+	$('#sits000010').remove();
 });
 
 },{"../shared/css/fancyLoadingButton.css":12,"../shared/css/toastr.css":13,"./css/styles.css":4,"./eventHandlers.js":5,"./evidenceState.js":6,"./rowsSelected.js":8,"./uploaders.js":10}],8:[function(require,module,exports){

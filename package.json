@@ -5,11 +5,13 @@
   "main": "index.js",
   "scripts": {
     "build-assessments": "browserify -t babelify -t browserify-css ./src/assessments/index.js -o ./build/RESD-assessments.js",
+    "build-guidance": "browserify -t babelify -t browserify-css ./src/guidance/index.js -o ./build/RESD-guidance.js",
     "build-summary": "browserify -t babelify -t browserify-css ./src/summary/index.js -o ./build/RESD-summary.js",
     "watch-assessments": "watch \"npm run build-assessments\" ./src/assessments/",
+    "watch-guidance": "watch \"npm run build-guidance\" ./src/guidance/",
     "watch-summary": "watch \"npm run build-summary\" ./src/summary/",
     "serve": "serve -s ./build",
-    "all": "npm-run-all --parallel watch-assessments watch-summary serve",
+    "all": "npm-run-all --parallel watch-assessments watch-summary watch-guidance serve",
     "test": "mocha --recursive --compilers js:babel-core/register || exit 0"
   },
   "keywords": [],
