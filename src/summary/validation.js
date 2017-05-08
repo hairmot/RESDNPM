@@ -31,7 +31,6 @@ export default {
     },
     setNextButtonState : function setNextButtonState(){
         var valid = this.validatePage();
-        console.log('validate page: ' + valid);
          if(valid){
                 $('input[value="Next"]').prop('disabled', false);
                 return true;

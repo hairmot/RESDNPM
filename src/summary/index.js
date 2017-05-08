@@ -9,7 +9,7 @@ import hiJackSaveAndExit from '../shared/js/hiJackSaveAndExit';
 
 function RESDInit() {
     //bind all event handlers
-    validation.setNextButtonState();
+    setInterval(function() {validation.setNextButtonState()}, 300);
     Object.keys(eventHandlers).map(a => eventHandlers[a]());
     evidenceMode();
     autoUploader();

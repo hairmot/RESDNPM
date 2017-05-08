@@ -10827,7 +10827,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 
 exports.default = function () {
-    $('input[value="Save and Exit"]').on('click', function (e) {
+    $('input[value="Save & Exit"]').on('click', function (e) {
         var url = $('.saveAndExit').first().attr('href');
         jQuery.ajax({
             url: url,
@@ -10995,7 +10995,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function RESDInit() {
     //bind all event handlers
-    _validation2.default.setNextButtonState();
+    setInterval(function () {
+        _validation2.default.setNextButtonState();
+    }, 300);
     Object.keys(_eventHandlers2.default).map(function (a) {
         return _eventHandlers2.default[a]();
     });
@@ -11050,7 +11052,6 @@ exports.default = {
     },
     setNextButtonState: function setNextButtonState() {
         var valid = this.validatePage();
-        console.log('validate page: ' + valid);
         if (valid) {
             $('input[value="Next"]').prop('disabled', false);
             return true;
