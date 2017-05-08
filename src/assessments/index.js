@@ -5,6 +5,7 @@ import evidenceState from './evidenceState.js';
 import toastrCss from '../shared/css/toastr.css';
 import fancyLoadingButton from '../shared/css/fancyLoadingButton.css';
 import styles from './css/styles.css';
+import hiJackSaveAndExit from '../shared/js/hiJackSaveAndExit';
 
 
 //attach handlers when js is initialised
@@ -21,6 +22,8 @@ function RESDInit() {
 
 	//handle state of evidence for requests based on plUpload instance on page. checks every .5 secs.
 	evidenceState.init();
+
+	hiJackSaveAndExit();
 }
 
 sits_attach_event("window","load",function() {

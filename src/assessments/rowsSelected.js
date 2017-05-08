@@ -1,7 +1,10 @@
+import validation from './validation';
+
 export default {
     updateCounters: function updateCounters() {
         this.updateRowsSelected('body','#selectedRows');
 	    this.updateSectionRowsSelected();
+        $('[data-continue]').prop('disabled', !validation.validatePage(true));
     },
     updateSectionRowsSelected: function updateSectionRowsSelected() {
         var _this = this;
@@ -11,7 +14,9 @@ export default {
     }, 
 
     updateRowsSelected: function updateRowsSelected(element, outputSelector) {
-        $(outputSelector).html(this.validRowsSelected(element));
+        var rows = this.validRowsSelected(element);
+        $(outputSelector).html(rows);
+        return rows;
     },    
 
     validRowsSelected: function validRowsSelected(element) {

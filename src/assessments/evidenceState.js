@@ -20,6 +20,20 @@ export default {
                         $(e).find('.uploadedEvidence').hide();
                     }
 			}
+
+			//disable upload button?
+			uploadButtonToggle($(e).parent().parent());
 		});
+	}
+}
+
+function uploadButtonToggle(row) {
+	var selected = $(row).find('.selected').first().prop('checked');
+	var saveBtn = $(row).find('.save').first();
+	if(selected && (saveBtn.hasClass('sv-btn-default') || saveBtn.hasClass('sv-btn-success'))) {
+		$(row).find('.add').first().prop('disabled', false);
+	}
+	else {
+		$(row).find('.add').first().prop('disabled', true);	
 	}
 }

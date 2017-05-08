@@ -1,6 +1,7 @@
 import plUploader from '../shared/js/getPlUploader.js'
 import toastr from 'toastr';
 import evidenceState from './evidenceState.js';
+import validation from './validation';
 
 var initPlUploadCheck = 0;
 
@@ -10,6 +11,7 @@ export default {
             e.preventDefault();
             var id = $(this).data('file');
             $("a[href*='SIW_FILE_LOAD']:contains('" + id +  "')").closest('.sv-form-group').find('.rspdeleter').click();
+            $('[data-continue]').prop('disabled', !validation.validatePage(true));
         });
     },
     bindFileViewButtons : function bindFileViewButtons() {
