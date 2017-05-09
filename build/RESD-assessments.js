@@ -11286,10 +11286,16 @@ exports.default = {
 		//collect inputs
 		var dissertation = $(row).find('.dissertation option:selected').first();
 		var taskType = $(row).find('.taskType option:selected').first();
-		var evidence = $(row).find('.add');
+
+		var selects = [dissertation, taskType];
+
+		var lengthCell = $(row).find('.length').parent();
+		if (lengthCell.css('display') === 'table-cell') {
+			selects.push($(row).find('.length option:selected').first());
+		}
 
 		//validate selects
-		_validator2.default.validateSelects([dissertation, taskType]);
+		_validator2.default.validateSelects(selects);
 
 		//return whether row is valid
 		return $(row).find('.sv-mandatory').not('.add').length === 0 ? true : false;

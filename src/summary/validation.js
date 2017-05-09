@@ -1,4 +1,5 @@
 import validator from '../shared/js/validator'; 
+import plUploader from '../shared/js/getPlUploader';
 
 export default {
     validatePage: function validatePage() {
@@ -31,7 +32,7 @@ export default {
     },
     setNextButtonState : function setNextButtonState(){
         var valid = this.validatePage();
-         if(valid){
+         if(valid && plUploader().state === 1){
                 $('input[value="Next"]').prop('disabled', false);
                 return true;
             } 

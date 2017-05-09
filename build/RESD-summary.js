@@ -11022,6 +11022,10 @@ var _validator = require('../shared/js/validator');
 
 var _validator2 = _interopRequireDefault(_validator);
 
+var _getPlUploader = require('../shared/js/getPlUploader');
+
+var _getPlUploader2 = _interopRequireDefault(_getPlUploader);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = {
@@ -11052,7 +11056,7 @@ exports.default = {
     },
     setNextButtonState: function setNextButtonState() {
         var valid = this.validatePage();
-        if (valid) {
+        if (valid && (0, _getPlUploader2.default)().state === 1) {
             $('input[value="Next"]').prop('disabled', false);
             return true;
         } else {
@@ -11063,4 +11067,4 @@ exports.default = {
 
 };
 
-},{"../shared/js/validator":9}]},{},[13]);
+},{"../shared/js/getPlUploader":7,"../shared/js/validator":9}]},{},[13]);
