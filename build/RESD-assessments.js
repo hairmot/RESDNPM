@@ -10795,19 +10795,18 @@ exports.default = {
 		return result;
 	},
 	FSSTDialog: function FSSTDialog(row) {
-		var result = false;
-		var dialog = sits_dialog('Task due within 24 hours', 'Please note: this task is due within 24 hours.\n\t\t\tYou must have spoken to a member of Faculty Student Services before your request can be submitted.\n\t\t\tHave you spoken to a member of staff?', {
+		var dialog = sits_dialog('Task due within 24 hours', // eslint-disable-line
+		'Please note: this task is due within 24 hours.\n\t\t\tYou must have spoken to a member of Faculty Student Services before your request can be submitted.\n\t\t\tHave you spoken to a member of staff?', {
 			Yes: function Yes() {
-				sits_dialog_close(dialog);
-				result = staffNamePrompt(row);
+				sits_dialog_close(dialog); // eslint-disable-line
+				staffNamePrompt(row);
 				//go to next dialog
 			},
 			No: function No() {
 				//de-select row
 				row.find('.selected').first().prop('checked', false);
-				sits_dialog_close(dialog);
+				sits_dialog_close(dialog); // eslint-disable-line
 				confirmCloseDialog();
-				result = false;
 			}
 		}, false, false, false);
 	}
@@ -10816,10 +10815,11 @@ exports.default = {
 
 function staffNamePrompt(row) {
 	var result = false;
-	var dialog = sits_dialog('Name of staff', 'Please enter the name of the member of staff that you spoke to:\n\t\t<br/><br/>\n\t\t<input id="fsstInput" class="sv-form-control" type="text" />', {
+	var dialog = sits_dialog('Name of staff', // eslint-disable-line
+	'Please enter the name of the member of staff that you spoke to:\n\t\t<br/><br/>\n\t\t<input id="fsstInput" class="sv-form-control" type="text" />', {
 		Save: function Save() {
 			if (transferFsstName()) {
-				sits_dialog_close(dialog);
+				sits_dialog_close(dialog); // eslint-disable-line
 				(0, _saveTask2.default)(row);
 				result = true;
 			}
@@ -10827,17 +10827,18 @@ function staffNamePrompt(row) {
 		Exit: function Exit() {
 			result = false;
 			$(row).find('.selected').first().prop('checked', false);
-			sits_dialog_close(dialog);
+			sits_dialog_close(dialog); // eslint-disable-line
 			confirmCloseDialog();
 		}
-	}, false, false, false);
+	}, false, false, false); // eslint-disable-line
 	return result;
 }
 
 function confirmCloseDialog() {
-	var dialog = sits_dialog('Task invalid', 'The task cannot be included in your request and will now be deselected.\n\t\t\tIf you would like to request an extension for this task please contact Faculty Student Services', {
+	var dialog = sits_dialog('Task invalid', // eslint-disable-line
+	'The task cannot be included in your request and will now be deselected.\n\t\t\tIf you would like to request an extension for this task please contact Faculty Student Services', {
 		Close: function Close() {
-			sits_dialog_close(dialog);
+			sits_dialog_close(dialog); // eslint-disable-line
 		}
 	}, false, false, false);
 }
@@ -10880,10 +10881,6 @@ var _saveTask = require('./saveTask.js');
 
 var _saveTask2 = _interopRequireDefault(_saveTask);
 
-var _toastr = require('toastr');
-
-var _toastr2 = _interopRequireDefault(_toastr);
-
 var _check24Hours = require('./check24Hours');
 
 var _check24Hours2 = _interopRequireDefault(_check24Hours);
@@ -10893,7 +10890,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 exports.default = {
 	//on each input change - check validation, display message on save button.
 	addValidationOnRowChange: function addValidationOnRowChange() {
-		$('.requestRow input:not([type="file"]), .requestRow select').on("change keyup", function () {
+		$('.requestRow input:not([type="file"]), .requestRow select').on('change keyup', function () {
 			var requestRow = $(this).closest('.requestRow');
 			$(requestRow).find('.add').removeClass('sv-mandatory');
 			if (_validation2.default.validateRow(requestRow)) {
@@ -10901,12 +10898,12 @@ exports.default = {
 			} else {
 				$(requestRow).find('.save').first().val('Validation Errors').removeClass('sv-btn-success sv-btn-primary sv-btn-default sv-btn-warning').addClass('sv-btn-danger').prop('disabled', true);
 			}
-			$('[data-continue]').prop('disabled', !_validation2.default.validatePage(true));
+			//$('[data-continue]').prop('disabled', !validator.validatePage(true));
 		});
 	},
 
 	addContinueHandler: function addContinueHandler() {
-		$('input[data-continue]').on('click', function (e) {
+		$('input[data-continue]').on('click', function () {
 			return _validation2.default.validatePage();
 		});
 	},
@@ -10915,13 +10912,12 @@ exports.default = {
 	addIndividualRowSaveHandlers: function addIndividualRowSaveHandlers() {
 		$('.save').click(function (e) {
 			e.preventDefault();
-			var _this = this;
 			var toSave = $(this).closest('.requestRow');
 			if (_validation2.default.validateRow(toSave)) {
 				if (!_check24Hours2.default.validate24Hours(toSave)) {
 					(0, _saveTask2.default)(toSave);
 				} else {
-					if ($('[data-fsstname]').first().val() !== "") {
+					if ($('[data-fsstname]').first().val() !== '') {
 						(0, _saveTask2.default)(toSave);
 					} else {
 						_check24Hours2.default.FSSTDialog(toSave);
@@ -10932,7 +10928,7 @@ exports.default = {
 	}
 };
 
-},{"./check24Hours":4,"./saveTask.js":10,"./validation.js":12,"toastr":3}],7:[function(require,module,exports){
+},{"./check24Hours":4,"./saveTask.js":10,"./validation.js":12}],7:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -10954,7 +10950,7 @@ exports.default = {
 	},
 	setEvidenceState: function setEvidenceState() {
 		$('.evidence').each(function (i, e) {
-			if ($("a[href*='SIW_FILE_LOAD']:contains('" + $(e).data('file') + "')").length > 0) {
+			if ($('a[href*=\'SIW_FILE_LOAD\']:contains(\'' + $(e).data('file') + '\')').length > 0) {
 				$(e).find('.uploadEvidence').hide();
 				$(e).find('.uploadedEvidence').show();
 			} else {
@@ -11000,17 +10996,11 @@ var _evidenceState = require('./evidenceState.js');
 
 var _evidenceState2 = _interopRequireDefault(_evidenceState);
 
-var _toastr = require('../shared/css/toastr.css');
+require('../shared/css/toastr.css');
 
-var _toastr2 = _interopRequireDefault(_toastr);
+require('../shared/css/fancyLoadingButton.css');
 
-var _fancyLoadingButton = require('../shared/css/fancyLoadingButton.css');
-
-var _fancyLoadingButton2 = _interopRequireDefault(_fancyLoadingButton);
-
-var _styles = require('./css/styles.css');
-
-var _styles2 = _interopRequireDefault(_styles);
+require('./css/styles.css');
 
 var _hiJackSaveAndExit = require('../shared/js/hiJackSaveAndExit');
 
@@ -11040,20 +11030,21 @@ function RESDInit() {
 	(0, _hiJackSaveAndExit2.default)();
 }
 
-sits_attach_event("window", "load", function () {
+sits_attach_event('window', 'load', function () {
+	// eslint-disable-line
 	RESDInit();
-	$("#accordion").accordion({
+	$('#accordion').accordion({
 		collapsible: true,
-		active: enhanced === "Y" ? false : parseInt($('[data-accordion]').val()),
+		active: enhanced === 'Y' ? false : parseInt($('[data-accordion]').val()), // eslint-disable-line
 		heightStyle: 'content'
-	}).fadeIn("slow");
+	}).fadeIn('slow');
 });
 
 },{"../shared/css/fancyLoadingButton.css":14,"../shared/css/toastr.css":15,"../shared/js/hiJackSaveAndExit":17,"./css/styles.css":5,"./eventHandlers.js":6,"./evidenceState.js":7,"./rowsSelected.js":9,"./uploaders.js":11}],9:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
-    value: true
+	value: true
 });
 
 var _validation = require('./validation');
@@ -11063,35 +11054,35 @@ var _validation2 = _interopRequireDefault(_validation);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = {
-    updateCounters: function updateCounters() {
-        this.updateRowsSelected('body', '#selectedRows');
-        this.updateSectionRowsSelected();
-        $('[data-continue]').prop('disabled', !_validation2.default.validatePage(true));
-    },
-    updateSectionRowsSelected: function updateSectionRowsSelected() {
-        var _this = this;
-        $('#accordion > div').each(function (i, e) {
-            _this.updateRowsSelected($(e), $(e).prev().find('.sectionSelectedRows'));
-        });
-    },
+	updateCounters: function updateCounters() {
+		this.updateRowsSelected('body', '#selectedRows');
+		this.updateSectionRowsSelected();
+		//$('[data-continue]').prop('disabled', !validation.validatePage(true));
+	},
+	updateSectionRowsSelected: function updateSectionRowsSelected() {
+		var _this = this;
+		$('#accordion > div').each(function (i, e) {
+			_this.updateRowsSelected($(e), $(e).prev().find('.sectionSelectedRows'));
+		});
+	},
 
-    updateRowsSelected: function updateRowsSelected(element, outputSelector) {
-        var rows = this.validRowsSelected(element);
-        $(outputSelector).html(rows);
-        return rows;
-    },
+	updateRowsSelected: function updateRowsSelected(element, outputSelector) {
+		var rows = this.validRowsSelected(element);
+		$(outputSelector).html(rows);
+		return rows;
+	},
 
-    validRowsSelected: function validRowsSelected(element) {
-        var count = 0;
-        $(element).find('.requestRow').each(function (i, e) {
-            if ($(e).find('.save').hasClass('sv-btn-success') || $(e).find('.save').hasClass('sv-btn-default')) {
-                if ($(e).find('.selected').first().prop('checked')) {
-                    count++;
-                }
-            }
-        });
-        return count;
-    }
+	validRowsSelected: function validRowsSelected(element) {
+		var count = 0;
+		$(element).find('.requestRow').each(function (i, e) {
+			if ($(e).find('.save').hasClass('sv-btn-success') || $(e).find('.save').hasClass('sv-btn-default')) {
+				if ($(e).find('.selected').first().prop('checked')) {
+					count++;
+				}
+			}
+		});
+		return count;
+	}
 };
 
 },{"./validation":12}],10:[function(require,module,exports){
@@ -11116,20 +11107,24 @@ var _submitFormAsync2 = _interopRequireDefault(_submitFormAsync);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+_toastr2.default.options.positionclass = 'toast-top-center';
+
 function saveTask(toSave) {
 	toSave.find('[data-ajaxinput]').each(function (i, e) {
 		populateAjaxField(e);
 	});
 	var saveButton = $(toSave).find('.save');
 	saveButton.prop('disabled', 'true').val('Saving...').addClass('progress-striped progress active');
-	if (enhanced === "Y") {
-		(0, _submitFormAsync2.default)(function () {
-			saveButton.removeClass('sv-btn-primary sv-btn-warning sv-btn-danger progress-striped progress active').addClass('sv-btn-success').val('Saved!');
-			_toastr2.default.success('Saved data');
-			_rowsSelected2.default.updateCounters();
-		});
-	} else {
-		$('[data-accordion]').val($('#accordion').accordion("option").active);
+	if (enhanced === 'Y') // eslint-disable-line
+		{
+			(0, _submitFormAsync2.default)(function () {
+				saveButton.removeClass('sv-btn-primary sv-btn-warning sv-btn-danger progress-striped progress active').addClass('sv-btn-success').val('Saved!');
+				_toastr2.default.options.positionClass = 'toast-bottom-full-width';
+				_toastr2.default.success('Saved data');
+				_rowsSelected2.default.updateCounters();
+			});
+		} else {
+		$('[data-accordion]').val($('#accordion').accordion('option').active);
 		$('#ajaxSubmit input[type="submit"]').first().click();
 	}
 }
@@ -11142,15 +11137,12 @@ function populateAjaxField(name) {
 
 function getFieldValue(field, type) {
 	switch (type) {
-		case "TD":
+		case 'TD':
 			return $(field).html();
-			break;
-		case "INPUT":
-			return $(field).prop('checked') === true ? "Y" : "N";
-			break;
-		case "SELECT":
-			return $(field).find("option:selected").val();
-			break;
+		case 'INPUT':
+			return $(field).prop('checked') === true ? 'Y' : 'N';
+		case 'SELECT':
+			return $(field).find('option:selected').val();
 		default:
 			return;
 	}
@@ -11160,7 +11152,7 @@ function getFieldValue(field, type) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
-    value: true
+	value: true
 });
 
 var _getPlUploader = require('../shared/js/getPlUploader.js');
@@ -11171,10 +11163,6 @@ var _toastr = require('toastr');
 
 var _toastr2 = _interopRequireDefault(_toastr);
 
-var _evidenceState = require('./evidenceState.js');
-
-var _evidenceState2 = _interopRequireDefault(_evidenceState);
-
 var _validation = require('./validation');
 
 var _validation2 = _interopRequireDefault(_validation);
@@ -11184,77 +11172,76 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var initPlUploadCheck = 0;
 
 exports.default = {
-    bindFileDeleteButtons: function bindFileDeleteButtons() {
-        $('.deleteEvidence').on('click', function (e) {
-            e.preventDefault();
-            var id = $(this).data('file');
-            $("a[href*='SIW_FILE_LOAD']:contains('" + id + "')").closest('.sv-form-group').find('.rspdeleter').click();
-            $('[data-continue]').prop('disabled', !_validation2.default.validatePage(true));
-        });
-    },
-    bindFileViewButtons: function bindFileViewButtons() {
-        $('.viewEvidence').on('click', function (e) {
-            e.preventDefault();
-            var id = $(this).data('file');
-            $("a[href*='SIW_FILE_LOAD']:contains('" + id + "')")[0].click();
-        });
-    },
-    bindFileUploadButtons: function bindFileUploadButtons() {
-        $('.add').on('click', function (e) {
-            e.preventDefault();
-            if (initPlUploadCheck === 0) {
-                initPlUpload();
-                initPlUploadCheck++;
-            }
-            $(this).prev().val('');
-            $(this).prev().click();
-        });
-    },
+	bindFileDeleteButtons: function bindFileDeleteButtons() {
+		$('.deleteEvidence').on('click', function (e) {
+			e.preventDefault();
+			var id = $(this).data('file');
+			$('a[href*=\'SIW_FILE_LOAD\']:contains(\'' + id + '\')').closest('.sv-form-group').find('.rspdeleter').click();
+			//$('[data-continue]').prop('disabled', !validation.validatePage(true));
+		});
+	},
+	bindFileViewButtons: function bindFileViewButtons() {
+		$('.viewEvidence').on('click', function (e) {
+			e.preventDefault();
+			var id = $(this).data('file');
+			$('a[href*=\'SIW_FILE_LOAD\']:contains(\'' + id + '\')')[0].click();
+		});
+	},
+	bindFileUploadButtons: function bindFileUploadButtons() {
+		$('.add').on('click', function (e) {
+			e.preventDefault();
+			if (initPlUploadCheck === 0) {
+				initPlUpload();
+				initPlUploadCheck++;
+			}
+			$(this).prev().val('');
+			$(this).prev().click();
+		});
+	},
 
-    bindHiddenFileInputs: function bindHiddenFileInputs() {
-        var _this = this;
-        $('.fileBrowse').on('change', function () {
-            var id = $(this).attr('id');
-            (0, _getPlUploader2.default)().addFile(this.files[0], id + this.files[0].name.substring(this.files[0].name.lastIndexOf('.')));
-            $(this).next().removeClass('sv-btn-default').addClass('sv-btn-success').val('Uploading').prop('disabled', true);
-            waitForSitsInputsToAppear(id);
-        });
-    }
+	bindHiddenFileInputs: function bindHiddenFileInputs() {
+		$('.fileBrowse').on('change', function () {
+			var id = $(this).attr('id');
+			(0, _getPlUploader2.default)().addFile(this.files[0], id + this.files[0].name.substring(this.files[0].name.lastIndexOf('.')));
+			$(this).next().removeClass('sv-btn-default').addClass('sv-btn-success').val('Uploading').prop('disabled', true);
+			waitForSitsInputsToAppear(id);
+		});
+	}
 };
 
 
 function waitForSitsInputsToAppear(id) {
-    if ($('.updesc').length > 0) {
-        populateUploadFields(id);
-    } else {
-        setTimeout(function () {
-            waitForSitsInputsToAppear(id);
-        }, 100);
-    }
+	if ($('.updesc').length > 0) {
+		populateUploadFields(id);
+	} else {
+		setTimeout(function () {
+			waitForSitsInputsToAppear(id);
+		}, 100);
+	}
 }
 
 function populateUploadFields(id) {
-    $('.upname').val(id);
-    $('.updesc').val(id);
-    $('.upnotes').val($('#mhdCode').html());
-    $('.upkeyw').val($('#stuCode').html());
-    (0, _getPlUploader2.default)().start();
+	$('.upname').val(id);
+	$('.updesc').val(id);
+	$('.upnotes').val($('#mhdCode').html());
+	$('.upkeyw').val($('#stuCode').html());
+	(0, _getPlUploader2.default)().start();
 }
 
 function initPlUpload() {
-    var uploader = (0, _getPlUploader2.default)();
-    uploader.bind("UploadComplete", function () {
-        $('input[data-continue]').prop('disabled', false).val('Continue');
-        _toastr2.default.success('All files finished uploading');
-        $.get($('.syncDocs').attr('href'), function (done) {});
-    });
-    uploader.bind("UploadFile", function () {
-        $('input[data-continue]').prop('disabled', true).val('Files Uploading');
-        _toastr2.default.info('Files uploading');
-    });
+	var uploader = (0, _getPlUploader2.default)();
+	uploader.bind('UploadComplete', function () {
+		//	$('input[data-continue]').prop('disabled',false).val('Continue');
+		_toastr2.default.success('All files finished uploading');
+		$.get($('.syncDocs').attr('href'), function () {});
+	});
+	uploader.bind('UploadFile', function () {
+		//	$('input[data-continue]').prop('disabled',true).val('Files Uploading');
+		_toastr2.default.info('Files uploading');
+	});
 }
 
-},{"../shared/js/getPlUploader.js":16,"./evidenceState.js":7,"./validation":12,"toastr":3}],12:[function(require,module,exports){
+},{"../shared/js/getPlUploader.js":16,"./validation":12,"toastr":3}],12:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -11276,6 +11263,8 @@ var v = _interopRequireWildcard(_validationStates);
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+_toastr2.default.options.positionclass = 'toast-top-center';
 
 exports.default = {
 	validateRow: function validateRow(row) {
@@ -11335,37 +11324,37 @@ exports.default = {
 function statusDisplay(result) {
 	switch (result) {
 		case v.VALID:
-			_toastr2.default.success("Success");
+			_toastr2.default.success('Success');
 			break;
 		case v.INVALID_SELECTION:
-			_toastr2.default.warning("Invalid Rows Selected");
+			_toastr2.default.warning('Invalid Rows Selected');
 			break;
 		case v.MISSING_EVIDENCE:
-			_toastr2.default.warning("Please provide supporting evidence");
+			_toastr2.default.warning('Please provide supporting evidence');
 			break;
 		case v.NO_TASKS_SELECTED:
-			_toastr2.default.warning("Please select tasks to include in your request");
+			_toastr2.default.warning('Please select tasks to include in your request');
 			break;
 		case v.UNSAVED_TASK:
-			_toastr2.default.warning("Unsaved Tasks. Please store your changes or deselect unsaved tasks");
+			_toastr2.default.warning('Unsaved Tasks. Please store your changes or deselect unsaved tasks');
 			break;
 		default:
-			_toastr2.default.warning("Invalid selection");
+			_toastr2.default.warning('Invalid selection');
 			break;
 	}
 }
 
 },{"../shared/js/validator":19,"./validationStates":13,"toastr":3}],13:[function(require,module,exports){
-"use strict";
+'use strict';
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-var VALID = exports.VALID = "VALID";
-var MISSING_EVIDENCE = exports.MISSING_EVIDENCE = "MISSING_EVIDENCE";
-var INVALID_SELECTION = exports.INVALID_SELECTION = "INVALID_SELECTION";
-var UNSAVED_TASK = exports.UNSAVED_TASK = "UNSAVED_TASK";
-var NO_TASKS_SELECTED = exports.NO_TASKS_SELECTED = "NO_TASKS_SELECTED";
+var VALID = exports.VALID = 'VALID';
+var MISSING_EVIDENCE = exports.MISSING_EVIDENCE = 'MISSING_EVIDENCE';
+var INVALID_SELECTION = exports.INVALID_SELECTION = 'INVALID_SELECTION';
+var UNSAVED_TASK = exports.UNSAVED_TASK = 'UNSAVED_TASK';
+var NO_TASKS_SELECTED = exports.NO_TASKS_SELECTED = 'NO_TASKS_SELECTED';
 
 },{}],14:[function(require,module,exports){
 var css = ".button-secondary:active,.button:active,button:active,input[type=submit]:active{box-shadow:1px 1px 4px rgba(0,0,0,.4) inset}.button.is-disabled,.button[disabled],.is-disabled.button-secondary,[disabled].button-secondary,button.is-disabled,button[disabled],input[type=submit].is-disabled,input[type=submit][disabled]{opacity:.8;cursor:not-allowed;color:#FFF;text-shadow:0 1px 1px #aaa}.button.is-disabled:focus,.button.is-disabled:hover,.button[disabled]:focus,.button[disabled]:hover,.is-disabled.button-secondary:focus,.is-disabled.button-secondary:hover,[disabled].button-secondary:focus,[disabled].button-secondary:hover,button.is-disabled:focus,button.is-disabled:hover,button[disabled]:focus,button[disabled]:hover,input[type=submit].is-disabled:focus,input[type=submit].is-disabled:hover,input[type=submit][disabled]:focus,input[type=submit][disabled]:hover{box-shadow:none}.button,.button-secondary,button,input[type=submit]{border-radius:5px;display:inline-block;outline:0;text-align:center;-webkit-transition:.1s background-color;-moz-transition:.1s background-color;-o-transition:.1s background-color;transition:.1s background-color}.progress-striped{background-color:#149bdf;background-image:-webkit-gradient(linear,0 100%,100% 0,color-stop(0.25,rgba(255,255,255,.15)),color-stop(0.25,transparent),color-stop(0.5,transparent),color-stop(0.5,rgba(255,255,255,.15)),color-stop(0.75,rgba(255,255,255,.15)),color-stop(0.75,transparent),to(transparent));background-image:-webkit-linear-gradient(45deg,rgba(255,255,255,.15) 25%,transparent 25%,transparent 50%,rgba(255,255,255,.15) 50%,rgba(255,255,255,.15) 75%,transparent 75%,transparent);background-image:-moz-linear-gradient(45deg,rgba(255,255,255,.15) 25%,transparent 25%,transparent 50%,rgba(255,255,255,.15) 50%,rgba(255,255,255,.15) 75%,transparent 75%,transparent);background-image:-o-linear-gradient(45deg,rgba(255,255,255,.15) 25%,transparent 25%,transparent 50%,rgba(255,255,255,.15) 50%,rgba(255,255,255,.15) 75%,transparent 75%,transparent);background-image:linear-gradient(45deg,rgba(255,255,255,.15) 25%,transparent 25%,transparent 50%,rgba(255,255,255,.15) 50%,rgba(255,255,255,.15) 75%,transparent 75%,transparent);-webkit-background-size:40px 40px;-moz-background-size:40px 40px;-o-background-size:40px 40px;background-size:40px 40px}.progress.active{-webkit-animation:progress-bar-stripes 2s linear infinite;-moz-animation:progress-bar-stripes 2s linear infinite;-ms-animation:progress-bar-stripes 2s linear infinite;-o-animation:progress-bar-stripes 2s linear infinite;animation:progress-bar-stripes 2s linear infinite}@-webkit-keyframes progress-bar-stripes{from{background-position:40px 0}to{background-position:0 0}}@-moz-keyframes progress-bar-stripes{from{background-position:40px 0}to{background-position:0 0}}@-ms-keyframes progress-bar-stripes{from{background-position:40px 0}to{background-position:0 0}}@-o-keyframes progress-bar-stripes{from{background-position:0 0}to{background-position:40px 0}}@keyframes progress-bar-stripes{from{background-position:40px 0}to{background-position:0 0}}"; (require("browserify-css").createStyle(css, { "href": "src\\shared\\css\\fancyLoadingButton.css" }, { "insertAt": "bottom" })); module.exports = css;

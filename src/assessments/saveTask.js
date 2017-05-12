@@ -1,24 +1,26 @@
 import toastr from 'toastr';
 import rowsSelected from './rowsSelected.js';
 import submitFormAsync from '../shared/js/submitFormAsync';
+toastr.options.positionclass = 'toast-top-center';
 
 export default function saveTask(toSave) {
 	toSave.find('[data-ajaxinput]').each(function(i,e) {
 		populateAjaxField(e);
-	});		
+	});
 	var saveButton = $(toSave).find('.save');
 	saveButton.prop('disabled','true').val('Saving...').addClass('progress-striped progress active');
-	if(enhanced === "Y")
+	if(enhanced === 'Y')// eslint-disable-line
 	{
 		submitFormAsync(function() {
 			saveButton.removeClass('sv-btn-primary sv-btn-warning sv-btn-danger progress-striped progress active').addClass('sv-btn-success').val('Saved!');
+			toastr.options.positionClass = 'toast-bottom-full-width';
 			toastr.success('Saved data');
-			rowsSelected.updateCounters();		
-		});		
-	}	
+			rowsSelected.updateCounters();
+		});
+	}
 	else
 	{
-		$('[data-accordion]').val($('#accordion').accordion("option").active);
+		$('[data-accordion]').val($('#accordion').accordion('option').active);
 		$('#ajaxSubmit input[type="submit"]').first().click();
 	}
 }
@@ -31,17 +33,14 @@ function populateAjaxField(name) {
 
 function getFieldValue(field, type) {
 	switch(type) {
-		case "TD":
-			return $(field).html();
-			break;
-		case "INPUT":
-			return $(field).prop('checked') === true ? "Y" : "N";
-			break;
-		case "SELECT":
-			return $(field).find("option:selected").val();
-			break;
-		default:
-			return ;
+	case 'TD':
+		return $(field).html();
+	case 'INPUT':
+		return $(field).prop('checked') === true ? 'Y' : 'N';
+	case 'SELECT':
+		return $(field).find('option:selected').val();
+	default:
+		return ;
 	}
 }
 

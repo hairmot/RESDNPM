@@ -2,9 +2,9 @@ import uploaders from './uploaders.js';
 import rowsSelected from './rowsSelected.js';
 import eventHandlers from './eventHandlers.js';
 import evidenceState from './evidenceState.js';
-import toastrCss from '../shared/css/toastr.css';
-import fancyLoadingButton from '../shared/css/fancyLoadingButton.css';
-import styles from './css/styles.css';
+import '../shared/css/toastr.css';
+import '../shared/css/fancyLoadingButton.css';
+import './css/styles.css';
 import hiJackSaveAndExit from '../shared/js/hiJackSaveAndExit';
 
 
@@ -26,11 +26,11 @@ function RESDInit() {
 	hiJackSaveAndExit();
 }
 
-sits_attach_event("window","load",function() {
+sits_attach_event('window','load',function() {// eslint-disable-line
 	RESDInit();
-	$( "#accordion" ).accordion({
-		collapsible : true,							
-		active : enhanced === "Y" ? false : parseInt($('[data-accordion]').val()),
+	$( '#accordion' ).accordion({
+		collapsible : true,
+		active : enhanced === 'Y' ? false : parseInt($('[data-accordion]').val()),// eslint-disable-line
 		heightStyle: 'content'
-	}).fadeIn("slow");
+	}).fadeIn('slow');
 });
