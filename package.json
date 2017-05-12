@@ -9,13 +9,15 @@
     "build-guidance": "browserify -t babelify -t browserify-css ./src/guidance/index.js -o ./build/RESD-guidance.js",
     "build-summary": "browserify -t babelify -t browserify-css ./src/summary/index.js -o ./build/RESD-summary.js",
     "build-staff-process": "browserify -t babelify -t browserify-css ./src/staff-process/index.js -o ./build/RESD-staff-process.js",
+		"build-staff-search": "browserify -t babelify -t browserify-css ./src/staff-search/index.js -o ./build/RESD-staff-search.js",
     "watch-assessments": "watch \"npm run build-assessments\" ./src/assessments/",
     "watch-confirmation": "watch \"npm run build-confirmation\" ./src/confirmation/",
     "watch-guidance": "watch \"npm run build-guidance\" ./src/guidance/",
     "watch-summary": "watch \"npm run build-summary\" ./src/summary/",
     "watch-staff-process": "watch \"npm run build-staff-process\" ./src/staff-process/",
+		"watch-staff-search": "watch \"npm run build-staff-search\" ./src/staff-search/",
     "serve": "serve -s ./build",
-    "all": "npm-run-all --parallel watch-assessments watch-summary watch-staff-process watch-guidance watch-confirmation serve",
+    "all": "npm-run-all --parallel watch-assessments watch-summary watch-staff-process watch-staff-search watch-guidance watch-confirmation serve",
     "test": "mocha --recursive --compilers js:babel-core/register || exit 0"
   },
   "keywords": [

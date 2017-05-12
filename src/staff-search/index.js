@@ -1,6 +1,3 @@
-import eventHandlers from './eventHandlers';
-import '../shared/css/toastr.css';
-
 function RESDInit() {
 	Object.keys(eventHandlers).map(a => eventHandlers[a]());
 

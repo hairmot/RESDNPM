@@ -2,7 +2,8 @@ module.exports = {
     "env": {
         "browser": true,
         "commonjs": true,
-        "es6": true
+        "es6": true,
+		"jquery": true
     },
     "extends": "eslint:recommended",
     "parserOptions": {
@@ -25,5 +26,8 @@ module.exports = {
             "error",
             "always"
         ]
-    }
+    },
+	 "settings": {
+      "import/ignore": [".css$","node_modules/*"]
+   }
 };
