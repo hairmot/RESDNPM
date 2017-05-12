@@ -11110,6 +11110,10 @@ var _rowsSelected = require('./rowsSelected.js');
 
 var _rowsSelected2 = _interopRequireDefault(_rowsSelected);
 
+var _submitFormAsync = require('../shared/js/submitFormAsync');
+
+var _submitFormAsync2 = _interopRequireDefault(_submitFormAsync);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function saveTask(toSave) {
@@ -11119,7 +11123,7 @@ function saveTask(toSave) {
 	var saveButton = $(toSave).find('.save');
 	saveButton.prop('disabled', 'true').val('Saving...').addClass('progress-striped progress active');
 	if (enhanced === "Y") {
-		submitFormAsync(function () {
+		(0, _submitFormAsync2.default)(function () {
 			saveButton.removeClass('sv-btn-primary sv-btn-warning sv-btn-danger progress-striped progress active').addClass('sv-btn-success').val('Saved!');
 			_toastr2.default.success('Saved data');
 			_rowsSelected2.default.updateCounters();
@@ -11128,13 +11132,6 @@ function saveTask(toSave) {
 		$('[data-accordion]').val($('#accordion').accordion("option").active);
 		$('#ajaxSubmit input[type="submit"]').first().click();
 	}
-}
-
-function submitFormAsync(done) {
-	var formData = $('form').first().serialize() + '&NEXT.DUMMY.MENSYS.1=Next';
-	$.post($('form').first().attr('action'), formData, function (data) {
-		done();
-	});
 }
 
 function populateAjaxField(name) {
@@ -11159,7 +11156,7 @@ function getFieldValue(field, type) {
 	}
 }
 
-},{"./rowsSelected.js":9,"toastr":3}],11:[function(require,module,exports){
+},{"../shared/js/submitFormAsync":18,"./rowsSelected.js":9,"toastr":3}],11:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -11358,7 +11355,7 @@ function statusDisplay(result) {
 	}
 }
 
-},{"../shared/js/validator":18,"./validationStates":13,"toastr":3}],13:[function(require,module,exports){
+},{"../shared/js/validator":19,"./validationStates":13,"toastr":3}],13:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -11406,6 +11403,20 @@ exports.default = function () {
 };
 
 },{}],18:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.default = submitFormAsync;
+function submitFormAsync(done) {
+    var formData = $('form').first().serialize() + '&NEXT.DUMMY.MENSYS.1=Next';
+    $.post($('form').first().attr('action'), formData, function (data) {
+        done();
+    });
+}
+
+},{}],19:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {

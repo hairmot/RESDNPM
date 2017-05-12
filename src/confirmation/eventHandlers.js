@@ -8,7 +8,7 @@ export default {
 }
 
 function bindAccept() {
-    $('[data-accept]').on('change', () => validation.validatePage());
+    $('[data-accept]').on('change', () => validation.nextButtonControl());
 }
 
 function bindDeleteButton() {

@@ -1,5 +1,6 @@
 import toastr from 'toastr';
 import rowsSelected from './rowsSelected.js';
+import submitFormAsync from '../shared/js/submitFormAsync';
 
 export default function saveTask(toSave) {
 	toSave.find('[data-ajaxinput]').each(function(i,e) {
@@ -20,13 +21,6 @@ export default function saveTask(toSave) {
 		$('[data-accordion]').val($('#accordion').accordion("option").active);
 		$('#ajaxSubmit input[type="submit"]').first().click();
 	}
-}
-
-function submitFormAsync(done) {
-    var formData = $('form').first().serialize() + '&NEXT.DUMMY.MENSYS.1=Next';
-    $.post($('form').first().attr('action'), formData, function(data) {
-        done();
-    });
 }
 
 function populateAjaxField(name) {
