@@ -22,7 +22,7 @@ export default {
 					row.next().find('[data-extensionduedate]').val()
 					];
 				$('[data-ajaxdata]').val(data.join('~'));
-				if($('.sv-mandatory').length ===0)
+				if(row.find('.sv-mandatory').length ===0 && row.next().find('.sv-mandatory').length ===0 )
 				{
 					submitFormAsync(() => {return true;});
 				}
