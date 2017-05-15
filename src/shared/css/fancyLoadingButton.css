@@ -90,3 +90,5 @@ input[type=submit], button, .button, .button-secondary {
     background-position: 0 0;
   }
 }
+
+.progress {min-height:34px; margin-bottom:0;}
