@@ -1,7 +1,6 @@
 import validator from '../shared/js/validator';
 import toastr from 'toastr';
 import * as v from './validationStates';
-toastr.options.positionclass = 'toast-top-center';
 
 export default {
 	validateRow: function validateRow(row) {

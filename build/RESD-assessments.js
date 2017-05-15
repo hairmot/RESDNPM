@@ -11107,8 +11107,6 @@ var _submitFormAsync2 = _interopRequireDefault(_submitFormAsync);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-_toastr2.default.options.positionclass = 'toast-top-center';
-
 function saveTask(toSave) {
 	toSave.find('[data-ajaxinput]').each(function (i, e) {
 		populateAjaxField(e);
@@ -11119,7 +11117,6 @@ function saveTask(toSave) {
 		{
 			(0, _submitFormAsync2.default)(function () {
 				saveButton.removeClass('sv-btn-primary sv-btn-warning sv-btn-danger progress-striped progress active').addClass('sv-btn-success').val('Saved!');
-				_toastr2.default.options.positionClass = 'toast-bottom-full-width';
 				_toastr2.default.success('Saved data');
 				_rowsSelected2.default.updateCounters();
 			});
@@ -11263,8 +11260,6 @@ var v = _interopRequireWildcard(_validationStates);
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-_toastr2.default.options.positionclass = 'toast-top-center';
 
 exports.default = {
 	validateRow: function validateRow(row) {

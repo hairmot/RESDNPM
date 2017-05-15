@@ -4,12 +4,12 @@ const jsdom = require("jsdom");
 const { JSDOM } = jsdom;
 import validator from '../../src/shared/js/validator';
 
-describe("Validator Tests", function(){  
+describe("Validator Tests", function(){
 
     before(() => {
-        const dom = new JSDOM(`    
+        const dom = new JSDOM(`
             <select>
-                <option value="0" selected>Please select</option>
+                <option value="" selected>Please select</option>
                 <option value="1">Valid Choice</option>
             </select>
 
@@ -17,7 +17,7 @@ describe("Validator Tests", function(){
         `);
         var $ = require('jquery')(dom.window);
         global.$ = $;
-    
+
     });
 
     it("invalidates a blank input", () => {
@@ -40,6 +40,6 @@ describe("Validator Tests", function(){
         expect($('select.sv-mandatory').length).to.equal(0);
     });
 
-    
+
 });
 

@@ -1,7 +1,6 @@
 import toastr from 'toastr';
 import rowsSelected from './rowsSelected.js';
 import submitFormAsync from '../shared/js/submitFormAsync';
-toastr.options.positionclass = 'toast-top-center';
 
 export default function saveTask(toSave) {
 	toSave.find('[data-ajaxinput]').each(function(i,e) {
@@ -13,7 +12,6 @@ export default function saveTask(toSave) {
 	{
 		submitFormAsync(function() {
 			saveButton.removeClass('sv-btn-primary sv-btn-warning sv-btn-danger progress-striped progress active').addClass('sv-btn-success').val('Saved!');
-			toastr.options.positionClass = 'toast-bottom-full-width';
 			toastr.success('Saved data');
 			rowsSelected.updateCounters();
 		});
