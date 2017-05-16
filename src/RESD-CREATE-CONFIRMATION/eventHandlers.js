@@ -3,12 +3,14 @@ import validation from './validation';
 export default {
 	init: function init() {
 		bindDeleteButton();
-		bindAccept();
+		bindSubmitButton();
 	}
 };
 
-function bindAccept() {
-	$('[data-accept]').on('change', () => validation.nextButtonControl());
+function bindSubmitButton() {
+	$('input[value="Submit Request"]').on('click', function() {
+		return validation.validatePage().length === 0;
+	});
 }
 
 function bindDeleteButton() {

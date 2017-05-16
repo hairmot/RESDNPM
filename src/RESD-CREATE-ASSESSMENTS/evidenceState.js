@@ -6,17 +6,17 @@ export default {
 		setInterval(function() {_this.setEvidenceState();}, 500);
 	},
 	setEvidenceState: function setEvidenceState() {
-		$('.evidence').each(function(i,e) {			
+		$('.evidence').each(function(i,e) {
 			if($('a[href*=\'SIW_FILE_LOAD\']:contains(\'' + $(e).data('file') +  '\')').length > 0)
 			{
 				$(e).find('.uploadEvidence').hide();
 				$(e).find('.uploadedEvidence').show();
 			}
 			else
-			{        
-				if(plUploader().state == 1)  
-                    {    
-					$(e).find('.uploadEvidence').show().find('.add').removeClass('sv-btn-success').addClass('sv-btn-block').val('Upload Work in Progress').prop('disabled',false);
+			{
+				if(plUploader().state == 1)
+                    {
+					$(e).find('.uploadEvidence').show().find('.add').removeClass('sv-btn-success progress progress-striped active').addClass('sv-btn-block sv-btn-default').val('Upload Work in Progress').prop('disabled',false);
 					$(e).find('.uploadedEvidence').hide();
 				}
 			}
@@ -34,6 +34,6 @@ function uploadButtonToggle(row) {
 		$(row).find('.add').first().prop('disabled', false);
 	}
 	else {
-		$(row).find('.add').first().prop('disabled', true);	
+		$(row).find('.add').first().prop('disabled', true);
 	}
 }

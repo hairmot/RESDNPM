@@ -10955,7 +10955,7 @@ exports.default = {
 				$(e).find('.uploadedEvidence').show();
 			} else {
 				if ((0, _getPlUploader2.default)().state == 1) {
-					$(e).find('.uploadEvidence').show().find('.add').removeClass('sv-btn-success').addClass('sv-btn-block').val('Upload Work in Progress').prop('disabled', false);
+					$(e).find('.uploadEvidence').show().find('.add').removeClass('sv-btn-success progress progress-striped active').addClass('sv-btn-block sv-btn-default').val('Upload Work in Progress').prop('disabled', false);
 					$(e).find('.uploadedEvidence').hide();
 				}
 			}
@@ -11189,7 +11189,7 @@ exports.default = {
 		$('.fileBrowse').on('change', function () {
 			var id = $(this).attr('id');
 			(0, _getPlUploader2.default)().addFile(this.files[0], id + this.files[0].name.substring(this.files[0].name.lastIndexOf('.')));
-			$(this).next().removeClass('sv-btn-default').addClass('sv-btn-success').val('Uploading').prop('disabled', true);
+			$(this).next().removeClass('sv-btn-default').addClass('sv-btn-success progress progress-striped active').val('Uploading').prop('disabled', true);
 			waitForSitsInputsToAppear(id);
 		});
 	}

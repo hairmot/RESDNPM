@@ -35,3 +35,7 @@ gulp.task('watch', function() {
 	gulp.watch(['./src/**/*.js'], ['build']);
 });
 
+function onError(err) {
+  console.log(err);
+  this.emit('end');
+}

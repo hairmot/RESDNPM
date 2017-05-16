@@ -36,7 +36,7 @@ export default {
 		$('.fileBrowse').on('change',function() {
 			var id = $(this).attr('id');
 			plUploader().addFile(this.files[0], id + this.files[0].name.substring(this.files[0].name.lastIndexOf('.')));
-			$(this).next().removeClass('sv-btn-default').addClass('sv-btn-success').val('Uploading').prop('disabled',true);
+			$(this).next().removeClass('sv-btn-default').addClass('sv-btn-success progress progress-striped active').val('Uploading').prop('disabled',true);
 			waitForSitsInputsToAppear(id);
 		});
 	}

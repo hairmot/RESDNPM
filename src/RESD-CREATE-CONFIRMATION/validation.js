@@ -1,10 +1,16 @@
-export default {
-	nextButtonControl: function nextButtonControl() {
-		$('input[value="Submit Request"]').prop('disabled', !this.validatePage());
-	},
+import toastr from 'toastr';
 
-	validatePage: function validatePage() {
-		$('.requestRow').length === 0 ? $('input[value="Submit Request"]').val('No Tasks Selected') : $('input[value="Submit Request"]').val('Submit Request');
-		return $('[data-accept]').prop('checked') && $('.requestRow').length > 0;
+export default {
+	validatePage: function validatePage(silent = false) {
+		var errors = [];
+		if($('.requestRow').length === 0)
+			errors.push('No valid tasks selected. Please return to Module and Assessments screen.');
+		if(!$('[data-accept]').prop('checked'))
+			errors.push('Please accept the confirmation statement');
+		if(!silent) {
+			errors.map(a=> toastr.warning(a));
+		}
+
+		return errors;
 	}
 };
