@@ -1,5 +1,3 @@
-import validation from './validation';
-
 export default {
 	updateCounters: function updateCounters() {
 		this.updateRowsSelected('body','#selectedRows');

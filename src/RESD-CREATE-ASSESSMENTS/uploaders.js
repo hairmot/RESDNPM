@@ -1,6 +1,5 @@
 import plUploader from '../shared/js/getPlUploader.js';
 import toastr from 'toastr';
-import validation from './validation';
 
 var initPlUploadCheck = 0;
 

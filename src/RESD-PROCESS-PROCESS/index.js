@@ -7,6 +7,6 @@ function RESDInit() {
 	validation.validatePage();
 }
 
-sits_attach_event('window','load',function() {
+sits_attach_event('window','load',function() {// eslint-disable-line
 	RESDInit();
 });
