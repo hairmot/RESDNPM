@@ -1,13 +1,13 @@
 import validation from './validation';
 import toastr from 'toastr';
- 
-export default function() {     
+
+export default function() {
 	if($('input[data-evidenceavailable]').prop('checked')) {
 		if(!validation.filesUploaded())
         {
 			$('.evidenceReason').fadeIn();
-			$('input[data-evidencereason]').val() === '' ? $('input[data-evidencereason]').addClass('sv-mandatory') : 
-                $('input[data-evidencereason]').removeClass('sv-mandatory');
+			$('input[data-evidencereason]').val() === '' ? $('input[data-evidencereason]').addClass('sv-mandatory') :
+			$('input[data-evidencereason]').removeClass('sv-mandatory');
 			$('[id^="PLUP_uploader"]').hide();
 		}
 		else {
