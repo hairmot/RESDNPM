@@ -38,6 +38,12 @@ function staffNamePrompt(row) {
 		`Please enter the name of the member of staff that you spoke to:
 		<br/><br/>
 		<input id="fsstInput" class="sv-form-control" type="text" />`, {
+			Exit: () => {
+				result = false;
+				$(row).find('.selected').first().prop('checked', false);
+				sits_dialog_close(dialog);// eslint-disable-line
+				confirmCloseDialog();
+			},
 			Save:() => {
 				if(transferFsstName())
 			{
@@ -45,13 +51,8 @@ function staffNamePrompt(row) {
 					saveTask(row);
 					result = true;
 				}
-			},
-			Exit: () => {
-				result = false;
-				$(row).find('.selected').first().prop('checked', false);
-				sits_dialog_close(dialog);// eslint-disable-line
-				confirmCloseDialog();
 			}
+
 		},false,false,false);// eslint-disable-line
 	return result;
 }

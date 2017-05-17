@@ -11,7 +11,7 @@ export default {
 
 		var selects = [dissertation, taskType];
 
-		var lengthCell = $(row).find('.length').parent();
+		var lengthCell = $(row).find('.length').parent().parent().parent();
 		if(lengthCell.css('display') === 'table-cell')
 		{
 			selects.push($(row).find('.length option:selected').first());
@@ -25,6 +25,7 @@ export default {
 	},
 	validateEvidence : function validateEvidence(evidence) {
 		var evidBtn = $(evidence).find('.add');
+		//if(evidBtn.length === 0) return false; //checks that evidence is in DOM
 		return $(evidBtn).parent().parent().css('display') === 'block' ? ($(evidBtn).addClass('sv-mandatory'),false) : ($(evidBtn).removeClass('sv-mandatory'), true);
 	},
 	validatePage: function validatePage(silent) {
