@@ -1,0 +1,13 @@
+@media (max-width: 767px){
+	.requestRow {
+		border:1px solid #621b40;
+	}
+	.tablesaw-cell-label {word-break:break-all;}
+	.stage2Row{
+		border-right:1px solid #621b40;
+		border-left: 1px solid #621b40;
+		border-bottom: 1px solid #621b40 !important;
+	}
+}
+
+.sv-table th {word-break:break-all}

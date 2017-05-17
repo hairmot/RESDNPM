@@ -32,7 +32,7 @@ gulp.task('minify', function() {
 gulp.task('default', ['build','watch']);
 
 gulp.task('watch', function() {
-	gulp.watch(['./src/**/*.js'], ['build']);
+	gulp.watch(['./src/**/*.js','./src/**/*.css'], ['build']);
 });
 
 function onError(err) {

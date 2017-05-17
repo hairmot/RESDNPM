@@ -1,6 +1,7 @@
 import eventHandlers from './eventHandlers';
 import validation from './validation';
 import '../shared/css/toastr.css';
+import './css/styles.css';
 
 function RESDInit() {
 	Object.keys(eventHandlers).map(a => eventHandlers[a]());
