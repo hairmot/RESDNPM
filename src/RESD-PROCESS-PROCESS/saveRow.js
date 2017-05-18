@@ -7,7 +7,7 @@ export default function saveRow(row) {
 		row.find('[data-extensionlength] option:selected').text().split(' ')[0],
 		row.find('[data-extensionduedate]').val(),
 		//stage 2
-		stage2Length === 'Other' ? '0' : stage2Length,
+		stage2Length === 'Grant' ? '0' : stage2Length,
 		row.next().find('[data-extensionduedate]').val()
 	];
 	$('[data-ajaxdata]').val(data.join('~'));

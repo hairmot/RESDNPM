@@ -10910,7 +10910,7 @@ function RESDInit() {
 	(0, _evidenceMode2.default)();
 	(0, _autoUploader2.default)();
 	(0, _hiJackSaveAndExit2.default)();
-	(0, _charactersRemaining2.default)(1500, '[data-remchar]', '#remChar');
+	(0, _charactersRemaining2.default)(summaryLength, '[data-remchar]', '#remChar');
 }
 
 sits_attach_event('window', 'load', function () {

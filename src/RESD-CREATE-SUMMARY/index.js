@@ -14,7 +14,7 @@ function RESDInit() {
 	evidenceMode();
 	autoUploader();
 	hiJackSaveAndExit();
-	charactersRemaining(1500, '[data-remchar]', '#remChar');
+	charactersRemaining(summaryLength, '[data-remchar]', '#remChar');
 }
 
 sits_attach_event('window','load',function() {// eslint-disable-line
