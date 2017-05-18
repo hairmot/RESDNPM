@@ -6,10 +6,10 @@ import toastr from 'toastr';
 var uploaders = 0;
 
 export default {
-  
+
 
 	addChangeHandlers : function addInputChangeHandlers() {
-        
+
 		$('input, select, textarea').on('keyup change', function() {
 			validation.setNextButtonState();
 		});
@@ -19,12 +19,12 @@ export default {
 			validation.setNextButtonState();
 		});
 
-		$('input[title="Next"]').on('click', function() {  
+		$('input[title="Next"]').on('click', function() {
 			if(validation.validatePage()) {
-				return true; 
+				return true;
 			}
-			else { 
-				toastr.warning('Missing inputs');
+			else {
+				toastr.warning(resdErrors.missingInputs);
 				return false;
 			}
 		});
@@ -33,11 +33,11 @@ export default {
 			if(uploaders === 0) {
 				getPlUploader().bind('UploadComplete', function() {
 					validation.setNextButtonState();
-                    
+
 				});
 				getPlUploader().bind('FilesRemoved', function() {
 					validation.setNextButtonState();
-                    
+
 				});
 				uploaders = 1;
 			}

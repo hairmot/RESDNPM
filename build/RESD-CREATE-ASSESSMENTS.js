@@ -10795,8 +10795,8 @@ exports.default = {
 		return result;
 	},
 	FSSTDialog: function FSSTDialog(row) {
-		var dialog = sits_dialog('Task due within 24 hours', // eslint-disable-line
-		'Please note: this task is due within 24 hours.\n\t\t\tYou must have spoken to a member of Faculty Student Services before your request can be submitted.\n\t\t\tHave you spoken to a member of staff?', {
+		var dialog = sits_dialog(resdDialogs.DUEIN24HOURS.title, // eslint-disable-line
+		resdDialogs.DUEIN24HOURS.message, {
 			Yes: function Yes() {
 				sits_dialog_close(dialog); // eslint-disable-line
 				staffNamePrompt(row);
@@ -10815,8 +10815,8 @@ exports.default = {
 
 function staffNamePrompt(row) {
 	var result = false;
-	var dialog = sits_dialog('Name of staff', // eslint-disable-line
-	'Please enter the name of the member of staff that you spoke to:\n\t\t<br/><br/>\n\t\t<input id="fsstInput" class="sv-form-control" type="text" />', {
+	var dialog = sits_dialog(resdDialogs.NAMEOFSTAFF.title, // eslint-disable-line
+	resdDialogs.NAMEOFSTAFF.message + ':\n\t\t<br/><br/>\n\t\t<input id="fsstInput" class="sv-form-control" type="text" />', {
 		Exit: function Exit() {
 			result = false;
 			$(row).find('.selected').first().prop('checked', false);
@@ -10836,8 +10836,8 @@ function staffNamePrompt(row) {
 }
 
 function confirmCloseDialog() {
-	var dialog = sits_dialog('Task invalid', // eslint-disable-line
-	'The task cannot be included in your request and will now be deselected.\n\t\t\tIf you would like to request an extension for this task please contact Faculty Student Services', {
+	var dialog = sits_dialog(resdDialogs.QUIT24HRCHECK.title, // eslint-disable-line
+	resdDialogs.QUIT24HRCHECK.message, {
 		Close: function Close() {
 			sits_dialog_close(dialog); // eslint-disable-line
 		}
@@ -10860,7 +10860,7 @@ function transferFsstName() {
 		$('[data-fsstname]').first().val(inputval);
 		return true;
 	} else {
-		_toastr2.default.warning('Please enter a name');
+		_toastr2.default.warning(resdErrors.enterName);
 		return false;
 	}
 }
@@ -11111,7 +11111,7 @@ function saveTask(toSave) {
 		{
 			(0, _submitFormAsync2.default)(function () {
 				saveButton.removeClass('sv-btn-primary sv-btn-warning sv-btn-danger progress-striped progress active').addClass('sv-btn-success').val('Saved!');
-				_toastr2.default.success('Saved data');
+				_toastr2.default.success(resdErrors.taskSaved);
 				_rowsSelected2.default.updateCounters();
 			});
 		} else {
@@ -11219,12 +11219,12 @@ function initPlUpload() {
 	var uploader = (0, _getPlUploader2.default)();
 	uploader.bind('UploadComplete', function () {
 		//	$('input[data-continue]').prop('disabled',false).val('Continue');
-		_toastr2.default.success('All files finished uploading');
+		_toastr2.default.success(resdErrors.filesUploaded);
 		$.get($('.syncDocs').attr('href'), function () {});
 	});
 	uploader.bind('UploadFile', function () {
 		//	$('input[data-continue]').prop('disabled',true).val('Files Uploading');
-		_toastr2.default.info('Files uploading');
+		_toastr2.default.info(resdErrors.filesUploading);
 	});
 }
 
@@ -11310,22 +11310,22 @@ exports.default = {
 function statusDisplay(result) {
 	switch (result) {
 		case v.VALID:
-			_toastr2.default.success('Success');
+			_toastr2.default.success(resdErrors.validationSuccess);
 			break;
 		case v.INVALID_SELECTION:
-			_toastr2.default.warning('Invalid Rows Selected');
+			_toastr2.default.warning(resdErrors.INVALID_SELECTION);
 			break;
 		case v.MISSING_EVIDENCE:
-			_toastr2.default.warning('Please provide supporting evidence');
+			_toastr2.default.warning(resdErrors.MISSING_EVIDENCE);
 			break;
 		case v.NO_TASKS_SELECTED:
-			_toastr2.default.warning('Please select tasks to include in your request');
+			_toastr2.default.warning(resdErrors.NO_TASKS_SELECTED);
 			break;
 		case v.UNSAVED_TASK:
-			_toastr2.default.warning('Unsaved Tasks. Please store your changes or deselect unsaved tasks');
+			_toastr2.default.warning(resdErrors.UNSAVED_TASK);
 			break;
 		default:
-			_toastr2.default.warning('Invalid selection');
+			_toastr2.default.warning(resdErrors.DEFAULT);
 			break;
 	}
 }

@@ -13,10 +13,8 @@ export default {
 		return result;
 	},
 	FSSTDialog: function FSSTDialog(row) {
-		var dialog = sits_dialog('Task due within 24 hours', // eslint-disable-line
-			`Please note: this task is due within 24 hours.
-			You must have spoken to a member of Faculty Student Services before your request can be submitted.
-			Have you spoken to a member of staff?`, {
+		var dialog = sits_dialog(resdDialogs.DUEIN24HOURS.title, // eslint-disable-line
+			resdDialogs.DUEIN24HOURS.message, {
 				Yes: () => {
 					sits_dialog_close(dialog);// eslint-disable-line
 					staffNamePrompt(row);
@@ -34,8 +32,8 @@ export default {
 
 function staffNamePrompt(row) {
 	var result = false;
-	var dialog = sits_dialog('Name of staff', // eslint-disable-line
-		`Please enter the name of the member of staff that you spoke to:
+	var dialog = sits_dialog(resdDialogs.NAMEOFSTAFF.title, // eslint-disable-line
+		resdDialogs.NAMEOFSTAFF.message + `:
 		<br/><br/>
 		<input id="fsstInput" class="sv-form-control" type="text" />`, {
 			Exit: () => {
@@ -58,9 +56,8 @@ function staffNamePrompt(row) {
 }
 
 function confirmCloseDialog() {
-	var dialog = sits_dialog('Task invalid',// eslint-disable-line
-			`The task cannot be included in your request and will now be deselected.
-			If you would like to request an extension for this task please contact Faculty Student Services`, {
+	var dialog = sits_dialog(resdDialogs.QUIT24HRCHECK.title,// eslint-disable-line
+			resdDialogs.QUIT24HRCHECK.message, {
 				Close:() => {
 					sits_dialog_close(dialog);// eslint-disable-line
 				},
@@ -91,7 +88,7 @@ function transferFsstName(){
 	}
 	else
 	{
-		toastr.warning('Please enter a name');
+		toastr.warning(resdErrors.enterName);
 		return false;
 	}
 }

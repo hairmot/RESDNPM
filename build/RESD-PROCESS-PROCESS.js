@@ -10809,12 +10809,12 @@ exports.default = {
 function submitHijack() {
 	_validation2.default.validatePage();
 	if ($('.sv-mandatory').length > 0) {
-		_toastr2.default.warning('You have unfinished rows');
+		_toastr2.default.warning(resdErrors.incompleteRows);
 		return false;
 	} else {
 		if ($('[data-decision] option:selected[value="3"]').length > 0) {
-			_toastr2.default.warning('There are still pending decisions. Please confirm outcomes before submitting.');
-			_toastr2.default.info('Please select save and exit to save your progress');
+			_toastr2.default.warning(resdErrors.pendingDecisions);
+			_toastr2.default.info(resdErrors.saveAndExitHint);
 			return false;
 		} else {
 			confirmDecision();
@@ -10824,8 +10824,8 @@ function submitHijack() {
 }
 
 function confirmDecision() {
-	var dialog = sits_dialog('Are you sure you want to continue?', // eslint-disable-line
-	'The student will be notified immediately', {
+	var dialog = sits_dialog(resdDialogs.CONFIRM.title, // eslint-disable-line
+	resdDialogs.CONFIRM.message, {
 		Cancel: function Cancel() {
 			sits_dialog_close(dialog); // eslint-disable-line
 		},

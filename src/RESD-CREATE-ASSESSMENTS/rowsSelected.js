@@ -1,3 +1,5 @@
+import validation from './validation';
+
 export default {
 	updateCounters: function updateCounters() {
 		this.updateRowsSelected('body','#selectedRows');
@@ -22,7 +24,7 @@ export default {
 		$(element).find('.requestRow').each(function(i,e) {
 			if($(e).find('.save').hasClass('sv-btn-success') || $(e).find('.save').hasClass('sv-btn-default'))
             {
-				if($(e).find('.selected').first().prop('checked'))
+				if($(e).find('.selected').first().prop('checked') && validation.validateRow(e))
                 {
 					count++;
 				}

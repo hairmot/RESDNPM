@@ -10804,8 +10804,8 @@ function cancelSubmit() {
 }
 
 function confirmDeleteRequest() {
-	var dialog = sits_dialog('Delete Request', // eslint-disable-line
-	'Deleting this request is an irreversible action. Please click continue if you still wish to proceed.', {
+	var dialog = sits_dialog(resdDialogs.DELETEREQUEST.title, // eslint-disable-line
+	resdDialogs.DELETEREQUEST.message, {
 		Continue: function Continue() {
 			sits_dialog_close(dialog); // eslint-disable-line
 			$('[data-delete]').off('click', cancelSubmit).click();
@@ -10854,8 +10854,8 @@ exports.default = {
 		var silent = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
 
 		var errors = [];
-		if ($('.requestRow').length === 0) errors.push('No valid tasks selected. Please return to Module and Assessments screen.');
-		if (!$('[data-accept]').prop('checked')) errors.push('Please accept the confirmation statement');
+		if ($('.requestRow').length === 0) errors.push(resdErrors.noValidTasks);
+		if (!$('[data-accept]').prop('checked')) errors.push(resdErrors.pleaseAccept);
 		if (!silent) {
 			errors.map(function (a) {
 				return _toastr2.default.warning(a);

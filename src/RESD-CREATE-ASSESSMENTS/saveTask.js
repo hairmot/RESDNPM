@@ -12,7 +12,7 @@ export default function saveTask(toSave) {
 	{
 		submitFormAsync(function() {
 			saveButton.removeClass('sv-btn-primary sv-btn-warning sv-btn-danger progress-striped progress active').addClass('sv-btn-success').val('Saved!');
-			toastr.success('Saved data');
+			toastr.success(resdErrors.taskSaved);
 			rowsSelected.updateCounters();
 		});
 	}

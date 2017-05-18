@@ -10813,7 +10813,7 @@ exports.default = {
 			if (_validation2.default.validatePage()) {
 				return true;
 			} else {
-				_toastr2.default.warning('Missing inputs');
+				_toastr2.default.warning(resdErrors.missingInputs);
 				return false;
 			}
 		});
@@ -10846,7 +10846,7 @@ exports.default = function () {
 			$('input[data-evidencereason]').val() === '' ? $('input[data-evidencereason]').addClass('sv-mandatory') : $('input[data-evidencereason]').removeClass('sv-mandatory');
 			$('[id^="PLUP_uploader"]').hide();
 		} else {
-			_toastr2.default.warning('Please delete any uploaded evidence');
+			_toastr2.default.warning(resdErrors.deleteUploadedEvidence);
 			$('input[data-evidenceavailable]').prop('checked', false);
 		}
 	} else {

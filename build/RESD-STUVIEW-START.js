@@ -91,12 +91,12 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function confirmDelete(button) {
 
-	var dialog = sits_dialog('Delete Request', // eslint-disable-line
-	'Once this task has been deleted, it cannot be recovered. Are you sure you wish to continue?', {
+	var dialog = sits_dialog(resdDialogs.DELETE.title, // eslint-disable-line
+	resdDialogs.DELETE.message, {
 		No: function No() {
 			sits_dialog_close(dialog); // eslint-disable-line
 		},
-		'Delete Request': function DeleteRequest() {
+		'Delete': function Delete() {
 			sits_dialog_close(dialog); // eslint-disable-line
 			(0, _deleteRequest2.default)(button);
 		}

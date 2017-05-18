@@ -64,11 +64,11 @@ function initPlUpload() {
 	var uploader = plUploader();
 	uploader.bind('UploadComplete', function() {
 	//	$('input[data-continue]').prop('disabled',false).val('Continue');
-		toastr.success('All files finished uploading');
+		toastr.success(resdErrors.filesUploaded);
 		$.get($('.syncDocs').attr('href'), function() {});
 	});
 	uploader.bind('UploadFile', function() {
 	//	$('input[data-continue]').prop('disabled',true).val('Files Uploading');
-		toastr.info('Files uploading');
+		toastr.info(resdErrors.filesUploading);
 	});
 }

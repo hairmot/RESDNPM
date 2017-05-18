@@ -1,4 +1,4 @@
-export default `<div><table><tr class="requestRow">
+export default `<body><div id="selectedRows"></div><div id="topLevel"><table><tr class="requestRow">
 	<td class="mapCode" style="display:none">55695500L16A</td>
 
 	<td class="mabSeqn" style="display:none">002</td>
@@ -35,9 +35,9 @@ export default `<div><table><tr class="requestRow">
 			<div class="sv-col-md-12">
 				<label>Task Type</label>
 				<select class="taskType sv-form-control" data-ajaxinput="obrdesc">
-					<option value="" selected>Please select</option>
+					<option value=""></option>
 
-					<option value="1">Phase Test</option><option value="2">Practical</option><option value="3">Presentation/Group Work</option><option value="4">Other</option>
+					<option value="1">Phase Test</option><option selected="" value="2">Practical</option><option value="3">Presentation/Group Work</option><option value="4">Other</option>
 				</select>
 			</div>
 		</div>
@@ -48,7 +48,7 @@ export default `<div><table><tr class="requestRow">
 			<div class="sv-col-md-12">
 				<label>Dissertation/Large Project</label>
 				<select class="dissertation sv-form-control" data-ajaxinput="obrdcon">
-					<option value="">Please select</option>
+					<option value=""></option>
 					<option selected="" value="Y">Yes</option>
 					<option value="N">No</option>
 				</select>
@@ -78,4 +78,4 @@ export default `<div><table><tr class="requestRow">
 		</div>
 	</td>
           <td style="display:none" data-ajaxinput="obrcode">55695500L16A~002</td>
-</tr></table></div>`;
+</tr></table></div></body>`;

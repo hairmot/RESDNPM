@@ -11,7 +11,7 @@ export default function() {
 			$('[id^="PLUP_uploader"]').hide();
 		}
 		else {
-			toastr.warning('Please delete any uploaded evidence');
+			toastr.warning(resdErrors.deleteUploadedEvidence);
 			$('input[data-evidenceavailable]').prop('checked', false);
 		}
 	}

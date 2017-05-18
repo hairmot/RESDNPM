@@ -11,6 +11,8 @@ describe("Assessments Validation Tests", function(){
 
     describe('testing assessment validation', function() {
         it('fails an invalid assessment row', function() {
+			var row = $('.requestRow').first();
+			row.find('.taskType').first().val("");
             var result = validation.validateRow($('.requestRow').first());
             expect(result).to.equal(false);
         });

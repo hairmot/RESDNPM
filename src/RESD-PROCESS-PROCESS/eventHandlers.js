@@ -20,13 +20,13 @@ export default {
 function submitHijack() {
 	validation.validatePage();
 	if($('.sv-mandatory').length > 0) {
-		toastr.warning('You have unfinished rows');
+		toastr.warning(resdErrors.incompleteRows);
 		return false;
 	}
 	else {
 		if($('[data-decision] option:selected[value="3"]').length > 0) {
-			toastr.warning('There are still pending decisions. Please confirm outcomes before submitting.');
-			toastr.info('Please select save and exit to save your progress');
+			toastr.warning(resdErrors.pendingDecisions);
+			toastr.info(resdErrors.saveAndExitHint);
 			return false;
 		}
 		else {
@@ -37,8 +37,8 @@ function submitHijack() {
 }
 
 function confirmDecision() {
-	var dialog = sits_dialog('Are you sure you want to continue?',// eslint-disable-line
-		'The student will be notified immediately', {
+	var dialog = sits_dialog(resdDialogs.CONFIRM.title,// eslint-disable-line
+		resdDialogs.CONFIRM.message, {
 			Cancel: () => {
 				sits_dialog_close(dialog);// eslint-disable-line
 			},

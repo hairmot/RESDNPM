@@ -23,8 +23,8 @@ function cancelSubmit() {
 }
 
 function confirmDeleteRequest() {
-	var dialog = sits_dialog('Delete Request', // eslint-disable-line
-			'Deleting this request is an irreversible action. Please click continue if you still wish to proceed.', {
+	var dialog = sits_dialog(resdDialogs.DELETEREQUEST.title, // eslint-disable-line
+			resdDialogs.DELETEREQUEST.message, {
 				Continue:() => {
 					sits_dialog_close(dialog);// eslint-disable-line
 					$('[data-delete]').off('click', cancelSubmit).click();

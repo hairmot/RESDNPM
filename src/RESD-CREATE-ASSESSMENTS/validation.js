@@ -56,7 +56,6 @@ export default {
 				}
 			});
 		}
-
 		if(!silent)
 			validationErrors.map(a => statusDisplay(a));
 		return validationErrors.length === 0 ? true: false;
@@ -67,22 +66,22 @@ export default {
 function statusDisplay(result) {
 	switch(result) {
 	case v.VALID:
-		toastr.success('Success');
+		toastr.success(resdErrors.validationSuccess);
 		break;
 	case v.INVALID_SELECTION:
-		toastr.warning('Invalid Rows Selected');
+		toastr.warning(resdErrors.INVALID_SELECTION);
 		break;
 	case v.MISSING_EVIDENCE:
-		toastr.warning('Please provide supporting evidence');
+		toastr.warning(resdErrors.MISSING_EVIDENCE);
 		break;
 	case v.NO_TASKS_SELECTED:
-		toastr.warning('Please select tasks to include in your request');
+		toastr.warning(resdErrors.NO_TASKS_SELECTED);
 		break;
 	case v.UNSAVED_TASK:
-		toastr.warning('Unsaved Tasks. Please store your changes or deselect unsaved tasks');
+		toastr.warning(resdErrors.UNSAVED_TASK);
 		break;
 	default:
-		toastr.warning('Invalid selection');
+		toastr.warning(resdErrors.DEFAULT);
 		break;
 	}
 }
