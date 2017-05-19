@@ -11047,6 +11047,13 @@ sits_attach_event('window', 'load', function () {
 Object.defineProperty(exports, "__esModule", {
 	value: true
 });
+
+var _validation = require('./validation');
+
+var _validation2 = _interopRequireDefault(_validation);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 exports.default = {
 	updateCounters: function updateCounters() {
 		this.updateRowsSelected('body', '#selectedRows');
@@ -11070,7 +11077,7 @@ exports.default = {
 		var count = 0;
 		$(element).find('.requestRow').each(function (i, e) {
 			if ($(e).find('.save').hasClass('sv-btn-success') || $(e).find('.save').hasClass('sv-btn-default')) {
-				if ($(e).find('.selected').first().prop('checked')) {
+				if ($(e).find('.selected').first().prop('checked') && _validation2.default.validateRow(e)) {
 					count++;
 				}
 			}
@@ -11079,7 +11086,7 @@ exports.default = {
 	}
 };
 
-},{}],10:[function(require,module,exports){
+},{"./validation":12}],10:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -11298,7 +11305,6 @@ exports.default = {
 				}
 			});
 		}
-
 		if (!silent) validationErrors.map(function (a) {
 			return statusDisplay(a);
 		});
