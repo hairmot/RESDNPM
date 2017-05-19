@@ -8,6 +8,12 @@ import requestRow from '../htmlTemplates/requestRow';
 describe("Assessments Validation Tests", function(){
     var $;
 
+	describe('validate page', function() {
+        it('passes a valid page', function() {
+			global.resdErrors = {};
+			expect(validation.validatePage(true)).to.equal(true);
+        });
+    })
 
     describe('testing assessment validation', function() {
         it('fails an invalid assessment row', function() {
@@ -24,6 +30,8 @@ describe("Assessments Validation Tests", function(){
             expect(result).to.equal(true);
         });
     })
+
+
 
      before(() => {
         var dom = new JSDOM(requestRow);
