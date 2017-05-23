@@ -5,6 +5,6 @@ function RESDInit() {
 	$('div[data-applylc]').on('change', validation.toggleCheck);
 }
 
-sits_attach_event('window','load',function() {// eslint-disable-line
+sits_attach_event('window','load',function() {
 	RESDInit();
 });

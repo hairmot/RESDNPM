@@ -1,20 +1,14 @@
-import toastr from 'toastr';
-import rowsSelected from './rowsSelected.js';
 import submitFormAsync from '../shared/js/submitFormAsync';
 
-export default function saveTask(toSave) {
+export default function saveTask(toSave, callback) {
 	toSave.find('[data-ajaxinput]').each(function(i,e) {
 		populateAjaxField(e);
 	});
 	var saveButton = $(toSave).find('.save');
 	saveButton.prop('disabled','true').val('Saving...').addClass('progress-striped progress active');
-	if(enhanced === 'Y')// eslint-disable-line
+	if(enhanced === 'Y')
 	{
-		submitFormAsync(function() {
-			saveButton.removeClass('sv-btn-primary sv-btn-warning sv-btn-danger progress-striped progress active').addClass('sv-btn-success').val('Saved!');
-			toastr.success(resdErrors.taskSaved);
-			rowsSelected.updateCounters();
-		});
+		submitFormAsync(callback);
 	}
 	else
 	{

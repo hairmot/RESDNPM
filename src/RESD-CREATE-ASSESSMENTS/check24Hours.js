@@ -12,54 +12,54 @@ export default {
 		}
 		return result;
 	},
-	FSSTDialog: function FSSTDialog(row) {
-		var dialog = sits_dialog(resdDialogs.DUEIN24HOURS.title, // eslint-disable-line
+	FSSTDialog: function FSSTDialog(row, callback) {
+		var dialog = sits_dialog(resdDialogs.DUEIN24HOURS.title,
 			resdDialogs.DUEIN24HOURS.message, {
-				Yes: () => {
-					sits_dialog_close(dialog);// eslint-disable-line
-					staffNamePrompt(row);
-				//go to next dialog
-				},
 				No:() => {
 				//de-select row
 					row.find('.selected').first().prop('checked', false);
-					sits_dialog_close(dialog);// eslint-disable-line
+					sits_dialog_close(dialog);
 					confirmCloseDialog();
 				},
+				Yes: () => {
+					sits_dialog_close(dialog);
+					staffNamePrompt(row, callback);
+				//go to next dialog
+				}
 			},false,false,false);
 	}
 };
 
-function staffNamePrompt(row) {
+function staffNamePrompt(row, callback) {
 	var result = false;
-	var dialog = sits_dialog(resdDialogs.NAMEOFSTAFF.title, // eslint-disable-line
+	var dialog = sits_dialog(resdDialogs.NAMEOFSTAFF.title,
 		resdDialogs.NAMEOFSTAFF.message + `:
 		<br/><br/>
 		<input id="fsstInput" class="sv-form-control" type="text" />`, {
 			Exit: () => {
 				result = false;
 				$(row).find('.selected').first().prop('checked', false);
-				sits_dialog_close(dialog);// eslint-disable-line
+				sits_dialog_close(dialog);
 				confirmCloseDialog();
 			},
 			Save:() => {
 				if(transferFsstName())
 			{
-					sits_dialog_close(dialog);// eslint-disable-line
-					saveTask(row);
+					sits_dialog_close(dialog);
+					saveTask(row, callback);
 					result = true;
 				}
 			}
 
-		},false,false,false);// eslint-disable-line
+		},false,false,false);
 	return result;
 }
 
 function confirmCloseDialog() {
-	var dialog = sits_dialog(resdDialogs.QUIT24HRCHECK.title,// eslint-disable-line
+	var dialog = sits_dialog(resdDialogs.QUIT24HRCHECK.title,
 			resdDialogs.QUIT24HRCHECK.message, {
 				Close:() => {
-					sits_dialog_close(dialog);// eslint-disable-line
+					sits_dialog_close(dialog);
 				},
 			},false,false,false);
 }

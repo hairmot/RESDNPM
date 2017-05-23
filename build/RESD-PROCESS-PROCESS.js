@@ -10824,17 +10824,16 @@ function submitHijack() {
 }
 
 function confirmDecision() {
-	var dialog = sits_dialog(resdDialogs.CONFIRM.title, // eslint-disable-line
-	resdDialogs.CONFIRM.message, {
+	var dialog = sits_dialog(resdDialogs.CONFIRM.title, resdDialogs.CONFIRM.message, {
 		Cancel: function Cancel() {
-			sits_dialog_close(dialog); // eslint-disable-line
+			sits_dialog_close(dialog);
 		},
 		Continue: function Continue() {
-			sits_dialog_close(dialog); // eslint-disable-line
+			sits_dialog_close(dialog);
 			$('input[value="Confirm Decision"]').off('click', submitHijack);
 			$('input[value="Confirm Decision"]').click();
 		}
-	}, false, false, false); // eslint-disable-line
+	}, false, false, false);
 	return false;
 }
 
@@ -10863,7 +10862,6 @@ function RESDInit() {
 }
 
 sits_attach_event('window', 'load', function () {
-	// eslint-disable-line
 	RESDInit();
 });
 
@@ -10975,8 +10973,10 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = submitFormAsync;
 function submitFormAsync(done) {
+	var ajax = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : $;
+
 	var formData = $('form').first().serialize() + '&NEXT.DUMMY.MENSYS.1=Next';
-	$.post($('form').first().attr('action'), formData, function () {
+	ajax.post($('form').first().attr('action'), formData, function () {
 		done();
 	});
 }

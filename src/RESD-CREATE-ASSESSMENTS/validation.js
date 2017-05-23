@@ -1,6 +1,5 @@
 import validator from '../shared/js/validator';
-import toastr from 'toastr';
-import * as v from './validationStates';
+//import toastr from 'toastr';
 
 export default {
 	validateRow: function validateRow(row) {
@@ -28,60 +27,36 @@ export default {
 		//if(evidBtn.length === 0) return false; //checks that evidence is in DOM
 		return $(evidBtn).parent().parent().css('display') === 'block' ? ($(evidBtn).addClass('sv-mandatory'),false) : ($(evidBtn).removeClass('sv-mandatory'), true);
 	},
-	validatePage: function validatePage(silent) {
+	validatePage: function validatePage(silent = true, resdErrors = global.resdErrors, notifier = require('toastr')) {
 		var validationErrors = [];
 		var _this = this;
 		if($('.requestRow').find('.selected:checked').length === 0) {
-			validationErrors.push(v.NO_TASKS_SELECTED);
+			validationErrors.push('NO_TASKS_SELECTED');
 		}
 		else {
 			$('.requestRow').each(function(i,e) {
 				if($(e).find('.selected').first().prop('checked')) {
 					if(!_this.validateRow(e)) {
-						validationErrors.push(v.INVALID_SELECTION);
+						validationErrors.push('INVALID_SELECTION');
 					}
 					else {
 						if($(e).find('.save').hasClass('sv-btn-default') || $(e).find('.save').hasClass('sv-btn-success')) {
 							if (!_this.validateEvidence(e))
-								validationErrors.push(v.MISSING_EVIDENCE);
+								validationErrors.push('MISSING_EVIDENCE');
 						}
 						else {
-							validationErrors.push(v.UNSAVED_TASK);
+							validationErrors.push('UNSAVED_TASK');
 						}
 					}
 				}
 				else {
 					if($(e).find('.save').hasClass('sv-btn-warning'))
-						validationErrors.push(v.UNSAVED_TASK);
+						validationErrors.push('UNSAVED_TASK');
 				}
 			});
 		}
 		if(!silent)
-			validationErrors.map(a => statusDisplay(a));
+			validationErrors.map(a => notifier.warning(resdErrors[a]));
 		return validationErrors.length === 0 ? true: false;
 	}
 };
-
-
-function statusDisplay(result) {
-	switch(result) {
-	case v.VALID:
-		toastr.success(resdErrors.validationSuccess);
-		break;
-	case v.INVALID_SELECTION:
-		toastr.warning(resdErrors.INVALID_SELECTION);
-		break;
-	case v.MISSING_EVIDENCE:
-		toastr.warning(resdErrors.MISSING_EVIDENCE);
-		break;
-	case v.NO_TASKS_SELECTED:
-		toastr.warning(resdErrors.NO_TASKS_SELECTED);
-		break;
-	case v.UNSAVED_TASK:
-		toastr.warning(resdErrors.UNSAVED_TASK);
-		break;
-	default:
-		toastr.warning(resdErrors.DEFAULT);
-		break;
-	}
-}

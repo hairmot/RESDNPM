@@ -26,11 +26,11 @@ function RESDInit() {
 	hiJackSaveAndExit();
 }
 
-sits_attach_event('window','load',function() {// eslint-disable-line
+sits_attach_event('window','load',function() {
 	RESDInit();
 	$( '#accordion' ).accordion({
 		collapsible : true,
-		active : enhanced === 'Y' ? false : parseInt($('[data-accordion]').val()),// eslint-disable-line
+		active : enhanced === 'Y' ? false : parseInt($('[data-accordion]').val()),
 		heightStyle: 'content'
 	}).fadeIn('slow');
 });

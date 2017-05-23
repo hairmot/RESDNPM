@@ -1,6 +1,8 @@
 import validator from './validation.js';
 import saveTask from  './saveTask.js';
+import rowsSelected from './rowsSelected.js';
 import check24Hours from './check24Hours';
+import toastr from 'toastr';
 
 export default {
 //on each input change - check validation, display message on save button.
@@ -21,7 +23,7 @@ export default {
 
 	addContinueHandler: function addContinueHandler() {
 		$('input[data-continue]').on('click', function (){
-			return validator.validatePage();
+			return validator.validatePage(false);
 		});
 	},
 
@@ -30,20 +32,28 @@ export default {
 		$('.save').click(function (e) {
 			e.preventDefault();
 			var toSave = $(this).closest('.requestRow');
+
+			var saveCallback = function() {
+				var saveButton = $(toSave).find('.save');
+				saveButton.removeClass('sv-btn-primary sv-btn-warning sv-btn-danger progress-striped progress active').addClass('sv-btn-success').val('Saved!');
+				toastr.success(resdErrors.taskSaved);
+				rowsSelected.updateCounters();
+			}
+
 			if(validator.validateRow(toSave)) {
 				if(!check24Hours.validate24Hours(toSave))
 				{
-					saveTask(toSave);
+					saveTask(toSave, saveCallback);
 				}
 				else
 				{
 					if($('[data-fsstname]').first().val() !== '')
 					{
-						saveTask(toSave);
+						saveTask(toSave, saveCallback);
 					}
 					else
 					{
-						check24Hours.FSSTDialog(toSave);
+						check24Hours.FSSTDialog(toSave, saveCallback);
 					}
 				}
 			}

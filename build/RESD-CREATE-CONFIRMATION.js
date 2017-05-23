@@ -10804,17 +10804,16 @@ function cancelSubmit() {
 }
 
 function confirmDeleteRequest() {
-	var dialog = sits_dialog(resdDialogs.DELETEREQUEST.title, // eslint-disable-line
-	resdDialogs.DELETEREQUEST.message, {
-		Continue: function Continue() {
-			sits_dialog_close(dialog); // eslint-disable-line
-			$('[data-delete]').off('click', cancelSubmit).click();
-		},
+	var dialog = sits_dialog(resdDialogs.DELETEREQUEST.title, resdDialogs.DELETEREQUEST.message, {
 		Cancel: function Cancel() {
-			sits_dialog_close(dialog); // eslint-disable-line
+			sits_dialog_close(dialog);
+		},
+		Continue: function Continue() {
+			sits_dialog_close(dialog);
+			$('[data-delete]').off('click', cancelSubmit).click();
 		}
 	}, false, false, false);
-} // eslint-disable-line
+}
 
 },{"./validation":6}],5:[function(require,module,exports){
 'use strict';
@@ -10832,7 +10831,6 @@ function RESDInit() {
 }
 
 sits_attach_event('window', 'load', function () {
-	// eslint-disable-line
 	RESDInit();
 });
 

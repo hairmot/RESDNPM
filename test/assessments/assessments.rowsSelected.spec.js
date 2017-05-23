@@ -8,7 +8,6 @@ import requestRow from '../htmlTemplates/requestRow';
 describe("Assessments Validation Tests", function(){
     var $;
 
-
     describe('countRows', function() {
 
 

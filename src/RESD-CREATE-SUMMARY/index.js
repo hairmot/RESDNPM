@@ -17,7 +17,7 @@ function RESDInit() {
 	charactersRemaining(summaryLength, '[data-remchar]', '#remChar');
 }
 
-sits_attach_event('window','load',function() {// eslint-disable-line
+sits_attach_event('window','load',function() {
 	RESDInit();
 });
 

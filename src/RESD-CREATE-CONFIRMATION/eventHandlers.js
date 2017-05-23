@@ -23,15 +23,15 @@ function cancelSubmit() {
 }
 
 function confirmDeleteRequest() {
-	var dialog = sits_dialog(resdDialogs.DELETEREQUEST.title, // eslint-disable-line
+	var dialog = sits_dialog(resdDialogs.DELETEREQUEST.title,
 			resdDialogs.DELETEREQUEST.message, {
+				Cancel: () => {
+					sits_dialog_close(dialog);
+				},
 				Continue:() => {
-					sits_dialog_close(dialog);// eslint-disable-line
+					sits_dialog_close(dialog);
 					$('[data-delete]').off('click', cancelSubmit).click();
 
-				},
-				Cancel: () => {
-					sits_dialog_close(dialog);// eslint-disable-line
 				}
 			},false,false,false);
-}// eslint-disable-line
+}

@@ -10794,52 +10794,49 @@ exports.default = {
 		}
 		return result;
 	},
-	FSSTDialog: function FSSTDialog(row) {
-		var dialog = sits_dialog(resdDialogs.DUEIN24HOURS.title, // eslint-disable-line
-		resdDialogs.DUEIN24HOURS.message, {
-			Yes: function Yes() {
-				sits_dialog_close(dialog); // eslint-disable-line
-				staffNamePrompt(row);
-				//go to next dialog
-			},
+	FSSTDialog: function FSSTDialog(row, callback) {
+		var dialog = sits_dialog(resdDialogs.DUEIN24HOURS.title, resdDialogs.DUEIN24HOURS.message, {
 			No: function No() {
 				//de-select row
 				row.find('.selected').first().prop('checked', false);
-				sits_dialog_close(dialog); // eslint-disable-line
+				sits_dialog_close(dialog);
 				confirmCloseDialog();
+			},
+			Yes: function Yes() {
+				sits_dialog_close(dialog);
+				staffNamePrompt(row, callback);
+				//go to next dialog
 			}
 		}, false, false, false);
 	}
 };
 
 
-function staffNamePrompt(row) {
+function staffNamePrompt(row, callback) {
 	var result = false;
-	var dialog = sits_dialog(resdDialogs.NAMEOFSTAFF.title, // eslint-disable-line
-	resdDialogs.NAMEOFSTAFF.message + ':\n\t\t<br/><br/>\n\t\t<input id="fsstInput" class="sv-form-control" type="text" />', {
+	var dialog = sits_dialog(resdDialogs.NAMEOFSTAFF.title, resdDialogs.NAMEOFSTAFF.message + ':\n\t\t<br/><br/>\n\t\t<input id="fsstInput" class="sv-form-control" type="text" />', {
 		Exit: function Exit() {
 			result = false;
 			$(row).find('.selected').first().prop('checked', false);
-			sits_dialog_close(dialog); // eslint-disable-line
+			sits_dialog_close(dialog);
 			confirmCloseDialog();
 		},
 		Save: function Save() {
 			if (transferFsstName()) {
-				sits_dialog_close(dialog); // eslint-disable-line
-				(0, _saveTask2.default)(row);
+				sits_dialog_close(dialog);
+				(0, _saveTask2.default)(row, callback);
 				result = true;
 			}
 		}
 
-	}, false, false, false); // eslint-disable-line
+	}, false, false, false);
 	return result;
 }
 
 function confirmCloseDialog() {
-	var dialog = sits_dialog(resdDialogs.QUIT24HRCHECK.title, // eslint-disable-line
-	resdDialogs.QUIT24HRCHECK.message, {
+	var dialog = sits_dialog(resdDialogs.QUIT24HRCHECK.title, resdDialogs.QUIT24HRCHECK.message, {
 		Close: function Close() {
-			sits_dialog_close(dialog); // eslint-disable-line
+			sits_dialog_close(dialog);
 		}
 	}, false, false, false);
 }
@@ -10882,9 +10879,17 @@ var _saveTask = require('./saveTask.js');
 
 var _saveTask2 = _interopRequireDefault(_saveTask);
 
+var _rowsSelected = require('./rowsSelected.js');
+
+var _rowsSelected2 = _interopRequireDefault(_rowsSelected);
+
 var _check24Hours = require('./check24Hours');
 
 var _check24Hours2 = _interopRequireDefault(_check24Hours);
+
+var _toastr = require('toastr');
+
+var _toastr2 = _interopRequireDefault(_toastr);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -10905,7 +10910,7 @@ exports.default = {
 
 	addContinueHandler: function addContinueHandler() {
 		$('input[data-continue]').on('click', function () {
-			return _validation2.default.validatePage();
+			return _validation2.default.validatePage(false);
 		});
 	},
 
@@ -10914,14 +10919,22 @@ exports.default = {
 		$('.save').click(function (e) {
 			e.preventDefault();
 			var toSave = $(this).closest('.requestRow');
+
+			var saveCallback = function saveCallback() {
+				var saveButton = $(toSave).find('.save');
+				saveButton.removeClass('sv-btn-primary sv-btn-warning sv-btn-danger progress-striped progress active').addClass('sv-btn-success').val('Saved!');
+				_toastr2.default.success(resdErrors.taskSaved);
+				_rowsSelected2.default.updateCounters();
+			};
+
 			if (_validation2.default.validateRow(toSave)) {
 				if (!_check24Hours2.default.validate24Hours(toSave)) {
-					(0, _saveTask2.default)(toSave);
+					(0, _saveTask2.default)(toSave, saveCallback);
 				} else {
 					if ($('[data-fsstname]').first().val() !== '') {
-						(0, _saveTask2.default)(toSave);
+						(0, _saveTask2.default)(toSave, saveCallback);
 					} else {
-						_check24Hours2.default.FSSTDialog(toSave);
+						_check24Hours2.default.FSSTDialog(toSave, saveCallback);
 					}
 				}
 			}
@@ -10929,7 +10942,7 @@ exports.default = {
 	}
 };
 
-},{"./check24Hours":4,"./saveTask.js":10,"./validation.js":12}],7:[function(require,module,exports){
+},{"./check24Hours":4,"./rowsSelected.js":9,"./saveTask.js":10,"./validation.js":12,"toastr":3}],7:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -10978,7 +10991,7 @@ function uploadButtonToggle(row) {
 	}
 }
 
-},{"../shared/js/getPlUploader.js":16}],8:[function(require,module,exports){
+},{"../shared/js/getPlUploader.js":15}],8:[function(require,module,exports){
 'use strict';
 
 var _uploaders = require('./uploaders.js');
@@ -11032,16 +11045,15 @@ function RESDInit() {
 }
 
 sits_attach_event('window', 'load', function () {
-	// eslint-disable-line
 	RESDInit();
 	$('#accordion').accordion({
 		collapsible: true,
-		active: enhanced === 'Y' ? false : parseInt($('[data-accordion]').val()), // eslint-disable-line
+		active: enhanced === 'Y' ? false : parseInt($('[data-accordion]').val()),
 		heightStyle: 'content'
 	}).fadeIn('slow');
 });
 
-},{"../shared/css/fancyLoadingButton.css":14,"../shared/css/toastr.css":15,"../shared/js/hiJackSaveAndExit":17,"./css/styles.css":5,"./eventHandlers.js":6,"./evidenceState.js":7,"./rowsSelected.js":9,"./uploaders.js":11}],9:[function(require,module,exports){
+},{"../shared/css/fancyLoadingButton.css":13,"../shared/css/toastr.css":14,"../shared/js/hiJackSaveAndExit":16,"./css/styles.css":5,"./eventHandlers.js":6,"./evidenceState.js":7,"./rowsSelected.js":9,"./uploaders.js":11}],9:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -11094,34 +11106,21 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = saveTask;
 
-var _toastr = require('toastr');
-
-var _toastr2 = _interopRequireDefault(_toastr);
-
-var _rowsSelected = require('./rowsSelected.js');
-
-var _rowsSelected2 = _interopRequireDefault(_rowsSelected);
-
 var _submitFormAsync = require('../shared/js/submitFormAsync');
 
 var _submitFormAsync2 = _interopRequireDefault(_submitFormAsync);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function saveTask(toSave) {
+function saveTask(toSave, callback) {
 	toSave.find('[data-ajaxinput]').each(function (i, e) {
 		populateAjaxField(e);
 	});
 	var saveButton = $(toSave).find('.save');
 	saveButton.prop('disabled', 'true').val('Saving...').addClass('progress-striped progress active');
-	if (enhanced === 'Y') // eslint-disable-line
-		{
-			(0, _submitFormAsync2.default)(function () {
-				saveButton.removeClass('sv-btn-primary sv-btn-warning sv-btn-danger progress-striped progress active').addClass('sv-btn-success').val('Saved!');
-				_toastr2.default.success(resdErrors.taskSaved);
-				_rowsSelected2.default.updateCounters();
-			});
-		} else {
+	if (enhanced === 'Y') {
+		(0, _submitFormAsync2.default)(callback);
+	} else {
 		$('[data-accordion]').val($('#accordion').accordion('option').active);
 		$('#ajaxSubmit input[type="submit"]').first().click();
 	}
@@ -11146,7 +11145,7 @@ function getFieldValue(field, type) {
 	}
 }
 
-},{"../shared/js/submitFormAsync":18,"./rowsSelected.js":9,"toastr":3}],11:[function(require,module,exports){
+},{"../shared/js/submitFormAsync":17}],11:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -11235,7 +11234,8 @@ function initPlUpload() {
 	});
 }
 
-},{"../shared/js/getPlUploader.js":16,"toastr":3}],12:[function(require,module,exports){
+},{"../shared/js/getPlUploader.js":15,"toastr":3}],12:[function(require,module,exports){
+(function (global){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -11246,17 +11246,9 @@ var _validator = require('../shared/js/validator');
 
 var _validator2 = _interopRequireDefault(_validator);
 
-var _toastr = require('toastr');
-
-var _toastr2 = _interopRequireDefault(_toastr);
-
-var _validationStates = require('./validationStates');
-
-var v = _interopRequireWildcard(_validationStates);
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+//import toastr from 'toastr';
 
 exports.default = {
 	validateRow: function validateRow(row) {
@@ -11283,76 +11275,45 @@ exports.default = {
 		//if(evidBtn.length === 0) return false; //checks that evidence is in DOM
 		return $(evidBtn).parent().parent().css('display') === 'block' ? ($(evidBtn).addClass('sv-mandatory'), false) : ($(evidBtn).removeClass('sv-mandatory'), true);
 	},
-	validatePage: function validatePage(silent) {
+	validatePage: function validatePage() {
+		var silent = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
+		var resdErrors = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : global.resdErrors;
+		var notifier = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : require('toastr');
+
 		var validationErrors = [];
 		var _this = this;
 		if ($('.requestRow').find('.selected:checked').length === 0) {
-			validationErrors.push(v.NO_TASKS_SELECTED);
+			validationErrors.push('NO_TASKS_SELECTED');
 		} else {
 			$('.requestRow').each(function (i, e) {
 				if ($(e).find('.selected').first().prop('checked')) {
 					if (!_this.validateRow(e)) {
-						validationErrors.push(v.INVALID_SELECTION);
+						validationErrors.push('INVALID_SELECTION');
 					} else {
 						if ($(e).find('.save').hasClass('sv-btn-default') || $(e).find('.save').hasClass('sv-btn-success')) {
-							if (!_this.validateEvidence(e)) validationErrors.push(v.MISSING_EVIDENCE);
+							if (!_this.validateEvidence(e)) validationErrors.push('MISSING_EVIDENCE');
 						} else {
-							validationErrors.push(v.UNSAVED_TASK);
+							validationErrors.push('UNSAVED_TASK');
 						}
 					}
 				} else {
-					if ($(e).find('.save').hasClass('sv-btn-warning')) validationErrors.push(v.UNSAVED_TASK);
+					if ($(e).find('.save').hasClass('sv-btn-warning')) validationErrors.push('UNSAVED_TASK');
 				}
 			});
 		}
 		if (!silent) validationErrors.map(function (a) {
-			return statusDisplay(a);
+			return notifier.warning(resdErrors[a]);
 		});
 		return validationErrors.length === 0 ? true : false;
 	}
 };
 
-
-function statusDisplay(result) {
-	switch (result) {
-		case v.VALID:
-			_toastr2.default.success(resdErrors.validationSuccess);
-			break;
-		case v.INVALID_SELECTION:
-			_toastr2.default.warning(resdErrors.INVALID_SELECTION);
-			break;
-		case v.MISSING_EVIDENCE:
-			_toastr2.default.warning(resdErrors.MISSING_EVIDENCE);
-			break;
-		case v.NO_TASKS_SELECTED:
-			_toastr2.default.warning(resdErrors.NO_TASKS_SELECTED);
-			break;
-		case v.UNSAVED_TASK:
-			_toastr2.default.warning(resdErrors.UNSAVED_TASK);
-			break;
-		default:
-			_toastr2.default.warning(resdErrors.DEFAULT);
-			break;
-	}
-}
-
-},{"../shared/js/validator":19,"./validationStates":13,"toastr":3}],13:[function(require,module,exports){
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-var VALID = exports.VALID = 'VALID';
-var MISSING_EVIDENCE = exports.MISSING_EVIDENCE = 'MISSING_EVIDENCE';
-var INVALID_SELECTION = exports.INVALID_SELECTION = 'INVALID_SELECTION';
-var UNSAVED_TASK = exports.UNSAVED_TASK = 'UNSAVED_TASK';
-var NO_TASKS_SELECTED = exports.NO_TASKS_SELECTED = 'NO_TASKS_SELECTED';
-
-},{}],14:[function(require,module,exports){
+}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
+},{"../shared/js/validator":18,"toastr":3}],13:[function(require,module,exports){
 var css = ".button-secondary:active,.button:active,button:active,input[type=submit]:active{box-shadow:1px 1px 4px rgba(0,0,0,.4) inset}.button.is-disabled,.button[disabled],.is-disabled.button-secondary,[disabled].button-secondary,button.is-disabled,button[disabled],input[type=submit].is-disabled,input[type=submit][disabled]{opacity:.8;cursor:not-allowed;color:#FFF;text-shadow:0 1px 1px #aaa}.button.is-disabled:focus,.button.is-disabled:hover,.button[disabled]:focus,.button[disabled]:hover,.is-disabled.button-secondary:focus,.is-disabled.button-secondary:hover,[disabled].button-secondary:focus,[disabled].button-secondary:hover,button.is-disabled:focus,button.is-disabled:hover,button[disabled]:focus,button[disabled]:hover,input[type=submit].is-disabled:focus,input[type=submit].is-disabled:hover,input[type=submit][disabled]:focus,input[type=submit][disabled]:hover{box-shadow:none}.button,.button-secondary,button,input[type=submit]{border-radius:5px;display:inline-block;outline:0;text-align:center;-webkit-transition:.1s background-color;-moz-transition:.1s background-color;-o-transition:.1s background-color;transition:.1s background-color}.progress-striped{background-color:#149bdf;background-image:-webkit-gradient(linear,0 100%,100% 0,color-stop(0.25,rgba(255,255,255,.15)),color-stop(0.25,transparent),color-stop(0.5,transparent),color-stop(0.5,rgba(255,255,255,.15)),color-stop(0.75,rgba(255,255,255,.15)),color-stop(0.75,transparent),to(transparent));background-image:-webkit-linear-gradient(45deg,rgba(255,255,255,.15) 25%,transparent 25%,transparent 50%,rgba(255,255,255,.15) 50%,rgba(255,255,255,.15) 75%,transparent 75%,transparent);background-image:-moz-linear-gradient(45deg,rgba(255,255,255,.15) 25%,transparent 25%,transparent 50%,rgba(255,255,255,.15) 50%,rgba(255,255,255,.15) 75%,transparent 75%,transparent);background-image:-o-linear-gradient(45deg,rgba(255,255,255,.15) 25%,transparent 25%,transparent 50%,rgba(255,255,255,.15) 50%,rgba(255,255,255,.15) 75%,transparent 75%,transparent);background-image:linear-gradient(45deg,rgba(255,255,255,.15) 25%,transparent 25%,transparent 50%,rgba(255,255,255,.15) 50%,rgba(255,255,255,.15) 75%,transparent 75%,transparent);-webkit-background-size:40px 40px;-moz-background-size:40px 40px;-o-background-size:40px 40px;background-size:40px 40px}.progress.active{-webkit-animation:progress-bar-stripes 2s linear infinite;-moz-animation:progress-bar-stripes 2s linear infinite;-ms-animation:progress-bar-stripes 2s linear infinite;-o-animation:progress-bar-stripes 2s linear infinite;animation:progress-bar-stripes 2s linear infinite}@-webkit-keyframes progress-bar-stripes{from{background-position:40px 0}to{background-position:0 0}}@-moz-keyframes progress-bar-stripes{from{background-position:40px 0}to{background-position:0 0}}@-ms-keyframes progress-bar-stripes{from{background-position:40px 0}to{background-position:0 0}}@-o-keyframes progress-bar-stripes{from{background-position:0 0}to{background-position:40px 0}}@keyframes progress-bar-stripes{from{background-position:40px 0}to{background-position:0 0}}.progress{min-height:34px;margin-bottom:0}"; (require("browserify-css").createStyle(css, { "href": "src\\shared\\css\\fancyLoadingButton.css" }, { "insertAt": "bottom" })); module.exports = css;
-},{"browserify-css":1}],15:[function(require,module,exports){
+},{"browserify-css":1}],14:[function(require,module,exports){
 var css = ".toast-title{font-weight:700}.toast-message{-ms-word-wrap:break-word;word-wrap:break-word}.toast-message a,.toast-message label{color:#FFF}.toast-message a:hover{color:#CCC;text-decoration:none}.toast-close-button{position:relative;right:-.3em;top:-.3em;float:right;font-size:20px;font-weight:700;color:#FFF;-webkit-text-shadow:0 1px 0 #fff;text-shadow:0 1px 0 #fff;opacity:.8;-ms-filter:alpha(Opacity=80);filter:alpha(opacity=80);line-height:1}.toast-close-button:focus,.toast-close-button:hover{color:#000;text-decoration:none;cursor:pointer;opacity:.4;-ms-filter:alpha(Opacity=40);filter:alpha(opacity=40)}.rtl .toast-close-button{left:-.3em;float:left;right:.3em}button.toast-close-button{padding:0;cursor:pointer;background:0 0;border:0;-webkit-appearance:none}.toast-top-center{top:0;right:0;width:100%}.toast-bottom-center{bottom:0;right:0;width:100%}.toast-top-full-width{top:0;right:0;width:100%}.toast-bottom-full-width{bottom:0;right:0;width:100%}.toast-top-left{top:12px;left:12px}.toast-top-right{top:12px;margin:0 auto;left:calc(50% - 150px)}.toast-bottom-right{right:12px;bottom:12px}.toast-bottom-left{bottom:12px;left:12px}#toast-container{position:fixed;z-index:999999;pointer-events:none}#toast-container *{-moz-box-sizing:border-box;-webkit-box-sizing:border-box;box-sizing:border-box}#toast-container>div{position:relative;pointer-events:auto;overflow:hidden;margin:0 0 6px;padding:15px 15px 15px 50px;width:300px;-moz-border-radius:3px;-webkit-border-radius:3px;border-radius:3px;background-position:15px center;background-repeat:no-repeat;-moz-box-shadow:0 0 12px #999;-webkit-box-shadow:0 0 12px #999;box-shadow:0 0 12px #999;color:#FFF;opacity:.8;-ms-filter:alpha(Opacity=80);filter:alpha(opacity=80)}#toast-container>div.rtl{direction:rtl;padding:15px 50px 15px 15px;background-position:right 15px center}#toast-container>div:hover{-moz-box-shadow:0 0 12px #000;-webkit-box-shadow:0 0 12px #000;box-shadow:0 0 12px #000;opacity:1;-ms-filter:alpha(Opacity=100);filter:alpha(opacity=100);cursor:pointer}#toast-container>.toast-info{background-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAGwSURBVEhLtZa9SgNBEMc9sUxxRcoUKSzSWIhXpFMhhYWFhaBg4yPYiWCXZxBLERsLRS3EQkEfwCKdjWJAwSKCgoKCcudv4O5YLrt7EzgXhiU3/4+b2ckmwVjJSpKkQ6wAi4gwhT+z3wRBcEz0yjSseUTrcRyfsHsXmD0AmbHOC9Ii8VImnuXBPglHpQ5wwSVM7sNnTG7Za4JwDdCjxyAiH3nyA2mtaTJufiDZ5dCaqlItILh1NHatfN5skvjx9Z38m69CgzuXmZgVrPIGE763Jx9qKsRozWYw6xOHdER+nn2KkO+Bb+UV5CBN6WC6QtBgbRVozrahAbmm6HtUsgtPC19tFdxXZYBOfkbmFJ1VaHA1VAHjd0pp70oTZzvR+EVrx2Ygfdsq6eu55BHYR8hlcki+n+kERUFG8BrA0BwjeAv2M8WLQBtcy+SD6fNsmnB3AlBLrgTtVW1c2QN4bVWLATaIS60J2Du5y1TiJgjSBvFVZgTmwCU+dAZFoPxGEEs8nyHC9Bwe2GvEJv2WXZb0vjdyFT4Cxk3e/kIqlOGoVLwwPevpYHT+00T+hWwXDf4AJAOUqWcDhbwAAAAASUVORK5CYII=)!important}#toast-container>.toast-error{background-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAHOSURBVEhLrZa/SgNBEMZzh0WKCClSCKaIYOED+AAKeQQLG8HWztLCImBrYadgIdY+gIKNYkBFSwu7CAoqCgkkoGBI/E28PdbLZmeDLgzZzcx83/zZ2SSXC1j9fr+I1Hq93g2yxH4iwM1vkoBWAdxCmpzTxfkN2RcyZNaHFIkSo10+8kgxkXIURV5HGxTmFuc75B2RfQkpxHG8aAgaAFa0tAHqYFfQ7Iwe2yhODk8+J4C7yAoRTWI3w/4klGRgR4lO7Rpn9+gvMyWp+uxFh8+H+ARlgN1nJuJuQAYvNkEnwGFck18Er4q3egEc/oO+mhLdKgRyhdNFiacC0rlOCbhNVz4H9FnAYgDBvU3QIioZlJFLJtsoHYRDfiZoUyIxqCtRpVlANq0EU4dApjrtgezPFad5S19Wgjkc0hNVnuF4HjVA6C7QrSIbylB+oZe3aHgBsqlNqKYH48jXyJKMuAbiyVJ8KzaB3eRc0pg9VwQ4niFryI68qiOi3AbjwdsfnAtk0bCjTLJKr6mrD9g8iq/S/B81hguOMlQTnVyG40wAcjnmgsCNESDrjme7wfftP4P7SP4N3CJZdvzoNyGq2c/HWOXJGsvVg+RA/k2MC/wN6I2YA2Pt8GkAAAAASUVORK5CYII=)!important}#toast-container>.toast-success{background-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAADsSURBVEhLY2AYBfQMgf///3P8+/evAIgvA/FsIF+BavYDDWMBGroaSMMBiE8VC7AZDrIFaMFnii3AZTjUgsUUWUDA8OdAH6iQbQEhw4HyGsPEcKBXBIC4ARhex4G4BsjmweU1soIFaGg/WtoFZRIZdEvIMhxkCCjXIVsATV6gFGACs4Rsw0EGgIIH3QJYJgHSARQZDrWAB+jawzgs+Q2UO49D7jnRSRGoEFRILcdmEMWGI0cm0JJ2QpYA1RDvcmzJEWhABhD/pqrL0S0CWuABKgnRki9lLseS7g2AlqwHWQSKH4oKLrILpRGhEQCw2LiRUIa4lwAAAABJRU5ErkJggg==)!important}#toast-container>.toast-warning{background-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAGYSURBVEhL5ZSvTsNQFMbXZGICMYGYmJhAQIJAICYQPAACiSDB8AiICQQJT4CqQEwgJvYASAQCiZiYmJhAIBATCARJy+9rTsldd8sKu1M0+dLb057v6/lbq/2rK0mS/TRNj9cWNAKPYIJII7gIxCcQ51cvqID+GIEX8ASG4B1bK5gIZFeQfoJdEXOfgX4QAQg7kH2A65yQ87lyxb27sggkAzAuFhbbg1K2kgCkB1bVwyIR9m2L7PRPIhDUIXgGtyKw575yz3lTNs6X4JXnjV+LKM/m3MydnTbtOKIjtz6VhCBq4vSm3ncdrD2lk0VgUXSVKjVDJXJzijW1RQdsU7F77He8u68koNZTz8Oz5yGa6J3H3lZ0xYgXBK2QymlWWA+RWnYhskLBv2vmE+hBMCtbA7KX5drWyRT/2JsqZ2IvfB9Y4bWDNMFbJRFmC9E74SoS0CqulwjkC0+5bpcV1CZ8NMej4pjy0U+doDQsGyo1hzVJttIjhQ7GnBtRFN1UarUlH8F3xict+HY07rEzoUGPlWcjRFRr4/gChZgc3ZL2d8oAAAAASUVORK5CYII=)!important}#toast-container.toast-bottom-center>div,#toast-container.toast-top-center>div{width:300px;margin-left:auto;margin-right:auto}#toast-container.toast-bottom-full-width>div,#toast-container.toast-top-full-width>div{width:96%;margin-left:auto;margin-right:auto}.toast{background-color:#030303}.toast-success{background-color:#51A351}.toast-error{background-color:#BD362F}.toast-info{background-color:#2F96B4}.toast-warning{background-color:#F89406}.toast-progress{position:absolute;left:0;bottom:0;height:4px;background-color:#000;opacity:.4;-ms-filter:alpha(Opacity=40);filter:alpha(opacity=40)}@media all and (max-width:240px){#toast-container>div{padding:8px 8px 8px 50px;width:11em}#toast-container>div.rtl{padding:8px 50px 8px 8px}#toast-container .toast-close-button{right:-.2em;top:-.2em}#toast-container .rtl .toast-close-button{left:-.2em;right:.2em}}@media all and (min-width:241px) and (max-width:480px){#toast-container>div{padding:8px 8px 8px 50px;width:18em}#toast-container>div.rtl{padding:8px 50px 8px 8px}#toast-container .toast-close-button{right:-.2em;top:-.2em}#toast-container .rtl .toast-close-button{left:-.2em;right:.2em}}@media all and (min-width:481px) and (max-width:768px){#toast-container>div{padding:15px 15px 15px 50px;width:25em}#toast-container>div.rtl{padding:15px 50px 15px 15px}}"; (require("browserify-css").createStyle(css, { "href": "src\\shared\\css\\toastr.css" }, { "insertAt": "bottom" })); module.exports = css;
-},{"browserify-css":1}],16:[function(require,module,exports){
+},{"browserify-css":1}],15:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -11362,10 +11323,10 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = function () {
 	return Object.keys(uploader).map(function (a) {
 		return uploader[a];
-	})[0]; // eslint-disable-line
+	})[0];
 };
 
-},{}],17:[function(require,module,exports){
+},{}],16:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -11383,7 +11344,7 @@ exports.default = function () {
 	});
 };
 
-},{}],18:[function(require,module,exports){
+},{}],17:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -11391,13 +11352,15 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = submitFormAsync;
 function submitFormAsync(done) {
+	var ajax = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : $;
+
 	var formData = $('form').first().serialize() + '&NEXT.DUMMY.MENSYS.1=Next';
-	$.post($('form').first().attr('action'), formData, function () {
+	ajax.post($('form').first().attr('action'), formData, function () {
 		done();
 	});
 }
 
-},{}],19:[function(require,module,exports){
+},{}],18:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {

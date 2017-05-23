@@ -13,7 +13,6 @@ function RESDInit() {
 }
 
 sits_attach_event('window', 'load', function () {
-	// eslint-disable-line
 	RESDInit();
 });
 

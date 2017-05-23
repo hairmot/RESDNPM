@@ -10914,7 +10914,6 @@ function RESDInit() {
 }
 
 sits_attach_event('window', 'load', function () {
-	// eslint-disable-line
 	RESDInit();
 });
 
@@ -10989,7 +10988,7 @@ exports.default = function () {
 			return uploader[a].bind('QueueChanged', function () {
 				return uploader[a].start();
 			});
-		}); // eslint-disable-line
+		});
 	});
 };
 
@@ -11023,7 +11022,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = function () {
 	return Object.keys(uploader).map(function (a) {
 		return uploader[a];
-	})[0]; // eslint-disable-line
+	})[0];
 };
 
 },{}],13:[function(require,module,exports){

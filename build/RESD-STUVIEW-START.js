@@ -91,13 +91,12 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function confirmDelete(button) {
 
-	var dialog = sits_dialog(resdDialogs.DELETE.title, // eslint-disable-line
-	resdDialogs.DELETE.message, {
+	var dialog = sits_dialog(resdDialogs.DELETE.title, resdDialogs.DELETE.message, {
 		No: function No() {
-			sits_dialog_close(dialog); // eslint-disable-line
+			sits_dialog_close(dialog);
 		},
 		'Delete': function Delete() {
-			sits_dialog_close(dialog); // eslint-disable-line
+			sits_dialog_close(dialog);
 			(0, _deleteRequest2.default)(button);
 		}
 	}, false, false, false);
@@ -123,7 +122,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function deleteRequest(button) {
 	$(button).prop('disabled', true).addClass('progress-striped progress active');
-	(0, _ajaxButton2.default)($(button), function () {
+	(0, _ajaxButton2.default)(button, function () {
 		(0, _refreshData2.default)();
 	});
 }
@@ -167,7 +166,6 @@ function RESDInit() {
 }
 
 sits_attach_event('window', 'load', function () {
-	// eslint-disable-line
 	RESDInit();
 });
 

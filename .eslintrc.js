@@ -29,5 +29,14 @@ module.exports = {
     },
 	 "settings": {
       "import/ignore": [".css$","node_modules/*"]
+   },
+   "globals": {
+	   "enhanced" : true,
+	   "resdErrors" : true,
+	   "resdDialogs" : true,
+	   "sits_attach_event" : true,
+	   "sits_dialog" : true,
+	   "sits_dialog_close" : true,
+	   "summaryLength" : true,
    }
 };

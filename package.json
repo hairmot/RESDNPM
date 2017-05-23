@@ -7,6 +7,7 @@
     "all": "npm-run-all --parallel gulp serve",
     "coverage": "cross-env NODE_ENV=test nyc --reporter=lcov --reporter=text mocha --compilers js:babel-register test/**/*.js",
     "gulp": "gulp",
+		"postcoverage": "node ./tools/openCoverageReport.js",
     "serve": "serve -s ./build",
     "test": "mocha --recursive --compilers js:babel-core/register || exit 0"
   },
@@ -36,6 +37,7 @@
     "mocha": "^3.3.0",
     "npm-run-all": "^4.0.2",
     "nyc": "^10.3.2",
+    "open": "0.0.5",
     "serve": "^5.1.5"
   },
   "dependencies": {
