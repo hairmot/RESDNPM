@@ -57,6 +57,6 @@ export default {
 		}
 		if(!silent)
 			validationErrors.map(a => notifier.warning(resdErrors[a]));
-		return validationErrors.length === 0 ? true: false;
+		return typeof(staff) != 'undefined' ? true : validationErrors.length === 0 ? true: false;
 	}
 };

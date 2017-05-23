@@ -11304,7 +11304,7 @@ exports.default = {
 		if (!silent) validationErrors.map(function (a) {
 			return notifier.warning(resdErrors[a]);
 		});
-		return validationErrors.length === 0 ? true : false;
+		return typeof staff != 'undefined' ? true : validationErrors.length === 0 ? true : false;
 	}
 };
 

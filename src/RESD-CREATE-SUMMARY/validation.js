@@ -1,9 +1,9 @@
-import validator from '../shared/js/validator'; 
+import validator from '../shared/js/validator';
 import plUploader from '../shared/js/getPlUploader';
 
 export default {
 	validatePage: function validatePage() {
-		return (this.validatePageInputs() && this.validateEvidence());          
+		return typeof(staff) != 'undefined' ? true : (this.validatePageInputs() && this.validateEvidence());
 	},
 	validatePageInputs: function validate() {
 		var circumstancesCategory = $('body').find('[data-resdreason] option:selected').first();
@@ -12,7 +12,7 @@ export default {
 		var summaryText = $('textarea[data-remchar]').first();
 		var evidenceReason = $('input[data-evidencereason]:visible').first();
 		validator.validateInputs([summaryText, evidenceReason]);
-        
+
 		return $('.sv-mandatory:visible').length === 0 ? true : false;
 	}
     ,
@@ -28,18 +28,18 @@ export default {
 	},
 	filesUploaded: function filesUploaded() {
 		var files = $('.sv-plupfile').length;
-		return (files > 0);             
+		return (files > 0);
 	},
 	setNextButtonState : function setNextButtonState(){
 		var valid = this.validatePage();
 		if(valid && plUploader().state === 1){
 			$('input[value="Next"]').prop('disabled', false);
 			return true;
-		} 
+		}
 		else {
 			$('input[value="Next"]').prop('disabled', true);
 			return false;
-		}            
+		}
 	}
-    
+
 };

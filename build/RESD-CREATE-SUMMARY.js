@@ -10936,7 +10936,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 exports.default = {
 	validatePage: function validatePage() {
-		return this.validatePageInputs() && this.validateEvidence();
+		return typeof staff != 'undefined' ? true : this.validatePageInputs() && this.validateEvidence();
 	},
 	validatePageInputs: function validate() {
 		var circumstancesCategory = $('body').find('[data-resdreason] option:selected').first();
