@@ -10821,6 +10821,7 @@ exports.default = {
 		$('body').on('click', function () {
 			if (uploaders === 0) {
 				(0, _getPlUploader2.default)().bind('UploadComplete', function () {
+					$('[data-evidencereason]').removeClass('.sv-mandatory');
 					_validation2.default.setNextButtonState();
 				});
 				(0, _getPlUploader2.default)().bind('FilesRemoved', function () {

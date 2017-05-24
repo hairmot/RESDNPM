@@ -1,9 +1,8 @@
 import ajaxButton from '../shared/js/ajaxButton';
-import refreshData from './refreshData';
 
-export default function deleteRequest(button) {
+export default function deleteRequest(button, callback = require('refreshData')) {
 	$(button).prop('disabled', true).addClass('progress-striped progress active');
 	ajaxButton(button, function() {
-		refreshData();
+		callback();
 	});
 }

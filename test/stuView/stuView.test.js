@@ -10,28 +10,28 @@ import stuview from '../htmlTemplates/stuView';
 describe('Student View', function() {
 	var $;
 	global.dialogCalled = false;
-	global.resdDialogs = {DELETE:  {title:"delete title", message: "delete message"}};
-	global.sits_dialog = function(title,message,actions) {
-		global.dialogCalled = true;
-	}
+
 
 	it('Binds a delete function', function() {
 		saveTask.deleteButtonClicked();
 		$('#deleteRequest').click();
-		expect(global.dialogCalled).to.equal(true);
+		expect(global.sitsDialogTitleReceived).to.equal('delete title');
 	});
 
 	it('deletes a request by performing an ajax call', function() {
 		var getsCalled = 0;
 		var hrefReceived = '';
+		var callbackCalled = false;
 		$.get = function(url, callback) {
 			hrefReceived = url;
 			getsCalled++;
+			callback();
 		}
-		deleteRequest('#deleteRequest');
+		deleteRequest('#deleteRequest', function() {callbackCalled = true;});
 		expect($('#deleteRequest').prop('disabled')).to.equal(true);
 		console.log($('#deleteRequest').attr('href'));
 		expect(getsCalled).to.equal(1);
+		expect(callbackCalled).to.be.true;
 		expect(hrefReceived).to.equal('delete');
 	});
 

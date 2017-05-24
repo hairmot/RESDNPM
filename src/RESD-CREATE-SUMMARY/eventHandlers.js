@@ -32,6 +32,7 @@ export default {
 		$('body').on('click', () => {
 			if(uploaders === 0) {
 				getPlUploader().bind('UploadComplete', function() {
+					$('[data-evidencereason]').removeClass('.sv-mandatory');
 					validation.setNextButtonState();
 
 				});
