@@ -36,23 +36,25 @@ function staffNamePrompt(row, callback) {
 		resdDialogs.NAMEOFSTAFF.message + `:
 		<br/><br/>
 		<input id="fsstInput" class="sv-form-control" type="text" />`, {
-			Exit: () => {
-				result = false;
-				$(row).find('.selected').first().prop('checked', false);
-				sits_dialog_close(dialog);
-				confirmCloseDialog();
-			},
-			Save:() => {
-				if(transferFsstName())
-			{
-					sits_dialog_close(dialog);
-					saveTask(row, callback);
-					result = true;
-				}
-			}
+			'Exit': () => { staffNamePromptExit(dialog, row)},
 
+			'Save': () => {staffNamePromptSave(dialog, row, callback)}
 		},false,false,false);
 	return result;
+}
+
+export function staffNamePromptExit(dialog, row) {
+	$(row).find('.selected').first().prop('checked', false);
+	sits_dialog_close(dialog);
+	confirmCloseDialog();
+}
+
+export function staffNamePromptSave(dialog, row, callback) {
+	if(transferFsstName())
+	{
+		sits_dialog_close(dialog);
+		return saveTask(row, callback);
+	}
 }
 
 function confirmCloseDialog() {
@@ -80,6 +82,7 @@ function formatDate(date) {
 }
 
 function transferFsstName(){
+
 	var inputval = $('#fsstInput').val();
 	if(inputval !== '')
 	{

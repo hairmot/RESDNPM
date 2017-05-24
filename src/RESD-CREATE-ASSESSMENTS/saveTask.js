@@ -15,6 +15,7 @@ export default function saveTask(toSave, callback) {
 		$('[data-accordion]').val($('#accordion').accordion('option').active);
 		$('#ajaxSubmit input[type="submit"]').first().click();
 	}
+	return true;
 }
 
 function populateAjaxField(name) {

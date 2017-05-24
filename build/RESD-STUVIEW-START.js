@@ -114,16 +114,14 @@ var _ajaxButton = require('../shared/js/ajaxButton');
 
 var _ajaxButton2 = _interopRequireDefault(_ajaxButton);
 
-var _refreshData = require('./refreshData');
-
-var _refreshData2 = _interopRequireDefault(_refreshData);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function deleteRequest(button) {
+	var callback = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : require('./refreshData');
+
 	$(button).prop('disabled', true).addClass('progress-striped progress active');
 	(0, _ajaxButton2.default)(button, function () {
-		(0, _refreshData2.default)();
+		callback();
 	});
 }
 

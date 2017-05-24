@@ -1,7 +1,5 @@
-import toastr from 'toastr';
-
 export default {
-	validatePage: function validatePage(silent = false) {
+	validatePage: function validatePage(silent = false, toastr = require('toastr')) {
 		var errors = [];
 		if($('.requestRow').length === 0)
 			errors.push(resdErrors.noValidTasks);

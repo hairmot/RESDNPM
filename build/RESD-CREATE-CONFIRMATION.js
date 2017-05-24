@@ -10840,23 +10840,17 @@ sits_attach_event('window', 'load', function () {
 Object.defineProperty(exports, "__esModule", {
 	value: true
 });
-
-var _toastr = require('toastr');
-
-var _toastr2 = _interopRequireDefault(_toastr);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
 exports.default = {
 	validatePage: function validatePage() {
 		var silent = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+		var toastr = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : require('toastr');
 
 		var errors = [];
 		if ($('.requestRow').length === 0) errors.push(resdErrors.noValidTasks);
 		if (!$('[data-accept]').prop('checked')) errors.push(resdErrors.pleaseAccept);
 		if (!silent) {
 			errors.map(function (a) {
-				return _toastr2.default.warning(a);
+				return toastr.warning(a);
 			});
 		}
 

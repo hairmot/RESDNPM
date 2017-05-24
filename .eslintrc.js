@@ -32,6 +32,7 @@ module.exports = {
    },
    "globals": {
 	   "enhanced" : true,
+	   "uploader" : true,
 	   "resdErrors" : true,
 	   "resdDialogs" : true,
 	   "sits_attach_event" : true,

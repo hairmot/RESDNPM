@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "all": "npm-run-all --parallel gulp serve",
-    "coverage": "cross-env NODE_ENV=test nyc --reporter=lcov --reporter=text mocha --compilers js:babel-register test/**/*.js",
+    "coverage": "cross-env NODE_ENV=test nyc --reporter=lcov --reporter=text --include-all-sources true mocha --compilers js:babel-register test/**/*.js",
     "gulp": "gulp",
 		"postcoverage": "node ./tools/openCoverageReport.js",
     "serve": "serve -s ./build",

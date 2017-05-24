@@ -2,7 +2,7 @@ var mocha = require('mocha');
 var expect = require('chai').expect;
 var jsdom = require("jsdom");
 var { JSDOM } = jsdom;
-import check24Hours from '../../src/RESD-CREATE-ASSESSMENTS/check24Hours';
+import check24Hours, {staffNamePromptExit, staffNamePromptSave} from '../../src/RESD-CREATE-ASSESSMENTS/check24Hours';
 import requestRow from '../htmlTemplates/requestRow';
 
 describe("check 24 Hours tests", function(){
@@ -20,6 +20,7 @@ describe("check 24 Hours tests", function(){
 		})
 
 		it('prompts for fsst name if necessary', function() {
+			$('body').append('<input id="fsstInput" value="Test Staff" />');
 			check24Hours.FSSTDialog($('.requestRow').first(), function() {});
 
 			expect(global.sitsDialogTitleReceived).to.equal('24hourstitle');
@@ -28,6 +29,16 @@ describe("check 24 Hours tests", function(){
 			expect(typeof(global.sitsDialogActionsReceived['No']) == 'function').to.be.true;
 		})
 
+		it('closes dialog if exit is chosen in staff name prompt dialog', function() {
+			staffNamePromptExit({title:'namePrompt'}, $('<div><input type="checkbox" class="selected"/></div>'));
+			expect(global.sitsDialogClosedTitle).to.equal('namePrompt');
+		})
+
+		it('closes dialog if exit is chosen in staff name prompt dialog', function() {
+			var saved = staffNamePromptSave({title:'namePrompt'}, $('<div><input type="checkbox" class="selected"/></div>'), () => {});
+			expect(global.sitsDialogClosedTitle).to.equal('namePrompt');
+			expect(saved).to.be.true;
+		})
 
 	});
 

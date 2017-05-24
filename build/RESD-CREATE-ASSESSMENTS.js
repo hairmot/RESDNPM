@@ -10773,6 +10773,8 @@ return jQuery;
 Object.defineProperty(exports, "__esModule", {
 	value: true
 });
+exports.staffNamePromptExit = staffNamePromptExit;
+exports.staffNamePromptSave = staffNamePromptSave;
 
 var _toastr = require('toastr');
 
@@ -10815,22 +10817,28 @@ exports.default = {
 function staffNamePrompt(row, callback) {
 	var result = false;
 	var dialog = sits_dialog(resdDialogs.NAMEOFSTAFF.title, resdDialogs.NAMEOFSTAFF.message + ':\n\t\t<br/><br/>\n\t\t<input id="fsstInput" class="sv-form-control" type="text" />', {
-		Exit: function Exit() {
-			result = false;
-			$(row).find('.selected').first().prop('checked', false);
-			sits_dialog_close(dialog);
-			confirmCloseDialog();
+		'Exit': function Exit() {
+			staffNamePromptExit(dialog, row);
 		},
-		Save: function Save() {
-			if (transferFsstName()) {
-				sits_dialog_close(dialog);
-				(0, _saveTask2.default)(row, callback);
-				result = true;
-			}
-		}
 
+		'Save': function Save() {
+			staffNamePromptSave(dialog, row, callback);
+		}
 	}, false, false, false);
 	return result;
+}
+
+function staffNamePromptExit(dialog, row) {
+	$(row).find('.selected').first().prop('checked', false);
+	sits_dialog_close(dialog);
+	confirmCloseDialog();
+}
+
+function staffNamePromptSave(dialog, row, callback) {
+	if (transferFsstName()) {
+		sits_dialog_close(dialog);
+		return (0, _saveTask2.default)(row, callback);
+	}
 }
 
 function confirmCloseDialog() {
@@ -10852,6 +10860,7 @@ function formatDate(date) {
 }
 
 function transferFsstName() {
+
 	var inputval = $('#fsstInput').val();
 	if (inputval !== '') {
 		$('[data-fsstname]').first().val(inputval);
@@ -11124,6 +11133,7 @@ function saveTask(toSave, callback) {
 		$('[data-accordion]').val($('#accordion').accordion('option').active);
 		$('#ajaxSubmit input[type="submit"]').first().click();
 	}
+	return true;
 }
 
 function populateAjaxField(name) {
