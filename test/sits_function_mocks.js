@@ -1,7 +1,8 @@
 global.resdDialogs = {
-	'DUEIN24HOURS': {'title': '24hourstitle', 'message':'24hoursmessage'},
+	DUEIN24HOURS: {title: '24hourstitle', message:'24hoursmessage'},
 	DELETE:  {title:"delete title", message: "delete message"},
-	QUIT24HRCHECK : {title: "24HRCHECK title", message: "24HRCHECK message"}
+	QUIT24HRCHECK : {title: "24HRCHECK title", message: "24HRCHECK message"},
+	NAMEOFSTAFF : {title:"NAMEOFSTAFF title", message:"NAMEOFSTAFF message"}
 };
 
 global.resdErrors = {
@@ -15,6 +16,10 @@ global.sitsDialogActionsReceived = [];
 global.sitsDialogClosedTitle = '';
 
 global.enhanced = 'Y';
+
+global.$.post = function() {};
+global.$.ajax = function() {};
+global.$.get = function() {};
 
 
 global.sits_dialog = function(title, message,actions) {

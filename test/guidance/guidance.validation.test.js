@@ -22,6 +22,13 @@ describe("Guidance Validation Tests", function(){
             expect($('input[value="Next"]').first().prop('disabled')).to.equal(true);
         });
 
+		it('enables the next button when a selection is made',function(){
+
+			$('input[data-applylc]').first().prop('checked', true);
+			validation.initToggleCheck();
+            expect($('input[value="Next"]').first().prop('disabled')).to.equal(false);
+        });
+
     });
 
     before(() =>{

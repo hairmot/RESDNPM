@@ -9,7 +9,7 @@
     "gulp": "gulp",
 		"postcoverage": "node ./tools/openCoverageReport.js",
     "serve": "serve -s ./build",
-    "test": "mocha --recursive --compilers js:babel-core/register || exit 0"
+    "test": "mocha --recursive --compilers js:babel-core/register"
   },
   "keywords": [
     "RESD",

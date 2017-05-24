@@ -50,7 +50,7 @@ export default {
 	}
 };
 
-function extensionLength(length, duedate) {
+export function extensionLength(length, duedate) {
 
 	if($(length).val() === '0')
     {

@@ -1,6 +1,6 @@
-export default function submitFormAsync(done, ajax = $) {
+export default function submitFormAsync(done, ajax = $, row = null) {
 	var formData = $('form').first().serialize() + '&NEXT.DUMMY.MENSYS.1=Next';
 	ajax.post($('form').first().attr('action'), formData, function() {
-		done();
+		done(row);
 	});
 }

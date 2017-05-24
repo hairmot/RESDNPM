@@ -23,6 +23,10 @@ describe("Guidance Validation Tests - not apply", function(){
             expect(validation.applyToggleCheck()).to.equal(false);
         });
 
+		it('doesn\'t bind toggle checks if not applicable', function() {
+            expect(validation.initToggleCheck()).to.equal(false);
+        });
+
     });
 
 

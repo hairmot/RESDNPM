@@ -8,7 +8,8 @@ export default function saveTask(toSave, callback) {
 	saveButton.prop('disabled','true').val('Saving...').addClass('progress-striped progress active');
 	if(enhanced === 'Y')
 	{
-		submitFormAsync(callback);
+		submitFormAsync(callback, $, toSave);
+
 	}
 	else
 	{

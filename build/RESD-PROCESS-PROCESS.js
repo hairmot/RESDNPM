@@ -10898,6 +10898,7 @@ function saveRow(row) {
 Object.defineProperty(exports, "__esModule", {
 	value: true
 });
+exports.extensionLength = extensionLength;
 
 var _validator = require('../shared/js/validator');
 
@@ -10948,8 +10949,6 @@ exports.default = {
 		});
 	}
 };
-
-
 function extensionLength(length, duedate) {
 
 	if ($(length).val() === '0') {
@@ -10974,10 +10973,11 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = submitFormAsync;
 function submitFormAsync(done) {
 	var ajax = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : $;
+	var row = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
 
 	var formData = $('form').first().serialize() + '&NEXT.DUMMY.MENSYS.1=Next';
 	ajax.post($('form').first().attr('action'), formData, function () {
-		done();
+		done(row);
 	});
 }
 

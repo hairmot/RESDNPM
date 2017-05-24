@@ -16,14 +16,10 @@ export default {
 		var dialog = sits_dialog(resdDialogs.DUEIN24HOURS.title,
 			resdDialogs.DUEIN24HOURS.message, {
 				No:() => {
-				//de-select row
-					row.find('.selected').first().prop('checked', false);
-					sits_dialog_close(dialog);
-					confirmCloseDialog();
+					fsstDialogNoResponse(dialog, row);
 				},
 				Yes: () => {
-					sits_dialog_close(dialog);
-					staffNamePrompt(row, callback);
+					fsstDialogYesResponse(dialog, row, callback);
 				//go to next dialog
 				}
 			},false,false,false);
@@ -55,6 +51,18 @@ export function staffNamePromptSave(dialog, row, callback) {
 		sits_dialog_close(dialog);
 		return saveTask(row, callback);
 	}
+}
+
+export function fsstDialogNoResponse(dialog, row) {
+		row.find('.selected').first().prop('checked', false);
+		sits_dialog_close(dialog);
+		confirmCloseDialog();
+}
+
+export function fsstDialogYesResponse(dialog, row, callback) {
+	sits_dialog_close(dialog);
+	staffNamePrompt(row, callback);
+	return true;
 }
 
 function confirmCloseDialog() {

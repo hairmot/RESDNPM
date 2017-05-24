@@ -10775,6 +10775,8 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.staffNamePromptExit = staffNamePromptExit;
 exports.staffNamePromptSave = staffNamePromptSave;
+exports.fsstDialogNoResponse = fsstDialogNoResponse;
+exports.fsstDialogYesResponse = fsstDialogYesResponse;
 
 var _toastr = require('toastr');
 
@@ -10799,14 +10801,10 @@ exports.default = {
 	FSSTDialog: function FSSTDialog(row, callback) {
 		var dialog = sits_dialog(resdDialogs.DUEIN24HOURS.title, resdDialogs.DUEIN24HOURS.message, {
 			No: function No() {
-				//de-select row
-				row.find('.selected').first().prop('checked', false);
-				sits_dialog_close(dialog);
-				confirmCloseDialog();
+				fsstDialogNoResponse(dialog, row);
 			},
 			Yes: function Yes() {
-				sits_dialog_close(dialog);
-				staffNamePrompt(row, callback);
+				fsstDialogYesResponse(dialog, row, callback);
 				//go to next dialog
 			}
 		}, false, false, false);
@@ -10839,6 +10837,18 @@ function staffNamePromptSave(dialog, row, callback) {
 		sits_dialog_close(dialog);
 		return (0, _saveTask2.default)(row, callback);
 	}
+}
+
+function fsstDialogNoResponse(dialog, row) {
+	row.find('.selected').first().prop('checked', false);
+	sits_dialog_close(dialog);
+	confirmCloseDialog();
+}
+
+function fsstDialogYesResponse(dialog, row, callback) {
+	sits_dialog_close(dialog);
+	staffNamePrompt(row, callback);
+	return true;
 }
 
 function confirmCloseDialog() {
@@ -10879,6 +10889,7 @@ var css = ".requestRow td label{display:none}input[type=checkbox]{width:22px;hei
 Object.defineProperty(exports, "__esModule", {
 	value: true
 });
+exports.rowSaveCallback = rowSaveCallback;
 
 var _validation = require('./validation.js');
 
@@ -10888,17 +10899,13 @@ var _saveTask = require('./saveTask.js');
 
 var _saveTask2 = _interopRequireDefault(_saveTask);
 
-var _rowsSelected = require('./rowsSelected.js');
-
-var _rowsSelected2 = _interopRequireDefault(_rowsSelected);
-
 var _check24Hours = require('./check24Hours');
 
 var _check24Hours2 = _interopRequireDefault(_check24Hours);
 
-var _toastr = require('toastr');
+var _rowsSelected = require('./rowsSelected');
 
-var _toastr2 = _interopRequireDefault(_toastr);
+var _rowsSelected2 = _interopRequireDefault(_rowsSelected);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -10913,7 +10920,6 @@ exports.default = {
 			} else {
 				$(requestRow).find('.save').first().val('Validation Errors').removeClass('sv-btn-success sv-btn-primary sv-btn-default sv-btn-warning').addClass('sv-btn-danger').prop('disabled', true);
 			}
-			//$('[data-continue]').prop('disabled', !validator.validatePage(true));
 		});
 	},
 
@@ -10927,31 +10933,32 @@ exports.default = {
 	addIndividualRowSaveHandlers: function addIndividualRowSaveHandlers() {
 		$('.save').click(function (e) {
 			e.preventDefault();
-			var toSave = $(this).closest('.requestRow');
+			var row = $(this).closest('.requestRow');
 
-			var saveCallback = function saveCallback() {
-				var saveButton = $(toSave).find('.save');
-				saveButton.removeClass('sv-btn-primary sv-btn-warning sv-btn-danger progress-striped progress active').addClass('sv-btn-success').val('Saved!');
-				_toastr2.default.success(resdErrors.taskSaved);
-				_rowsSelected2.default.updateCounters();
-			};
-
-			if (_validation2.default.validateRow(toSave)) {
-				if (!_check24Hours2.default.validate24Hours(toSave)) {
-					(0, _saveTask2.default)(toSave, saveCallback);
+			if (_validation2.default.validateRow(row)) {
+				if (!_check24Hours2.default.validate24Hours(row)) {
+					(0, _saveTask2.default)(row, rowSaveCallback);
 				} else {
 					if ($('[data-fsstname]').first().val() !== '') {
-						(0, _saveTask2.default)(toSave, saveCallback);
+						(0, _saveTask2.default)(row, rowSaveCallback);
 					} else {
-						_check24Hours2.default.FSSTDialog(toSave, saveCallback);
+						_check24Hours2.default.FSSTDialog(row, rowSaveCallback);
 					}
 				}
 			}
 		});
 	}
 };
+function rowSaveCallback(row) {
+	var toastr = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : require('toastr');
 
-},{"./check24Hours":4,"./rowsSelected.js":9,"./saveTask.js":10,"./validation.js":12,"toastr":3}],7:[function(require,module,exports){
+	var saveButton = $(row).find('.save');
+	saveButton.removeClass('sv-btn-primary sv-btn-warning sv-btn-danger progress-striped progress active').addClass('sv-btn-success').val('Saved!');
+	toastr.success(resdErrors.taskSaved);
+	_rowsSelected2.default.updateCounters();
+};
+
+},{"./check24Hours":4,"./rowsSelected":9,"./saveTask.js":10,"./validation.js":12,"toastr":3}],7:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -11128,7 +11135,7 @@ function saveTask(toSave, callback) {
 	var saveButton = $(toSave).find('.save');
 	saveButton.prop('disabled', 'true').val('Saving...').addClass('progress-striped progress active');
 	if (enhanced === 'Y') {
-		(0, _submitFormAsync2.default)(callback);
+		(0, _submitFormAsync2.default)(callback, $, toSave);
 	} else {
 		$('[data-accordion]').val($('#accordion').accordion('option').active);
 		$('#ajaxSubmit input[type="submit"]').first().click();
@@ -11363,10 +11370,11 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = submitFormAsync;
 function submitFormAsync(done) {
 	var ajax = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : $;
+	var row = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
 
 	var formData = $('form').first().serialize() + '&NEXT.DUMMY.MENSYS.1=Next';
 	ajax.post($('form').first().attr('action'), formData, function () {
-		done();
+		done(row);
 	});
 }
 
