@@ -1,8 +1,7 @@
 import validator from './validation.js';
 import saveTask from  './saveTask.js';
-import rowsSelected from './rowsSelected.js';
 import check24Hours from './check24Hours';
-import toastr from 'toastr';
+import rowsSelected from './rowsSelected';
 
 export default {
 //on each input change - check validation, display message on save button.
@@ -16,7 +15,6 @@ export default {
 			else {
 				$(requestRow).find('.save').first().val('Validation Errors').removeClass('sv-btn-success sv-btn-primary sv-btn-default sv-btn-warning').addClass('sv-btn-danger').prop('disabled',true);
 			}
-			//$('[data-continue]').prop('disabled', !validator.validatePage(true));
 		});
 	},
 
@@ -31,32 +29,32 @@ export default {
 	addIndividualRowSaveHandlers: function addIndividualRowSaveHandlers() {
 		$('.save').click(function (e) {
 			e.preventDefault();
-			var toSave = $(this).closest('.requestRow');
+			var row = $(this).closest('.requestRow');
 
-			var saveCallback = function() {
-				var saveButton = $(toSave).find('.save');
-				saveButton.removeClass('sv-btn-primary sv-btn-warning sv-btn-danger progress-striped progress active').addClass('sv-btn-success').val('Saved!');
-				toastr.success(resdErrors.taskSaved);
-				rowsSelected.updateCounters();
-			};
-
-			if(validator.validateRow(toSave)) {
-				if(!check24Hours.validate24Hours(toSave))
+			if(validator.validateRow(row)) {
+				if(!check24Hours.validate24Hours(row))
 				{
-					saveTask(toSave, saveCallback);
+					saveTask(row, rowSaveCallback);
 				}
 				else
 				{
 					if($('[data-fsstname]').first().val() !== '')
 					{
-						saveTask(toSave, saveCallback);
+						saveTask(row, rowSaveCallback);
 					}
 					else
 					{
-						check24Hours.FSSTDialog(toSave, saveCallback);
+						check24Hours.FSSTDialog(row, rowSaveCallback);
 					}
 				}
 			}
 		});
 	}
+};
+
+export function rowSaveCallback(row, toastr = require('toastr')) {
+	var saveButton = $(row).find('.save');
+	saveButton.removeClass('sv-btn-primary sv-btn-warning sv-btn-danger progress-striped progress active').addClass('sv-btn-success').val('Saved!');
+	toastr.success(resdErrors.taskSaved);
+	rowsSelected.updateCounters();
 };

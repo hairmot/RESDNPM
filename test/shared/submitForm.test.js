@@ -25,6 +25,7 @@ describe('Submit Form', function() {
 		expect(posted).to.equal(true);
 		expect(dataReceived).to.not.equal('');
 		expect(actionReceived).to.equal('test');
+
 	});
 
 	before(() => {

@@ -82,6 +82,7 @@ Object.defineProperty(exports, "__esModule", {
 	value: true
 });
 exports.default = confirmDelete;
+exports.confirmDeleteNoResponse = confirmDeleteNoResponse;
 
 var _deleteRequest = require('./deleteRequest');
 
@@ -92,14 +93,19 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 function confirmDelete(button) {
 
 	var dialog = sits_dialog(resdDialogs.DELETE.title, resdDialogs.DELETE.message, {
-		No: function No() {
-			sits_dialog_close(dialog);
-		},
-		'Delete': function Delete() {
+		No: //() => {
+		confirmDeleteNoResponse //(dialog)//;
+		//}
+
+		, 'Delete': function Delete() {
 			sits_dialog_close(dialog);
 			(0, _deleteRequest2.default)(button);
 		}
 	}, false, false, false);
+}
+
+function confirmDeleteNoResponse(dialog) {
+	sits_dialog_close(dialog);
 }
 
 },{"./deleteRequest":3}],3:[function(require,module,exports){
@@ -114,14 +120,18 @@ var _ajaxButton = require('../shared/js/ajaxButton');
 
 var _ajaxButton2 = _interopRequireDefault(_ajaxButton);
 
+var _refreshData = require('./refreshData');
+
+var _refreshData2 = _interopRequireDefault(_refreshData);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function deleteRequest(button) {
-	var callback = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : require('./refreshData');
+	var callback = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : _refreshData2.default;
 
 	$(button).prop('disabled', true).addClass('progress-striped progress active');
 	(0, _ajaxButton2.default)(button, function () {
-		callback();
+		typeof callback == 'function' ? callback() : true;
 	});
 }
 

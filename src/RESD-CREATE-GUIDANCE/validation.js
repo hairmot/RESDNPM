@@ -5,6 +5,9 @@ export default {
 			this.bindToggleChecks();
 			this.toggleCheck();
 		}
+		else {
+			return false;
+		}
 	},
 	toggleCheck : function toggleCheck() {
 		$('input[data-applylc]:checked').length > 0 ? $('input[value="Next"]').first().prop('disabled',false) : $('input[value="Next"]').first().prop('disabled',true);

@@ -2,7 +2,11 @@ var mocha = require('mocha');
 var expect = require('chai').expect;
 var jsdom = require("jsdom");
 var { JSDOM } = jsdom;
-import check24Hours, {staffNamePromptExit, staffNamePromptSave} from '../../src/RESD-CREATE-ASSESSMENTS/check24Hours';
+import check24Hours, {staffNamePromptExit,
+	staffNamePromptSave,
+	fsstDialogNoResponse,
+	fsstDialogYesResponse
+} from '../../src/RESD-CREATE-ASSESSMENTS/check24Hours';
 import requestRow from '../htmlTemplates/requestRow';
 
 describe("check 24 Hours tests", function(){
@@ -39,6 +43,25 @@ describe("check 24 Hours tests", function(){
 			expect(global.sitsDialogClosedTitle).to.equal('namePrompt');
 			expect(saved).to.be.true;
 		})
+
+		it('closes the fsst dialog if no is selected and deselects the row', function() {
+			fsstDialogNoResponse
+		})
+
+		it('closes the fsst dialog if no is selected and deselects the row', function() {
+			var row = $('.requestRow').first()
+			row.find('.selected').first().prop('checked',true);
+			fsstDialogNoResponse({title:'noresponse'}, row);
+			expect(global.sitsDialogClosedTitle).to.equal('noresponse');
+			expect(row.find('.selected').first().prop('checked')).to.be.false;
+		})
+
+			it('closes the fsst dialog and calls staff name prompt', function() {
+			var result = fsstDialogYesResponse({title:'yesresponse'});
+			expect(global.sitsDialogClosedTitle).to.equal('yesresponse');
+
+		})
+
 
 	});
 

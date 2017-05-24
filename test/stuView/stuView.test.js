@@ -32,6 +32,9 @@ describe('Student View', function() {
 		expect(getsCalled).to.equal(1);
 		expect(callbackCalled).to.be.true;
 		expect(hrefReceived).to.equal('delete');
+		callbackCalled = false;
+		deleteRequest('#deleteRequest', 'no callback');
+		expect(callbackCalled).to.be.false;
 	});
 
 
