@@ -33,7 +33,7 @@ describe("Assessments Validation Tests", function(){
 		it('fails an invalid page', function() {
 			var row = $('.requestRow').first();
 			row.find('.taskType').first().val("").keyup();
-			expect(validation.validatePage(false, resdErrors, {warning:(a) => console.log(a)})).to.equal(false);
+			expect(validation.validatePage(false, resdErrors, {warning:(a) => {}})).to.equal(false);
         });
 
 		it('displays an unsaved row message if the row is valid but not saved', function() {

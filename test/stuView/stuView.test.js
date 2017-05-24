@@ -29,7 +29,6 @@ describe('Student View', function() {
 		}
 		deleteRequest('#deleteRequest', function() {callbackCalled = true;});
 		expect($('#deleteRequest').prop('disabled')).to.equal(true);
-		console.log($('#deleteRequest').attr('href'));
 		expect(getsCalled).to.equal(1);
 		expect(callbackCalled).to.be.true;
 		expect(hrefReceived).to.equal('delete');

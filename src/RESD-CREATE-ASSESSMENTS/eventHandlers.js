@@ -38,7 +38,7 @@ export default {
 				saveButton.removeClass('sv-btn-primary sv-btn-warning sv-btn-danger progress-striped progress active').addClass('sv-btn-success').val('Saved!');
 				toastr.success(resdErrors.taskSaved);
 				rowsSelected.updateCounters();
-			}
+			};
 
 			if(validator.validateRow(toSave)) {
 				if(!check24Hours.validate24Hours(toSave))

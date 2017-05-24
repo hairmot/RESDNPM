@@ -1,4 +1,4 @@
-export default  function refreshData() {
+export default function refreshData() {
 	$.get($('#openRequestsAjax').attr('href'), function(rows) {
 		if(rows.indexOf('requestRow') === -1) {
 			$('#newRequest').show();
