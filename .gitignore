@@ -3,3 +3,4 @@ node_modules
 min
 coverage
 .nyc_output
+mochawesome-report

@@ -56,6 +56,6 @@ export function rowSaveCallback(row, toastr = require('toastr')) {
 	saveButton.removeClass('sv-btn-primary sv-btn-warning sv-btn-danger progress-striped progress active').addClass('sv-btn-success').val('Saved!');
 	toastr.success(resdErrors.taskSaved);
 	rowsSelected.updateCounters();
-};
+}
 
 

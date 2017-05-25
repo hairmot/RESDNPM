@@ -1,8 +1,8 @@
 import deleteRequest from './deleteRequest';
 
-export default function confirmDelete(button) {
+export default function confirmDelete() {
 
-	var dialog = sits_dialog(resdDialogs.DELETE.title,
+	sits_dialog(resdDialogs.DELETE.title,
 			resdDialogs.DELETE.message, {
 				No: confirmDeleteNoResponse
 				,
