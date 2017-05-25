@@ -33,3 +33,6 @@ indent_style = tab
 [*.md]
 trim_trailing_whitespace = false
 
+[.codeclimate.yml]
+index_style = spaces
+

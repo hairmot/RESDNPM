@@ -9,7 +9,7 @@ engines:
     enabled: false
   duplication:
   	enabled: true
-    config:
+	config:
     	languages:
       - ruby
       - javascript
