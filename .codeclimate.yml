@@ -23,3 +23,7 @@ exclude_paths:
 - dist
 - esdoc
 - node_modules
+- test
+- tolls
+- mochawesome-report
+- build
