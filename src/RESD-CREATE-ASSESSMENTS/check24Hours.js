@@ -32,9 +32,9 @@ function staffNamePrompt(row, callback) {
 		resdDialogs.NAMEOFSTAFF.message + `:
 		<br/><br/>
 		<input id="fsstInput" class="sv-form-control" type="text" />`, {
-			'Exit': () => { staffNamePromptExit(dialog, row)},
+			'Exit': () => { staffNamePromptExit(dialog, row);},
 
-			'Save': () => {staffNamePromptSave(dialog, row, callback)}
+			'Save': () => {staffNamePromptSave(dialog, row, callback);}
 		},false,false,false);
 	return result;
 }
@@ -54,9 +54,9 @@ export function staffNamePromptSave(dialog, row, callback) {
 }
 
 export function fsstDialogNoResponse(dialog, row) {
-		row.find('.selected').first().prop('checked', false);
-		sits_dialog_close(dialog);
-		confirmCloseDialog();
+	row.find('.selected').first().prop('checked', false);
+	sits_dialog_close(dialog);
+	confirmCloseDialog();
 }
 
 export function fsstDialogYesResponse(dialog, row, callback) {
