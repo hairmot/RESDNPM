@@ -3,3 +3,5 @@
 Javascript for the RESD solution. 
 
 npm run all builds all scripts, watches for changes and serves at localhost:5000
+
+various badges
