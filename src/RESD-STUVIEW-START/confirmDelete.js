@@ -16,6 +16,6 @@ export function confirmDeleteNoResponse(dialog) {
 }
 
 export function confirmDeleteDeleteResponse(dialog) {
-	sits_dialog_close(dialog);
+	global.sits_dialog_close(dialog);
 	deleteRequest($('#deleteRequest'));
 }
