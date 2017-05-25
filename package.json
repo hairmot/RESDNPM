@@ -5,11 +5,12 @@
   "main": "index.js",
   "scripts": {
     "all": "npm-run-all --parallel gulp serve",
-    "coverage": "cross-env NODE_ENV=test nyc --reporter=lcov --reporter=text --include-all-sources true mocha --compilers js:babel-register test/**/*.js",
+    "cover": "cross-env NODE_ENV=test nyc --reporter=lcov --reporter=text --include-all-sources true mocha --compilers js:babel-register test/**/*.js",
     "gulp": "gulp",
-    "postcoverage": "node ./tools/openCoverageReport.js",
+    "postcover": "node ./tools/openCoverageReport.js",
     "serve": "serve -s ./build",
-    "test": "mocha --recursive --compilers js:babel-core/register --reporter mochawesome"
+    "test": "mocha --recursive --compilers js:babel-core/register --reporter mochawesome",
+		"coveralls": "npm run cover -- --report lcovonly && cat ./coverage/lcov.info | coveralls"
   },
   "keywords": [
     "RESD",
@@ -28,6 +29,7 @@
     "browserify": "^14.3.0",
     "browserify-css": "^0.10.1",
     "chai": "^3.5.0",
+    "coveralls": "^2.13.1",
     "cross-env": "^5.0.0",
     "fs": "0.0.1-security",
     "gulp": "^3.9.1",
@@ -35,6 +37,7 @@
     "istanbul": "^0.4.5",
     "jsdom": "^10.1.0",
     "mocha": "^3.3.0",
+    "mocha-lcov-reporter": "^1.3.0",
     "mochawesome": "^2.2.0",
     "npm-run-all": "^4.0.2",
     "nyc": "^10.3.2",
