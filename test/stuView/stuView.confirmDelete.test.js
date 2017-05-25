@@ -10,6 +10,7 @@ describe("it kills the dialog box", function() {
 })
 
 describe("it fires the delete request", function() {
+	$.get = function() {};
 	confirmDeleteDeleteResponse({title:"confirmDeleteYes"});
 	expect(global.sitsDialogClosedTitle).to.equal('confirmDeleteYes');
 })

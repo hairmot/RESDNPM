@@ -12,10 +12,10 @@ export default function confirmDelete() {
 }
 
 export function confirmDeleteNoResponse(dialog) {
-	global.sits_dialog_close(dialog);
+	sits_dialog_close(dialog);
 }
 
 export function confirmDeleteDeleteResponse(dialog) {
-	global.sits_dialog_close(dialog);
+	sits_dialog_close(dialog);
 	deleteRequest($('#deleteRequest'));
 }

@@ -9,7 +9,7 @@
     "gulp": "gulp",
     "postcover": "node ./tools/openCoverageReport.js",
     "serve": "serve -s ./build",
-    "test": "mocha --recursive --compilers js:babel-core/register --reporter mochawesome",
+    "test": "mocha -S --recursive --compilers js:babel-core/register --reporter mochawesome",
     "coveralls": "npm run cover -- --report lcovonly && cat ./coverage/lcov.info | coveralls"
   },
   "keywords": [
