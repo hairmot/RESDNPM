@@ -18,6 +18,12 @@ describe("Confirmation Validation Tests", function(){
 		var error = '';
 		validation.validatePage(false, {warning: function(a) {error = a}});
 		expect(error).to.equal('pleaseAcceptError');
+		error = '';
+		$('[data-accept]').prop('checked', true);
+
+		validation.validatePage(false, {warning: function(a) {error = a}});
+		expect(error).to.equal('');
+
 	});
 
     before(() =>{

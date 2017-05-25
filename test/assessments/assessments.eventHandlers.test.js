@@ -2,7 +2,7 @@ var mocha = require('mocha');
 var expect = require('chai').expect;
 var jsdom = require("jsdom");
 var { JSDOM } = jsdom;
-import eventHandlers, {rowSaveCallback} from '../../src/RESD-CREATE-ASSESSMENTS/eventHandlers';
+import eventHandlers, {rowSaveCallback, addContinueHandler} from '../../src/RESD-CREATE-ASSESSMENTS/eventHandlers';
 import requestRow from '../htmlTemplates/requestRow';
 
 describe("Assessments Event handlers Tests", function(){
@@ -22,8 +22,6 @@ describe("Assessments Event handlers Tests", function(){
 		expect(successMessage).to.equal('done');
 		expect($('.requestRow').first().find('.save').val() === 'Saved!').to.be.true;
 	});
-
-	rowSaveCallback
 
      before(() => {
         var dom = new JSDOM(requestRow);

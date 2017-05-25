@@ -1,7 +1,6 @@
 import validation from './validation';
-import toastr from 'toastr';
 
-export default function() {
+export default function(toastr = require('toastr')) {
 	if($('input[data-evidenceavailable]').prop('checked')) {
 		if(!validation.filesUploaded())
         {

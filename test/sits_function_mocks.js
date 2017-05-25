@@ -17,7 +17,7 @@ global.sitsDialogClosedTitle = '';
 
 global.enhanced = 'Y';
 
-global.$.post = function() {};
+global.$.post = function(url, data, callback) {callback()};
 global.$.ajax = function() {};
 global.$.get = function() {};
 
