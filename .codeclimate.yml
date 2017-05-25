@@ -1,32 +1,36 @@
 engines:
+# to turn on an engine, add it here and set enabled to `true`
+# to turn off an engine, set enabled to `false` or remove it
   rubocop:
-    enabled: false
-    #checks:
-    #	Rubocop/Metrics/ClassLength:
-    #  	enabled: false
-  brakeman:
-   	enabled: false
-    #exclude_fingerprints:
-    #- 08c185b3f764f262539a1f76997d3a89
+    enabled: true
+  golint:
+    enabled: true
+  gofmt:
+    enabled: true
   eslint:
     enabled: true
   csslint:
-    enabled: false
-  duplication:
-  	enabled: true
-    config:
-    	languages:
-      	#mass_threshold: 30
-      - javascript
-ratings: # customize
-  paths:
-  - src/**/*
-exclude_paths: # customize
-- .bundle/
-- build
-- coverage
-- mochawesome-report
-- node_modules
-- test
-- tools
-- .nyc_output
+    enabled: true
+
+# Engines can analyze files and report issues on them, but you can separately
+# decide which files will receive ratings based on those issues. This is
+# specified by path patterns under the ratings key.
+
+# For more details see here:
+# http://docs.codeclimate.com/article/289-configuring-your-repository-via-codeclimate-yml#platform
+
+# Note: If the ratings key is not specified, this will result in a 0.0 GPA on your dashboard.
+
+ ratings:
+   paths:
+  - src/**
+#   - lib/**
+#   - "**.rb"
+#   - "**.go"
+
+# You can globally exclude files from being analyzed by any engine using the
+# exclude_paths key.
+
+exclude_paths:
+- test/**/*
+- node_modules/**/*
