@@ -19,12 +19,11 @@ export default {
 	},
 
 
-	addContinueHandler: function addContinueHandler() {
+	addContinueHandler: function() {
 		$('input[data-continue]').on('click', function (){
 			return validator.validatePage(false);
 		});
 	},
-
 	//populate ajax input, serialize form and submit. Update message in save button
 	addIndividualRowSaveHandlers: function addIndividualRowSaveHandlers() {
 		$('.save').click(function (e) {
@@ -58,3 +57,5 @@ export function rowSaveCallback(row, toastr = require('toastr')) {
 	toastr.success(resdErrors.taskSaved);
 	rowsSelected.updateCounters();
 };
+
+

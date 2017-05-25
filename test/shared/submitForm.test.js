@@ -13,14 +13,15 @@ describe('Submit Form', function() {
 		var posted = false;
 		var actionReceived = '';
 		var dataReceived = '';
-		var fakeAjaxPost = {
-			"post" : (action, data, callback) => {
-				actionReceived = action;
-				dataReceived = data;
-				callback();
-			}
-		}
-		submit(function() {posted = true}, fakeAjaxPost );
+
+		global.$.post = function(action, data, callback) {
+
+			actionReceived = action;
+			dataReceived = data;
+			callback()};
+		submit(function() {
+			posted = true;
+		});
 
 		expect(posted).to.equal(true);
 		expect(dataReceived).to.not.equal('');
