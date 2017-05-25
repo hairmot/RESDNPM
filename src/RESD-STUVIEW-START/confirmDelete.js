@@ -12,7 +12,7 @@ export default function confirmDelete() {
 }
 
 export function confirmDeleteNoResponse(dialog) {
-	sits_dialog_close(dialog);
+	global.sits_dialog_close(dialog);
 }
 
 export function confirmDeleteDeleteResponse(dialog) {
