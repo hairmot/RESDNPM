@@ -8,7 +8,7 @@ engines:
     - specs
   eslint:
     enabled: true
-		config: ./.eslintrc.js
+    config: ./.eslintrc.js
     channel: 'eslint-2'
     checks:
       import/no-unresolved:
