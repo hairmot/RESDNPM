@@ -4,6 +4,7 @@ var jsdom = require("jsdom");
 var { JSDOM } = jsdom;
 import validation, {extensionLength}from '../../src/RESD-PROCESS-PROCESS/validation';
 import process from '../htmlTemplates/process';
+import setGlobals from '../aasits_function_mocks';
 
 describe("process Validation Tests", function(){
 
@@ -49,6 +50,7 @@ describe("process Validation Tests", function(){
         var dom = new JSDOM(process);
         $ = require('jquery')(dom.window);
         global.$ = $;
+		setGlobals();
     })
 
 });

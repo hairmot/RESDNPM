@@ -6,6 +6,7 @@ import saveTask from '../../src/RESD-STUVIEW-START/eventHandlers';
 import refreshData from '../../src/RESD-STUVIEW-START/refreshData';
 import deleteRequest from '../../src/RESD-STUVIEW-START/deleteRequest';
 import stuview from '../htmlTemplates/stuView';
+import setGlobals from '../aasits_function_mocks';
 
 describe('Student View', function() {
 	var $;
@@ -71,6 +72,7 @@ describe('Student View', function() {
         var dom = new JSDOM(stuview);
         $ = require('jquery')(dom.window);
         global.$ = $;
+		setGlobals();
 
     });
 });
