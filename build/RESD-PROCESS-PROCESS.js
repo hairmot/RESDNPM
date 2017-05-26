@@ -10768,7 +10768,7 @@ return jQuery;
 }));
 
 },{"jquery":2}],4:[function(require,module,exports){
-var css = "@media (max-width:767px){.requestRow{border:1px solid #621b40}.tablesaw-cell-label{word-break:break-all}.stage2Row{border-right:1px solid #621b40;border-left:1px solid #621b40;border-bottom:1px solid #621b40!important}}"; (require("browserify-css").createStyle(css, { "href": "src\\RESD-PROCESS-PROCESS\\css\\styles.css" }, { "insertAt": "bottom" })); module.exports = css;
+var css = "@media (max-width:767px){.requestRow{border:1px solid #621b40}.tablesaw-cell-label{word-break:break-all}.stage2Row{border-right:1px solid #621b40;border-left:1px solid #621b40;border-bottom:1px solid #621b40!important}}th{word-break:break-all}"; (require("browserify-css").createStyle(css, { "href": "src\\RESD-PROCESS-PROCESS\\css\\styles.css" }, { "insertAt": "bottom" })); module.exports = css;
 },{"browserify-css":1}],5:[function(require,module,exports){
 'use strict';
 
