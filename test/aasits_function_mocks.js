@@ -19,9 +19,11 @@ var setGlobals = function setGlobals () {
 
 	global.enhanced = 'Y';
 
-	global.$.post = function(url, data, callback) {callback()};
-	global.$.ajax = function() {};
-	global.$.get = function() {};
+	if (global.$) {
+		global.$.post = function(url, data, callback) {callback()};
+		global.$.ajax = function() {};
+		global.$.get = function() {};
+	}
 
 
 	global.sits_dialog = function(title, message,actions) {
