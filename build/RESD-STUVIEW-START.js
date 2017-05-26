@@ -83,6 +83,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = confirmDelete;
 exports.confirmDeleteNoResponse = confirmDeleteNoResponse;
+exports.confirmDeleteDeleteResponse = confirmDeleteDeleteResponse;
 
 var _deleteRequest = require('./deleteRequest');
 
@@ -90,22 +91,22 @@ var _deleteRequest2 = _interopRequireDefault(_deleteRequest);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function confirmDelete(button) {
+function confirmDelete() {
 
-	var dialog = sits_dialog(resdDialogs.DELETE.title, resdDialogs.DELETE.message, {
-		No: //() => {
-		confirmDeleteNoResponse //(dialog)//;
-		//}
+	sits_dialog(resdDialogs.DELETE.title, resdDialogs.DELETE.message, {
+		No: confirmDeleteNoResponse,
 
-		, 'Delete': function Delete() {
-			sits_dialog_close(dialog);
-			(0, _deleteRequest2.default)(button);
-		}
+		'Delete': confirmDeleteDeleteResponse
 	}, false, false, false);
 }
 
 function confirmDeleteNoResponse(dialog) {
 	sits_dialog_close(dialog);
+}
+
+function confirmDeleteDeleteResponse(dialog) {
+	sits_dialog_close(dialog);
+	(0, _deleteRequest2.default)($('#deleteRequest'));
 }
 
 },{"./deleteRequest":3}],3:[function(require,module,exports){
@@ -131,7 +132,7 @@ function deleteRequest(button) {
 
 	$(button).prop('disabled', true).addClass('progress-striped progress active');
 	(0, _ajaxButton2.default)(button, function () {
-		typeof callback == 'function' ? callback() : true;
+		if (typeof callback == 'function') callback();
 	});
 }
 

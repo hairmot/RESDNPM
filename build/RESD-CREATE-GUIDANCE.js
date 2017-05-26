@@ -27,6 +27,8 @@ exports.default = {
 		if (this.applyToggleCheck()) {
 			this.bindToggleChecks();
 			this.toggleCheck();
+		} else {
+			return false;
 		}
 	},
 	toggleCheck: function toggleCheck() {

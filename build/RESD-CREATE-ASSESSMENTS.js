@@ -10928,7 +10928,6 @@ exports.default = {
 			return _validation2.default.validatePage(false);
 		});
 	},
-
 	//populate ajax input, serialize form and submit. Update message in save button
 	addIndividualRowSaveHandlers: function addIndividualRowSaveHandlers() {
 		$('.save').click(function (e) {
@@ -10956,7 +10955,7 @@ function rowSaveCallback(row) {
 	saveButton.removeClass('sv-btn-primary sv-btn-warning sv-btn-danger progress-striped progress active').addClass('sv-btn-success').val('Saved!');
 	toastr.success(resdErrors.taskSaved);
 	_rowsSelected2.default.updateCounters();
-};
+}
 
 },{"./check24Hours":4,"./rowsSelected":9,"./saveTask.js":10,"./validation.js":12,"toastr":3}],7:[function(require,module,exports){
 'use strict';
@@ -11135,7 +11134,7 @@ function saveTask(toSave, callback) {
 	var saveButton = $(toSave).find('.save');
 	saveButton.prop('disabled', 'true').val('Saving...').addClass('progress-striped progress active');
 	if (enhanced === 'Y') {
-		(0, _submitFormAsync2.default)(callback, $, toSave);
+		(0, _submitFormAsync2.default)(callback, toSave);
 	} else {
 		$('[data-accordion]').val($('#accordion').accordion('option').active);
 		$('#ajaxSubmit input[type="submit"]').first().click();
@@ -11369,11 +11368,10 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = submitFormAsync;
 function submitFormAsync(done) {
-	var ajax = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : $;
-	var row = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
+	var row = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
 
 	var formData = $('form').first().serialize() + '&NEXT.DUMMY.MENSYS.1=Next';
-	ajax.post($('form').first().attr('action'), formData, function () {
+	$.post($('form').first().attr('action'), formData, function () {
 		done(row);
 	});
 }

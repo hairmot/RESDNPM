@@ -10841,13 +10841,15 @@ Object.defineProperty(exports, "__esModule", {
 });
 
 exports.default = function () {
+	var toastr = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : require('toastr');
+
 	if ($('input[data-evidenceavailable]').prop('checked')) {
 		if (!_validation2.default.filesUploaded()) {
 			$('.evidenceReason').fadeIn();
 			$('input[data-evidencereason]').val() === '' ? $('input[data-evidencereason]').addClass('sv-mandatory') : $('input[data-evidencereason]').removeClass('sv-mandatory');
 			$('[id^="PLUP_uploader"]').hide();
 		} else {
-			_toastr2.default.warning(resdErrors.deleteUploadedEvidence);
+			toastr.warning(resdErrors.deleteUploadedEvidence);
 			$('input[data-evidenceavailable]').prop('checked', false);
 		}
 	} else {
@@ -10860,10 +10862,6 @@ exports.default = function () {
 var _validation = require('./validation');
 
 var _validation2 = _interopRequireDefault(_validation);
-
-var _toastr = require('toastr');
-
-var _toastr2 = _interopRequireDefault(_toastr);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 

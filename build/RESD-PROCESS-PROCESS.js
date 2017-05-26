@@ -10972,11 +10972,10 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = submitFormAsync;
 function submitFormAsync(done) {
-	var ajax = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : $;
-	var row = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
+	var row = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
 
 	var formData = $('form').first().serialize() + '&NEXT.DUMMY.MENSYS.1=Next';
-	ajax.post($('form').first().attr('action'), formData, function () {
+	$.post($('form').first().attr('action'), formData, function () {
 		done(row);
 	});
 }

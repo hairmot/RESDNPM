@@ -19,12 +19,9 @@ describe('save Task', function() {
 
      before(() => {
         var dom = new JSDOM(requestRow);
-
         $ = require('jquery')(dom.window);
         global.$ = $;
 		setGlobals();
-
-
     });
 });
 
