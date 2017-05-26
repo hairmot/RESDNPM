@@ -1,5 +1,6 @@
 var mocha = require('mocha');
 var expect = require('chai').expect;
+import setGlobals from '../aasits_function_mocks';
 
 import {confirmDeleteNoResponse, confirmDeleteDeleteResponse} from '../../src/RESD-STUVIEW-START/confirmDelete';
 
