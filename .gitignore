@@ -4,3 +4,4 @@ min
 .nyc_output
 mochawesome-report
 coverage
+test.1
