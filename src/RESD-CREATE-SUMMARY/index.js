@@ -15,6 +15,8 @@ function RESDInit() {
 	autoUploader();
 	hiJackSaveAndExit();
 	charactersRemaining(summaryLength, '[data-remchar]', '#remChar');
+	charactersRemaining(noevidlength, '[data-evidencereason]', '#remChar2');
+
 }
 
 sits_attach_event('window','load',function() {

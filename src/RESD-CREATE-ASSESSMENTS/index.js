@@ -6,6 +6,7 @@ import '../shared/css/toastr.css';
 import '../shared/css/fancyLoadingButton.css';
 import './css/styles.css';
 import hiJackSaveAndExit from '../shared/js/hiJackSaveAndExit';
+import tour from '../shared/js/tour';
 
 
 //attach handlers when js is initialised
@@ -24,13 +25,15 @@ function RESDInit() {
 	evidenceState.init();
 
 	hiJackSaveAndExit();
+
+	tour.initTour();
 }
 
 sits_attach_event('window','load',function() {
 	RESDInit();
 	$( '#accordion' ).accordion({
 		collapsible : true,
-		active : enhanced === 'Y' ? false : parseInt($('[data-accordion]').val()),
+		active : 0,
 		heightStyle: 'content'
 	}).fadeIn('slow');
 });
