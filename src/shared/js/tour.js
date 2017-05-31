@@ -1,4 +1,4 @@
-import Shepherd from 'tether-shepherd'
+import Shepherd from 'tether-shepherd';
 import '../css/tether-shepherd-arrows.css';
 
 export default {
@@ -8,7 +8,7 @@ export default {
 			$('body').on('click', '.help-tour', startTour);
 		}
 	}
-}
+};
 
 function startTour() {
 
@@ -29,7 +29,7 @@ function startTour() {
 				name: $(e).data('tour-name'),
 				text : $(e).data('tour-text'),
 				attachTo:'[data-tour="' + id + '"] top'
-			})
+			});
 		}
 	});
 
@@ -38,11 +38,11 @@ function startTour() {
 			text : a.text,
 			scrollTo:true,
 			attachTo:a.attachTo
-		})
+		});
 	});
 
 	tour.start();
-};
+}
 
 
 	// tour.addStep($(e).data('tour-name'), {

@@ -29,6 +29,7 @@ module.exports = {
    },
    "globals": {
 	   "enhanced" : true,
+	   "noevidlength": true,
 	   "uploader" : true,
 	   "resdErrors" : true,
 	   "resdDialogs" : true,
