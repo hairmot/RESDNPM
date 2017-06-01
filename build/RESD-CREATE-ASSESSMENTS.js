@@ -13669,7 +13669,7 @@ exports.default = {
 	validRowsSelected: function validRowsSelected(element) {
 		var count = 0;
 		$(element).find('.requestRow').each(function (i, e) {
-			if ($(e).find('.save').hasClass('sv-btn-success') || $(e).find('.save').hasClass('sv-btn-default')) {
+			if (_validation2.default.saveButtonSavedState(e)) {
 				if ($(e).find('.selected').first().prop('checked') && _validation2.default.validateRow(e)) {
 					count++;
 				}
@@ -13872,7 +13872,7 @@ exports.default = {
 					if (!_this.validateRow(e)) {
 						validationErrors.push('INVALID_SELECTION');
 					} else {
-						if ($(e).find('.save').hasClass('sv-btn-default') || $(e).find('.save').hasClass('sv-btn-success')) {
+						if (_this.saveButtonSavedState(e)) {
 							if (!_this.validateEvidence(e)) validationErrors.push('MISSING_EVIDENCE');
 						} else {
 							validationErrors.push('UNSAVED_TASK');
@@ -13887,6 +13887,10 @@ exports.default = {
 			return notifier.warning(resdErrors[a]);
 		});
 		return typeof staff != 'undefined' ? true : validationErrors.length === 0 ? true : false;
+	},
+	saveButtonSavedState: function saveButtonSavedState(row) {
+		var savebtn = $(row).find('.save');
+		return savebtn.is('.sv-btn-default, .sv-btn-success');
 	}
 };
 

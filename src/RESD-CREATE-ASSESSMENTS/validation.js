@@ -60,6 +60,7 @@ export default {
 		return typeof(staff) != 'undefined' ? true : validationErrors.length === 0 ? true: false;
 	},
 	saveButtonSavedState : function saveButtonSavedState(row) {
-		return ($(row).find('.save').hasClass('sv-btn-default') || $(row).find('.save').hasClass('sv-btn-success'));
+		var savebtn = $(row).find('.save');
+		return (savebtn.is('.sv-btn-default, .sv-btn-success'));
 	}
 };
