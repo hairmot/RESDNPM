@@ -40,7 +40,7 @@ export default {
 						validationErrors.push('INVALID_SELECTION');
 					}
 					else {
-						if($(e).find('.save').hasClass('sv-btn-default') || $(e).find('.save').hasClass('sv-btn-success')) {
+						if(_this.saveButtonSavedState(e)) {
 							if (!_this.validateEvidence(e))
 								validationErrors.push('MISSING_EVIDENCE');
 						}
@@ -58,5 +58,8 @@ export default {
 		if(!silent)
 			validationErrors.map(a => notifier.warning(resdErrors[a]));
 		return typeof(staff) != 'undefined' ? true : validationErrors.length === 0 ? true: false;
+	},
+	saveButtonSavedState : function saveButtonSavedState(row) {
+		return ($(row).find('.save').hasClass('sv-btn-default') || $(row).find('.save').hasClass('sv-btn-success'));
 	}
 };
