@@ -9,7 +9,6 @@ export default function saveTask(toSave, callback) {
 	if(enhanced === 'Y')
 	{
 		submitFormAsync(callback, toSave);
-
 	}
 	else
 	{
@@ -29,12 +28,10 @@ function getFieldValue(field, type) {
 	switch(type) {
 	case 'TD':
 		return $(field).html();
-	case 'INPUT':
-		return $(field).prop('checked') === true ? 'Y' : 'N';
 	case 'SELECT':
 		return $(field).find('option:selected').val();
 	default:
-		return ;
+		return $(field).prop('checked') === true ? 'Y' : 'N';
 	}
 }
 

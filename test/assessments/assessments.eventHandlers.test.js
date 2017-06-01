@@ -2,6 +2,7 @@ var mocha = require('mocha');
 var expect = require('chai').expect;
 var jsdom = require("jsdom");
 var { JSDOM } = jsdom;
+import jquery from 'jquery';
 import eventHandlers, {rowSaveCallback, addContinueHandler} from '../../src/RESD-CREATE-ASSESSMENTS/eventHandlers';
 import requestRow from '../htmlTemplates/requestRow';
 import setGlobals from '../aasits_function_mocks';
@@ -12,9 +13,8 @@ describe("Assessments Event handlers Tests", function(){
 	it("binds event handlers", function() {
 		Object.keys(eventHandlers).map(a => eventHandlers[a]());
 		$('input[data-continue]').prop('disabled',false);
-		//$('input[data-continue]').click();
-		//$('.save').click();
-		//expect($('.save').val()).to.equal('Saving...');
+		$('input[data-continue]').click();
+
 	});
 
 	it("callback calls success message and updates save button text", function() {
