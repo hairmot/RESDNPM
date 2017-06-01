@@ -4,7 +4,7 @@ export default {
 		$(document).on('mousemove', function(e){
 			$('#toolTip').css({
 				left:  e.pageX,
-				top:   e.pageY,
+				top:   e.pageY
 			});
 		});
 	}
