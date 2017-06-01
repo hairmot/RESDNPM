@@ -1,10 +1,12 @@
 import eventHandlers from './eventHandlers';
 import '../shared/css/fancyLoadingButton.css';
 import tour from '../shared/js/tour';
+import tooltips from '../shared/js/tooltips/';
 
 function RESDInit() {
 	eventHandlers.deleteButtonClicked();
 	tour.initTour();
+	tooltips.init();
 }
 
 sits_attach_event('window','load',function() {

@@ -2732,18 +2732,23 @@ var _tour = require('../shared/js/tour');
 
 var _tour2 = _interopRequireDefault(_tour);
 
+var _tooltips = require('../shared/js/tooltips/');
+
+var _tooltips2 = _interopRequireDefault(_tooltips);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function RESDInit() {
 	_eventHandlers2.default.deleteButtonClicked();
 	_tour2.default.initTour();
+	_tooltips2.default.init();
 }
 
 sits_attach_event('window', 'load', function () {
 	RESDInit();
 });
 
-},{"../shared/css/fancyLoadingButton.css":9,"../shared/js/tour":12,"./eventHandlers":6}],8:[function(require,module,exports){
+},{"../shared/css/fancyLoadingButton.css":9,"../shared/js/tooltips/":12,"../shared/js/tour":13,"./eventHandlers":6}],8:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -2782,6 +2787,50 @@ function ajaxButton(selector, callback) {
 }
 
 },{}],12:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+exports.default = {
+	init: function init() {
+		$('[data-content-tooltip-target]').hover(getContentToolTip, destroyContentToolTip);
+		$(document).on('mousemove', function (e) {
+			$('#toolTip').css({
+				left: e.pageX,
+				top: e.pageY
+			});
+		});
+	}
+};
+
+
+function getContentToolTip() {
+	var style = 'position:absolute;width:60%;min-width:120px;z-index:99;';
+	switch ($(this).attr('content-tooltip-target')) {
+		case 'right':
+			style += 'transform:translate(4%, -40%)';break;
+		case 'botttom':
+			style += 'transform:translate(-50%, -104%)';break;
+		case 'top':
+			style += 'transform:translate(-50%, -4%)';break;
+		default:
+			style += 'transform:translate(-104%, -40%)';break;
+	}
+	$('body').append('<div id="toolTip" style="' + style + '"><img style="float:right;background-color:white;" class="loading" src="/images/working.gif"/></div>');
+	$.get($(this).attr('href'), function (data) {
+		$('.loading').remove();
+		var html = $(data).find('[data-content-tooltip]');
+		$(html).find('[data-content-tooltip-remove]').remove();
+		$('#toolTip').css('background-color', 'white').html(html);
+	});
+}
+
+function destroyContentToolTip() {
+	$('#toolTip').remove();
+}
+
+},{}],13:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
