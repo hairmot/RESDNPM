@@ -7,7 +7,7 @@ input[type=checkbox] {
 #accordion h3 {
     color: #fff;
     background-color: #621b40;
-    border-bottom-color: white;	
+    border-bottom-color: white;
 }
 .progress {margin-bottom:0;}
 @media (max-width: 767px){
@@ -22,7 +22,7 @@ input[type=checkbox] {
 	}
 	.save {margin-bottom:20px;}
 	.progress {margin-bottom:20px;}
- 
+
 }
 
 .save {min-height:34px;}
@@ -62,7 +62,7 @@ input[type=checkbox] {
 	}
 	.fixedWidth {padding-bottom:20px;}
 	#ui-id-2 > div > div > div > table > tbody > tr > td:nth-child(3) > div > div {text-align:center;}
-	
+
 	.requestRow td label {display:inline-block;}
 	.dateCell, .titleCell {width:50% !important; float:left !important;clear:none !important;font-weight:700;}
 }
@@ -86,3 +86,5 @@ body{
 }
 
 .syncDocs {display:none;}
+
+#accordion table {margin-bottom:2px;}
