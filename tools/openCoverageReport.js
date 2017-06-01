@@ -1,3 +1,3 @@
 var open = require('open');
 
-open("./coverage/lcov-report/index.html", "chrome");
+open('./coverage/lcov-report/index.html', 'chrome');

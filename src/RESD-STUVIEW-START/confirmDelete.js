@@ -6,7 +6,7 @@ export default function confirmDelete() {
 			resdDialogs.DELETE.message, {
 				No: confirmDeleteNoResponse
 				,
-				'Delete': confirmDeleteDeleteResponse,
+				'Delete': confirmDeleteDeleteResponse
 			},false,false,false);
 
 }

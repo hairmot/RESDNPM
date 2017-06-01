@@ -35,18 +35,13 @@ function startTour() {
 
 	steps.forEach(a => {
 		tour.addStep(a.id, {
+			title: a.name.replace( /(^|\s)([a-z])/g , (m,p1,p2) =>  p1+p2.toUpperCase()),
 			text : a.text,
 			scrollTo:true,
+			showCancelLink: true,
 			attachTo:a.attachTo
 		});
 	});
 
 	tour.start();
 }
-
-
-	// tour.addStep($(e).data('tour-name'), {
-	// 		text : $(e).data('tour-text'),
-	// 		scrollTo:true,
-	// 		attachTo:'[data-tour="' + $(e).data('tour') + '"] top'
-	// 	})

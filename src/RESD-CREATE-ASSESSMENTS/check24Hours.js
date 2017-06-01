@@ -70,7 +70,7 @@ function confirmCloseDialog() {
 			resdDialogs.QUIT24HRCHECK.message, {
 				Close:() => {
 					sits_dialog_close(dialog);
-				},
+				}
 			},false,false,false);
 }
 
