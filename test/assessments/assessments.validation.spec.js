@@ -63,6 +63,15 @@ describe("Assessments Validation Tests", function(){
             expect(result).to.equal(true);
         });
 
+		it('detects that a row is in a saved state', function() {
+			expect(validation.saveButtonSavedState(`<div><button class="save sv-btn sv-btn-success"></button></div>`)).to.be.true;
+			expect(validation.saveButtonSavedState(`<div><button class="save sv-btn sv-btn-default"></button></div>`)).to.be.true;
+		});
+
+		it('detects that a row is in an unsaved state', function() {
+			expect(validation.saveButtonSavedState(`<div><button class="save sv-btn sv-btn-warning"></button></div>`)).to.be.false;
+		});
+
 
     })
 
