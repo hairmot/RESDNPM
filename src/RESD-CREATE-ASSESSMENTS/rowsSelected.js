@@ -9,7 +9,7 @@ export default {
 	updateSectionRowsSelected: function updateSectionRowsSelected() {
 		var _this = this;
 		$('#accordion > div').each(function(i,e) {
-			_this.updateRowsSelected($(e), $(e).prev().find('.sectionSelectedRows'));
+			_this.updateRowsSelected($(e), $(e).find('.sectionSelectedRows'));
 		});
 	},
 

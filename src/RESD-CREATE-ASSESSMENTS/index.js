@@ -31,9 +31,6 @@ function RESDInit() {
 
 sits_attach_event('window','load',function() {
 	RESDInit();
-	$( '#accordion' ).accordion({
-		collapsible : true,
-		active : 0,
-		heightStyle: 'content'
-	}).fadeIn('slow');
+	sits_collapsible_panel('#accordion > div', false);
+	$('#accordion').fadeIn('slow');
 });

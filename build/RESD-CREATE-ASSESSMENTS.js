@@ -13442,7 +13442,7 @@ function transferFsstName() {
 }
 
 },{"./saveTask":12,"toastr":5}],7:[function(require,module,exports){
-var css = ".requestRow td label{display:none}input[type=checkbox]{width:22px;height:22px;-webkit-border-radius:11px;-moz-border-radius:11px;border-radius:11px;border:1px solid #bbb}#accordion h3{color:#fff;background-color:#621b40;border-bottom-color:#fff}.progress{margin-bottom:0}@media (max-width:767px){.tablesaw-stack td .tablesaw-cell-content{max-width:50%;display:inline-block}.tablesaw-stack td .tablesaw-cell-label{word-break:break-word;width:50%}.progress,.save{margin-bottom:20px}}.save{min-height:34px}@media (min-width:1220px){.fixedWidth{min-width:350px;max-width:350px}}.requestTable{border:1px solid #ddd}@media (max-width:767px){.data-tablesaw-hide{display:none!important}.requestRow{background-color:#fff}.requestTable{border:none;border-collapse:separate;border-spacing:2px;background-color:#621b40}.requestTable thead{display:none}.sv-table-container{border:none}.taskType ::before{content:\"Task Type: \"}.selectedContainer{display:inline-block;width:20%}.fixedWidth{padding-bottom:20px}#ui-id-2>div>div>div>table>tbody>tr>td:nth-child(3)>div>div{text-align:center}.requestRow td label{display:inline-block}.dateCell,.titleCell{width:50%!important;float:left!important;clear:none!important;font-weight:700}}@media (max-width:400px){.dateCell,.titleCell{width:100%!important}}.no-gutter>[class*=col-]{padding-right:0;padding-left:0}body{overflow-y:scroll}.syncDocs{display:none}"; (require("browserify-css").createStyle(css, { "href": "src\\RESD-CREATE-ASSESSMENTS\\css\\styles.css" }, { "insertAt": "bottom" })); module.exports = css;
+var css = ".requestRow td label{display:none}input[type=checkbox]{width:22px;height:22px;-webkit-border-radius:11px;-moz-border-radius:11px;border-radius:11px;border:1px solid #bbb}#accordion h3{color:#fff;background-color:#621b40;border-bottom-color:#fff}.progress{margin-bottom:0}@media (max-width:767px){.tablesaw-stack td .tablesaw-cell-content{max-width:50%;display:inline-block}.tablesaw-stack td .tablesaw-cell-label{word-break:break-word;width:50%}.progress,.save{margin-bottom:20px}}.save{min-height:34px}@media (min-width:1220px){.fixedWidth{min-width:350px;max-width:350px}}.requestTable{border:1px solid #ddd}@media (max-width:767px){.data-tablesaw-hide{display:none!important}.requestRow{background-color:#fff}.requestTable{border:none;border-collapse:separate;border-spacing:2px;background-color:#621b40}.requestTable thead{display:none}.sv-table-container{border:none}.taskType ::before{content:\"Task Type: \"}.selectedContainer{display:inline-block;width:20%}.fixedWidth{padding-bottom:20px}#ui-id-2>div>div>div>table>tbody>tr>td:nth-child(3)>div>div{text-align:center}.requestRow td label{display:inline-block}.dateCell,.titleCell{width:50%!important;float:left!important;clear:none!important;font-weight:700}}@media (max-width:400px){.dateCell,.titleCell{width:100%!important}}.no-gutter>[class*=col-]{padding-right:0;padding-left:0}body{overflow-y:scroll}.syncDocs{display:none}#accordion table{margin-bottom:2px}"; (require("browserify-css").createStyle(css, { "href": "src\\RESD-CREATE-ASSESSMENTS\\css\\styles.css" }, { "insertAt": "bottom" })); module.exports = css;
 },{"browserify-css":1}],8:[function(require,module,exports){
 'use strict';
 
@@ -13627,11 +13627,8 @@ function RESDInit() {
 
 sits_attach_event('window', 'load', function () {
 	RESDInit();
-	$('#accordion').accordion({
-		collapsible: true,
-		active: 0,
-		heightStyle: 'content'
-	}).fadeIn('slow');
+	sits_collapsible_panel('#accordion > div', false);
+	$('#accordion').fadeIn('slow');
 });
 
 },{"../shared/css/fancyLoadingButton.css":15,"../shared/css/toastr.css":17,"../shared/js/hiJackSaveAndExit":19,"../shared/js/tour":21,"./css/styles.css":7,"./eventHandlers.js":8,"./evidenceState.js":9,"./rowsSelected.js":11,"./uploaders.js":13}],11:[function(require,module,exports){
@@ -13656,7 +13653,7 @@ exports.default = {
 	updateSectionRowsSelected: function updateSectionRowsSelected() {
 		var _this = this;
 		$('#accordion > div').each(function (i, e) {
-			_this.updateRowsSelected($(e), $(e).prev().find('.sectionSelectedRows'));
+			_this.updateRowsSelected($(e), $(e).find('.sectionSelectedRows'));
 		});
 	},
 
@@ -13718,12 +13715,10 @@ function getFieldValue(field, type) {
 	switch (type) {
 		case 'TD':
 			return $(field).html();
-		case 'INPUT':
-			return $(field).prop('checked') === true ? 'Y' : 'N';
 		case 'SELECT':
 			return $(field).find('option:selected').val();
 		default:
-			return;
+			return $(field).prop('checked') === true ? 'Y' : 'N';
 	}
 }
 
