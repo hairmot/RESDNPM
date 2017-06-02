@@ -9,10 +9,10 @@ import setGlobals from '../aasits_function_mocks';
 import formatDate from '../../src/shared/js/formatDate';
 import check24Hours  from '../../src/RESD-CREATE-ASSESSMENTS/check24Hours';
 
-describe("Assessments Event handlers Tests", function(){
+describe("Assessments Event handlers Tests - 24 hours branches", function(){
 	var $;
 
-	it("individual row handlers checks - blank fsst", function() {
+	it("individual row handlers checks - not within 24 hours", function() {
 		var result = false;
 		eventHandlers.rowSaveCallback = function() {result = true;}
 		eventHandlers.addIndividualRowSaveHandlers();
@@ -20,7 +20,7 @@ describe("Assessments Event handlers Tests", function(){
 		expect(result).to.be.true;
 	});
 
-	it("individual row handlers checks in 24hrs", function() {
+	it("saves row if an fsst name is already provided", function() {
 		var result = false;
 		$('.dueDate').first().html(formatDate(new Date()));
 		$('.selected').first().prop('checked',true);
@@ -30,7 +30,7 @@ describe("Assessments Event handlers Tests", function(){
 		expect(result).to.be.true;
 	});
 
-	it("individual row handlers checks in 24hrs", function() {
+	it("individual row handlers checks in 24hrs - no fsst name provided so prompt", function() {
 		$('.dueDate').first().html(formatDate(new Date()));
 		$('.selected').first().prop('checked',true);
 		$('[data-fsstname]').first().val('');

@@ -4,11 +4,11 @@ import check24Hours from './check24Hours';
 import rowsSelected from './rowsSelected';
 
 export default {
-		init : function() {
-			this.addValidationOnRowChange();
-			this.addContinueHandler();
-			this.addValidationOnRowChange();
-		},
+	init : function init() {
+		this.addValidationOnRowChange();
+		this.addContinueHandler();
+		this.addIndividualRowSaveHandlers();
+	},
 //on each input change - check validation, display message on save button.
 	addValidationOnRowChange: function addValidationOnRowChange() {
 		$('.requestRow input:not([type="file"]), .requestRow select').on('change keyup', function() {
@@ -25,9 +25,7 @@ export default {
 
 
 	addContinueHandler: function() {
-		$('input[data-continue]').on('click', function (){
-			return validator.validatePage(false);
-		});
+		$('input[data-continue]').on('click', this.continue);
 	},
 	//populate ajax input, serialize form and submit. Update message in save button
 	addIndividualRowSaveHandlers: function addIndividualRowSaveHandlers() {
@@ -55,11 +53,14 @@ export default {
 			}
 		});
 	},
-	rowSaveCallback: function rowSaveCallback(row, toastr = require('toastr')) {
+	rowSaveCallback: function rowSaveCallback (row, toastr = require('toastr')) {
 		var saveButton = $(row).find('.save');
 		saveButton.removeClass('sv-btn-primary sv-btn-warning sv-btn-danger progress-striped progress active').addClass('sv-btn-success').val('Saved!');
 		toastr.success(resdErrors.taskSaved);
 		rowsSelected.updateCounters();
+	},
+	continue : function () {
+		return validator.validatePage(false);
 	}
 };
 

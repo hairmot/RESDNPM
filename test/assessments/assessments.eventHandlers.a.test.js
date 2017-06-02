@@ -14,14 +14,17 @@ describe("Assessments Event handlers Tests", function(){
 		eventHandlers.init();
 		$('input[data-continue]').prop('disabled',false);
 		$('input[data-continue]').click();
-		//$('.save').first().click();
 	});
 
-	it("callback calls success message and updates save button text", function() {
-		var successMessage = '';
-		eventHandlers.rowSaveCallback($('.requestRow').first(), {success: () => {successMessage = 'done'} });
-		expect(successMessage).to.equal('done');
-		expect($('.requestRow').first().find('.save').val() === 'Saved!').to.be.true;
+	it("returns a value on contine", function() {
+		expect(typeof(eventHandlers.continue())).to.equal('boolean');
+	});
+
+	it("can call the callback", function() {
+		var success = false;
+		eventHandlers.rowSaveCallback($('.requestRow').first(), {success: () => {success = true}});
+		expect(success).to.be.true;
+
 	});
 
      before(() => {
