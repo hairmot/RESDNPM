@@ -4,6 +4,11 @@ import check24Hours from './check24Hours';
 import rowsSelected from './rowsSelected';
 
 export default {
+	init : function init() {
+		this.addValidationOnRowChange();
+		this.addContinueHandler();
+		this.addIndividualRowSaveHandlers();
+	},
 //on each input change - check validation, display message on save button.
 	addValidationOnRowChange: function addValidationOnRowChange() {
 		$('.requestRow input:not([type="file"]), .requestRow select').on('change keyup', function() {
@@ -20,12 +25,11 @@ export default {
 
 
 	addContinueHandler: function() {
-		$('input[data-continue]').on('click', function (){
-			return validator.validatePage(false);
-		});
+		$('input[data-continue]').on('click', this.continue);
 	},
 	//populate ajax input, serialize form and submit. Update message in save button
 	addIndividualRowSaveHandlers: function addIndividualRowSaveHandlers() {
+		var _this = this;
 		$('.save').click(function (e) {
 			e.preventDefault();
 			var row = $(this).closest('.requestRow');
@@ -33,29 +37,32 @@ export default {
 			if(validator.validateRow(row)) {
 				if(!check24Hours.validate24Hours(row))
 				{
-					saveTask(row, rowSaveCallback);
+					saveTask(row, _this.rowSaveCallback);
 				}
 				else
 				{
 					if($('[data-fsstname]').first().val() !== '')
 					{
-						saveTask(row, rowSaveCallback);
+						saveTask(row, _this.rowSaveCallback);
 					}
 					else
 					{
-						check24Hours.FSSTDialog(row, rowSaveCallback);
+						check24Hours.FSSTDialog(row, _this.rowSaveCallback);
 					}
 				}
 			}
 		});
+	},
+	rowSaveCallback: function rowSaveCallback (row, toastr = require('toastr')) {
+		var saveButton = $(row).find('.save');
+		saveButton.removeClass('sv-btn-primary sv-btn-warning sv-btn-danger progress-striped progress active').addClass('sv-btn-success').val('Saved!');
+		toastr.success(resdErrors.taskSaved);
+		rowsSelected.updateCounters();
+	},
+	continue : function () {
+		return validator.validatePage(false);
 	}
 };
 
-export function rowSaveCallback(row, toastr = require('toastr')) {
-	var saveButton = $(row).find('.save');
-	saveButton.removeClass('sv-btn-primary sv-btn-warning sv-btn-danger progress-striped progress active').addClass('sv-btn-success').val('Saved!');
-	toastr.success(resdErrors.taskSaved);
-	rowsSelected.updateCounters();
-}
 
 

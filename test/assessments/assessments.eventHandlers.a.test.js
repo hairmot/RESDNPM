@@ -3,7 +3,7 @@ var expect = require('chai').expect;
 var jsdom = require("jsdom");
 var { JSDOM } = jsdom;
 import jquery from 'jquery';
-import eventHandlers, {rowSaveCallback, addContinueHandler} from '../../src/RESD-CREATE-ASSESSMENTS/eventHandlers';
+import eventHandlers from '../../src/RESD-CREATE-ASSESSMENTS/eventHandlers';
 import requestRow from '../htmlTemplates/requestRow';
 import setGlobals from '../aasits_function_mocks';
 
@@ -11,17 +11,20 @@ describe("Assessments Event handlers Tests", function(){
     var $;
 
 	it("binds event handlers", function() {
-		Object.keys(eventHandlers).map(a => eventHandlers[a]());
+		eventHandlers.init();
 		$('input[data-continue]').prop('disabled',false);
 		$('input[data-continue]').click();
-
 	});
 
-	it("callback calls success message and updates save button text", function() {
-		var successMessage = '';
-		rowSaveCallback($('.requestRow').first(), {success: () => {successMessage = 'done'} });
-		expect(successMessage).to.equal('done');
-		expect($('.requestRow').first().find('.save').val() === 'Saved!').to.be.true;
+	it("returns a value on contine", function() {
+		expect(typeof(eventHandlers.continue())).to.equal('boolean');
+	});
+
+	it("can call the callback", function() {
+		var success = false;
+		eventHandlers.rowSaveCallback($('.requestRow').first(), {success: () => {success = true}});
+		expect(success).to.be.true;
+
 	});
 
      before(() => {

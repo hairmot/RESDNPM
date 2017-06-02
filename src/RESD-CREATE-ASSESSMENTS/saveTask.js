@@ -12,7 +12,6 @@ export default function saveTask(toSave, callback) {
 	}
 	else
 	{
-		$('[data-accordion]').val($('#accordion').accordion('option').active);
 		$('#ajaxSubmit input[type="submit"]').first().click();
 	}
 	return true;

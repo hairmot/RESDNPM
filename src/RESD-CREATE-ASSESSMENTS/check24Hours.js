@@ -1,5 +1,6 @@
 import toastr from 'toastr';
 import saveTask from './saveTask';
+import formatDate from '../shared/js/formatDate';
 
 export default {
 	validate24Hours: function validate24Hours(row) {
@@ -72,21 +73,6 @@ function confirmCloseDialog() {
 					sits_dialog_close(dialog);
 				}
 			},false,false,false);
-}
-
-function formatDate(date) {
-	var monthNames = [
-		'January', 'February', 'March',
-		'April', 'May', 'June', 'July',
-		'August', 'September', 'October',
-		'November', 'December'
-	];
-
-	var day = ('0' + date.getDate()).slice(-2);
-	var monthIndex = date.getMonth();
-	var year = date.getFullYear();
-
-	return day + '/' + monthNames[monthIndex] + '/' + year;
 }
 
 function transferFsstName(){

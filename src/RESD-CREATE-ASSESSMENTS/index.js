@@ -13,7 +13,7 @@ import tour from '../shared/js/tour';
 function RESDInit() {
 
 	//trigger validation when rows change
-	Object.keys(eventHandlers).map(a => eventHandlers[a]());
+	eventHandlers.init();
 
 	//hook up individual file upload controls with the plupload instance on page
 	Object.keys(uploaders).map(a => uploaders[a]());

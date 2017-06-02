@@ -9,6 +9,7 @@ import check24Hours, {staffNamePromptExit,
 } from '../../src/RESD-CREATE-ASSESSMENTS/check24Hours';
 import requestRow from '../htmlTemplates/requestRow';
 import setGlobals from '../aasits_function_mocks';
+import formatDate from '../../src/shared/js/formatDate';
 
 describe("check 24 Hours tests", function(){
     var $;
@@ -21,6 +22,7 @@ describe("check 24 Hours tests", function(){
 
 		it('detects if an assessment is within 24 hours', function() {
 			$('.dueDate').first().html(formatDate(new Date()));
+			$('.selected').first().prop('checked',true);
 			expect(check24Hours.validate24Hours($('.requestRow').first())).to.equal(true);
 		})
 
@@ -76,18 +78,3 @@ describe("check 24 Hours tests", function(){
 
 });
 });
-
-function formatDate(date) {
-	var monthNames = [
-		'January', 'February', 'March',
-		'April', 'May', 'June', 'July',
-		'August', 'September', 'October',
-		'November', 'December'
-	];
-
-	var day = ('0' + date.getDate()).slice(-2);
-	var monthIndex = date.getMonth();
-	var year = date.getFullYear();
-
-	return day + '/' + monthNames[monthIndex] + '/' + year;
-}
