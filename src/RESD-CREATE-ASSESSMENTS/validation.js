@@ -56,7 +56,7 @@ export default {
 			});
 		}
 		if(!silent)
-			validationErrors.map(a => notifier.warning(resdErrors[a]));
+			validationErrors.filter((e,i) => validationErrors.indexOf(e) == i).map(a => notifier.warning(resdErrors[a]));
 		return typeof(staff) != 'undefined' ? true : validationErrors.length === 0 ? true: false;
 	},
 	saveButtonSavedState : function saveButtonSavedState(row) {

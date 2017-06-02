@@ -12,6 +12,7 @@ export default {
 
 function getContentToolTip() {
 	var style = 'position:absolute;width:60%;min-width:120px;z-index:99;';
+	var href = $(this).attr('href');
 	switch($(this).attr('content-tooltip-target')) {
 	case 'right':  style += 'transform:translate(4%, -40%)';break;
 	case 'botttom':  style += 'transform:translate(-50%, -104%)';break;
@@ -20,15 +21,26 @@ function getContentToolTip() {
 		style += 'transform:translate(-104%, -40%)'; break;
 	}
 	$('body').append('<div class="sv-hidden-sm sv-hidden-xs sv-hidden-md" id="toolTip" style="' + style + '"><img style="float:right;background-color:white;" class="loading" src="/images/working.gif"/></div>');
-	if($('#toolTip :visible').length > 0) {
-		$.get($(this).attr('href'), function(data) {
+
+	if($('#toolTip').length > 0) {
+		if(content.filter(a => a.href === href).length === 0)
+		{
+			$.get(href, function(data) {
+				var html = $(data).find('[data-content-tooltip]');
+				$(html).find('[data-content-tooltip-remove]').remove();
+				content.push({href: href, html: html});
+				$('.loading').remove();
+				$('#toolTip').css('background-color','white').html(content.filter(a=> a.href === href)[0].html);
+			});
+		}
+		else {
 			$('.loading').remove();
-			var html = $(data).find('[data-content-tooltip]');
-			$(html).find('[data-content-tooltip-remove]').remove();
-			$('#toolTip').css('background-color','white').html(html);
-		});
+			$('#toolTip').css('background-color','white').html(content.filter(a=> a.href === href)[0].html);
+		}
 	}
 }
+
+var content = [];
 
 function destroyContentToolTip() {
 	$('#toolTip').remove();

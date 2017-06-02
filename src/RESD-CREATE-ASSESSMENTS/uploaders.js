@@ -8,7 +8,7 @@ export default {
 		$('.deleteEvidence').on('click', function(e) {
 			e.preventDefault();
 			var id = $(this).data('file');
-			$('a[href*=\'SIW_FILE_LOAD\']:contains(\'' + id +  '\')').closest('.sv-form-group').find('.rspdeleter').click();
+			$('a[href*=\'SIW_FILE_LOAD\']:contains(\'' + id +  '\')').closest('.sv-panel').find('.rspdeleter').click();
 			//$('[data-continue]').prop('disabled', !validation.validatePage(true));
 		});
 	},
