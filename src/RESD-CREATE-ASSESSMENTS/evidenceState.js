@@ -30,7 +30,7 @@ function uploadButtonToggle(row) {
 	var selected = $(row).find('.selected').first().prop('checked');
 	var saveBtn = $(row).find('.save').first();
 	if(selected && (saveBtn.hasClass('sv-btn-default') || saveBtn.hasClass('sv-btn-success')) && plUploader().state !== 2) {
-			$(row).find('.add').first().prop('disabled', false);
+		$(row).find('.add').first().prop('disabled', false);
 	}
 	else {
 		$(row).find('.add').first().prop('disabled', true);

@@ -30,14 +30,17 @@ function getContentToolTip() {
 				$(html).find('[data-content-tooltip-remove]').remove();
 				content.push({href: href, html: html});
 				$('.loading').remove();
-				$('#toolTip').css('background-color','white').html(content.filter(a=> a.href === href)[0].html);
+				showToolTip(href);
 			});
 		}
 		else {
 			$('.loading').remove();
-			$('#toolTip').css('background-color','white').html(content.filter(a=> a.href === href)[0].html);
+			showToolTip(href);
 		}
 	}
+}
+function showToolTip(href) {
+	$('#toolTip').css('background-color','white').html(content.filter(a=> a.href === href)[0].html);
 }
 
 var content = [];
