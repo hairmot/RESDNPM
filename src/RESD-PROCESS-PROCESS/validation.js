@@ -22,13 +22,8 @@ export default {
 			//validate stage 1
 			length.parent().prop('disabled',false);
 			extensionLength(length, duedate);
-			try {
-				validator.validateSelects([length, decision]);
-				validator.validateInputs([duedate]);
-			}
-			catch(e) {
-				//must be stage 2
-			}
+			validator.validateSelects([length, decision]);
+			validator.validateInputs([duedate]);
 
 			//validate stage 2
 			stage2length.parent().prop('disabled',false);

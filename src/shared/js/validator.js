@@ -4,7 +4,13 @@ export default {
 	},
 
 	validateInputs: function validateInputs(inputs) {
-		inputs.map(a => a.val().replace(/\s/g,'') == '' ? a.addClass('sv-mandatory') : a.removeClass('sv-mandatory'));
+		inputs.map(a => {
+			if(a.val()) {
+				a.val().replace(/\s/g,'') == '' ? a.addClass('sv-mandatory') : a.removeClass('sv-mandatory')
+			} else {
+				a.addClass('sv-mandatory')
+			}
+		});
 	},
 	validateRecordPicker: function validateInputs(recpicker) {
 		$(recpicker).find('input[type="checkbox"]:checked').length === 0 ? $(recpicker).find('.sv-checkbox label').addClass('sv-mandatory') :
