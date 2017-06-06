@@ -33,3 +33,11 @@
 	word-break:break-word;
 	-ms-word-break: break-word;
 }
+
+.help-tour:visited, .help-tour:active, .help-tour:focus, .help-tour {
+	text-decoration:none;
+	color:#fff;
+}
+.help-tour:hover {
+	color:#eee;
+}
