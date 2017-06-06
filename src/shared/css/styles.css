@@ -29,3 +29,7 @@
 .sv-btn-success:hover {
 	color:#000;
 }
+.requestRow td {
+	word-break:break-word;
+	-ms-word-break: break-word;
+}
