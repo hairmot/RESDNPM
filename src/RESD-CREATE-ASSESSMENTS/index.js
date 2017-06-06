@@ -7,6 +7,7 @@ import '../shared/css/fancyLoadingButton.css';
 import './css/styles.css';
 import hiJackSaveAndExit from '../shared/js/hiJackSaveAndExit';
 import tour from '../shared/js/tour';
+import '../shared/css/styles.css';
 
 
 //attach handlers when js is initialised

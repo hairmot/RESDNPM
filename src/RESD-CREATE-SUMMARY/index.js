@@ -6,6 +6,7 @@ import charactersRemaining from '../shared/js/charactersRemaining.js';
 import './css/styles.css';
 import validation from './validation';
 import hiJackSaveAndExit from '../shared/js/hiJackSaveAndExit';
+import '../shared/css/styles.css';
 
 function RESDInit() {
     //bind all event handlers

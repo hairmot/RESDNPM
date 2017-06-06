@@ -1,0 +1,31 @@
+/* accessibility overrides for bootstrap */
+
+.sv-form-control.sv-mandatory {color:black;}
+
+.sv-btn-danger {
+	background-color:#e58681;
+	border-color:#e06c66;
+	color:#000;
+}
+
+.sv-btn-danger:hover {
+	background-color:#ea9e9a;
+	color: #000;
+}
+
+
+.sv-btn-warning {
+	color:#000;
+}
+
+.sv-btn-warning:hover {
+	color:#000;
+}
+
+.sv-btn-success {
+	color:#000;
+}
+
+.sv-btn-success:hover {
+	color:#000;
+}
