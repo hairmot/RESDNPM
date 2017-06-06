@@ -42,7 +42,8 @@
     "npm-run-all": "^4.0.2",
     "nyc": "^10.3.2",
     "open": "0.0.5",
-    "serve": "^5.1.5"
+    "serve": "^5.1.5",
+    "tether-shepherd": "^1.8.1"
   },
   "dependencies": {
     "jquery": "^3.2.1",
