@@ -9,4 +9,4 @@ function RESDInit() {
 
 sits_attach_event('window', 'load', () => {
 	RESDInit();
-})
+});

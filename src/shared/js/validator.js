@@ -10,6 +10,6 @@ export default {
 	},
 	validateRecordPicker: function validateInputs(recpicker) {
 		$(recpicker).find('input[type="checkbox"]:checked').length === 0 ? $(recpicker).find('.sv-checkbox label').addClass('sv-mandatory') :
-		$(recpicker).find('.sv-checkbox label').removeClass('sv-mandatory')
+		$(recpicker).find('.sv-checkbox label').removeClass('sv-mandatory');
 	}
 };

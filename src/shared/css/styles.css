@@ -29,7 +29,7 @@
 .sv-btn-success:hover {
 	color:#000;
 }
-.requestRow td:nth-child(1) {
+#page .requestRow td:nth-child(1) {
 	word-break:break-word;
 	-ms-word-break: break-word;
 }

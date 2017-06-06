@@ -22,8 +22,13 @@ export default {
 			//validate stage 1
 			length.parent().prop('disabled',false);
 			extensionLength(length, duedate);
-			validator.validateSelects([length, decision]);
-			validator.validateInputs([duedate]);
+			try {
+				validator.validateSelects([length, decision]);
+				validator.validateInputs([duedate]);
+			}
+			catch(e) {
+				//must be stage 2
+			}
 
 			//validate stage 2
 			stage2length.parent().prop('disabled',false);
@@ -51,18 +56,20 @@ export default {
 };
 
 export function extensionLength(length, duedate) {
-
-	if($(length).val() === '0')
-    {
+	switch($(length).val()) {
+	case '0':
 		$(duedate).prop('disabled', false);
 		$(duedate).prop('readonly',true);
 		$(duedate).val() === '' ? $(duedate).addClass('sv-mandatory') : $(duedate).removeClass('sv-mandatory');
-	}
-	else
-    {
-
+		break;
+	case 'X':
+		$(duedate).prop('disabled',  true).removeClass('sv-mandatory');
+		break;
+	default:
 		$(duedate).prop('disabled',  true).removeClass('sv-mandatory');
 		$(duedate).datepicker('setDate', $(length).val()  );
+		break;
 	}
+
 
 }

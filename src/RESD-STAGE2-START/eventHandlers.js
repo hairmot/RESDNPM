@@ -15,7 +15,7 @@ export default (messager) => {
 			});
 		},
 		validateSubmit: function validateSubmit() {
-			$('input[value="Submit"]').on('click', function(e) {
+			$('input[value="Submit"]').on('click', function() {
 				validator.validateInputs([$('[data-stage2info]')]);
 				validator.validateRecordPicker($('[data-recpicker]'));
 				if($('.sv-mandatory').length > 0) {
@@ -25,6 +25,6 @@ export default (messager) => {
 				return true;
 			});
 		}
-	}
+	};
 	return validationObject;
-}
+};
