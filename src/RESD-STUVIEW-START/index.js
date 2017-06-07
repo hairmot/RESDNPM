@@ -1,5 +1,6 @@
 import eventHandlers from './eventHandlers';
 import '../shared/css/fancyLoadingButton.css';
+import './css/styles.css';
 import '../shared/css/styles.css';
 import tour from '../shared/js/tour';
 import tooltips from '../shared/js/tooltips/';

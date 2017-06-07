@@ -4,8 +4,8 @@ export default {
 	validateRow : function(row) {
 
 		var decision = $(row).find('[data-decision] option:selected').first();
-		var length = $(row).find('[data-extensionlength] option:selected').first();
-		var duedate = $(row).find('[data-extensionduedate]').first();
+		var length = $(row).find('[data-extensionlength="validate"] option:selected').first();
+		var duedate = $(row).find('[data-extensionduedate="validate"]').first();
 		var stage2length = $(row).next('.stage2Row').find('[data-extensionlength] option:selected');
 		var stage2duedate = $(row).next('.stage2Row').find('[data-extensionduedate]');
 
@@ -28,7 +28,14 @@ export default {
 			//validate stage 2
 			stage2length.parent().prop('disabled',false);
 			stage2duedate.prop('disabled',false);
-			extensionLength(stage2length, stage2duedate);
+			if(decision.parent().prop('disabled')) {
+				//this is a stage 2 request (identified by the disabled prop on decision) so we must have a stage 2 decision
+				validateStage2(stage2length, stage2duedate);
+			}
+			else {
+				extensionLength(stage2length, stage2duedate);
+			}
+
 
 		}
 
@@ -67,4 +74,18 @@ export function extensionLength(length, duedate) {
 	}
 
 
+}
+
+export function validateStage2(length, duedate) {
+	switch($(length).val()) {
+		case '':
+			duedate.prop('disabled', true).val('');
+			length.parent().addClass('sv-mandatory');
+			break;
+		case '0':
+			duedate.val() == '' ? duedate.addClass('sv-mandatory') :duedate.removeClass('sv-mandatory') ;
+		default:
+			length.parent().removeClass('sv-mandatory');
+			extensionLength(length, duedate);
+	}
 }

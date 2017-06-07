@@ -12,3 +12,10 @@
 
 th {word-break: break-word}
 
+[data-datepick][readonly] {background-color: #fff }
+[data-datepick][readonly].sv-mandatory {background-color: #f7b7ce }
+[data-datepick][disabled] {background-color: #eee }
+
+ [data-datepick][readonly]:hover {cursor:pointer;}
+
+ [data-datepick][disabled]:hover {cursor:not-allowed;}

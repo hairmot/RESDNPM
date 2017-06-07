@@ -10768,7 +10768,7 @@ return jQuery;
 }));
 
 },{"jquery":2}],4:[function(require,module,exports){
-var css = "@media (max-width:767px){.requestRow{border:1px solid #621b40}.tablesaw-cell-label{word-break:break-all}.stage2Row{border-right:1px solid #621b40;border-left:1px solid #621b40;border-bottom:1px solid #621b40!important}}th{word-break:break-word}"; (require("browserify-css").createStyle(css, { "href": "src\\RESD-PROCESS-PROCESS\\css\\styles.css" }, { "insertAt": "bottom" })); module.exports = css;
+var css = "@media (max-width:767px){.requestRow{border:1px solid #621b40}.tablesaw-cell-label{word-break:break-all}.stage2Row{border-right:1px solid #621b40;border-left:1px solid #621b40;border-bottom:1px solid #621b40!important}}th{word-break:break-word}[data-datepick][readonly]{background-color:#fff}[data-datepick][readonly].sv-mandatory{background-color:#f7b7ce}[data-datepick][disabled]{background-color:#eee}[data-datepick][readonly]:hover{cursor:pointer}[data-datepick][disabled]:hover{cursor:not-allowed}"; (require("browserify-css").createStyle(css, { "href": "src\\RESD-PROCESS-PROCESS\\css\\styles.css" }, { "insertAt": "bottom" })); module.exports = css;
 },{"browserify-css":1}],5:[function(require,module,exports){
 'use strict';
 
@@ -10885,7 +10885,7 @@ function saveRow(row) {
 	var stage2Length = row.next().find('[data-extensionlength] option:selected').text().split(' ')[0];
 	var data = [row.data('task'), row.find('[data-decision] option:selected').val(), row.find('[data-extensionlength] option:selected').text().split(' ')[0], row.find('[data-extensionduedate]').val(),
 	//stage 2
-	stage2Length === 'Grant' ? '0' : stage2Length, row.next().find('[data-extensionduedate]').val()];
+	stage2Length === 'Grant' ? '0' : stage2Length === 'Reject' ? 'R' : stage2Length, row.next().find('[data-extensionduedate]').val()];
 	$('[data-ajaxdata]').val(data.join('~'));
 	if (row.find('.sv-mandatory').length === 0 && row.next().find('.sv-mandatory').length === 0) {
 		(0, _submitFormAsync2.default)(function () {
@@ -10901,6 +10901,7 @@ Object.defineProperty(exports, "__esModule", {
 	value: true
 });
 exports.extensionLength = extensionLength;
+exports.validateStage2 = validateStage2;
 
 var _validator = require('../shared/js/validator');
 
@@ -10912,8 +10913,8 @@ exports.default = {
 	validateRow: function validateRow(row) {
 
 		var decision = $(row).find('[data-decision] option:selected').first();
-		var length = $(row).find('[data-extensionlength] option:selected').first();
-		var duedate = $(row).find('[data-extensionduedate]').first();
+		var length = $(row).find('[data-extensionlength="validate"] option:selected').first();
+		var duedate = $(row).find('[data-extensionduedate="validate"]').first();
 		var stage2length = $(row).next('.stage2Row').find('[data-extensionlength] option:selected');
 		var stage2duedate = $(row).next('.stage2Row').find('[data-extensionduedate]');
 
@@ -10934,7 +10935,12 @@ exports.default = {
 			//validate stage 2
 			stage2length.parent().prop('disabled', false);
 			stage2duedate.prop('disabled', false);
-			extensionLength(stage2length, stage2duedate);
+			if (decision.parent().prop('disabled')) {
+				//this is a stage 2 request (identified by the disabled prop on decision) so we must have a stage 2 decision
+				validateStage2(stage2length, stage2duedate);
+			} else {
+				extensionLength(stage2length, stage2duedate);
+			}
 		}
 
 		if (stage2length.val() !== '' && stage2duedate.val() !== '') {
@@ -10965,6 +10971,20 @@ function extensionLength(length, duedate) {
 			$(duedate).prop('disabled', true).removeClass('sv-mandatory');
 			$(duedate).datepicker('setDate', $(length).val());
 			break;
+	}
+}
+
+function validateStage2(length, duedate) {
+	switch ($(length).val()) {
+		case '':
+			duedate.prop('disabled', true).val('');
+			length.parent().addClass('sv-mandatory');
+			break;
+		case '0':
+			duedate.val() == '' ? duedate.addClass('sv-mandatory') : duedate.removeClass('sv-mandatory');
+		default:
+			length.parent().removeClass('sv-mandatory');
+			extensionLength(length, duedate);
 	}
 }
 
