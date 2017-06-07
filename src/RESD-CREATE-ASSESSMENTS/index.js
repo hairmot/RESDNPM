@@ -32,7 +32,4 @@ function RESDInit() {
 
 sits_attach_event('window','load',function() {
 	RESDInit();
-	sits_collapsible_panel('#accordion > div:not(":first")', false);
-	sits_collapsible_panel('#accordion > div:first', true);
-	$('#accordion').fadeIn('slow');
 });

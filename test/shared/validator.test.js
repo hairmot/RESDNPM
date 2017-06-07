@@ -14,6 +14,15 @@ describe("Validator Tests", function(){
             </select>
 
             <input type="text" value="" />
+
+			<div data-recpicker="">
+              <div class="sv-checkbox">
+			  	<label for="ANSWER.RECPICKER.MENSYS.1-1">
+				  <input type="checkbox" name="ANSWER.RECPICKER.MENSYS.1-1" id="ANSWER.RECPICKER.MENSYS.1-1" value="12621600L16A~001" data-ttqseqn="2">
+				  COURSEWORK (due 08/Jun/2017)
+				</label>
+			  </div>
+            </div>
         `);
         var $ = require('jquery')(dom.window);
         global.$ = $;
@@ -38,6 +47,19 @@ describe("Validator Tests", function(){
     it("validates a valid select", () => {
         validator.validateSelects([$('select').first().val("1").find('option:selected').first()]);
         expect($('select.sv-mandatory').length).to.equal(0);
+    });
+
+
+    it("marks an invalid recpicker", () => {
+        validator.validateRecordPicker($('[data-recpicker]').first());
+        expect($('.sv-mandatory').length).to.equal(1);
+    });
+
+	it("validates a correct recpicker", () => {
+		var picker = $('[data-recpicker]').first();
+		picker.find('input[type="checkbox"]').first().prop('checked', true);
+        validator.validateRecordPicker(picker);
+        expect($('.sv-mandatory').length).to.equal(0);
     });
 
 

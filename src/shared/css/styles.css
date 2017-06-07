@@ -41,3 +41,44 @@
 .help-tour:hover {
 	color:#eee;
 }
+
+.sv-btn-success, .sv-btn-success:focus, .sv-btn-success:visited {
+		background-color:#dff0d8;
+		border-color:#c1e2b3;
+		color:#3c763d;
+
+}
+.sv-btn-success:hover{
+	background-color:#c1e2b3;
+	border-color:#c1e2b3;
+	color:#1d391e;
+}
+
+.sv-btn-warning, .sv-btn-warning:focus, .sv-btn-warning:visited {
+		background-color:#fcf8e3;
+		border-color:#faebcc;
+		color:#8a6d3b;
+
+}
+.sv-btn-warning:hover{
+	background-color:#f7ecb5;
+	border-color:#faebcc;
+	color:#4a3b20;
+}
+
+
+.sv-btn-danger, .sv-btn-danger:focus, .sv-btn-danger:visited {
+		background-color:#f2dede;
+		border-color:#ebccd1;
+		color:#a94442;
+
+}
+.sv-btn-danger:hover{
+	background-color:#e4b9b9;
+	border-color:#ebccd1;
+	color:#50201f;
+}
+
+.sv-btn-danger[disabled],.sv-btn-success[disabled] ,.sv-btn-warning[disabled]  {
+	color:black;
+}

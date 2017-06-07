@@ -20,6 +20,7 @@ export default {
 		}
 		else {
 			//validate stage 1
+
 			length.parent().prop('disabled',false);
 			extensionLength(length, duedate);
 			validator.validateSelects([length, decision]);
@@ -28,7 +29,7 @@ export default {
 			//validate stage 2
 			stage2length.parent().prop('disabled',false);
 			stage2duedate.prop('disabled',false);
-			if(decision.parent().prop('disabled')) {
+			if(decision.parent().prop('disabled') ) {
 				//this is a stage 2 request (identified by the disabled prop on decision) so we must have a stage 2 decision
 				validateStage2(stage2length, stage2duedate);
 			}

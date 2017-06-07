@@ -7,5 +7,10 @@ export default {
 			confirmDelete($(this));
 			return false;
 		});
+	},
+	openButtonClicked : function openButtonClicked() {
+		$('body').on('click','#openRequest', function(e) {
+			$(this).addClass('progress active progress-striped');
+		});
 	}
 };
