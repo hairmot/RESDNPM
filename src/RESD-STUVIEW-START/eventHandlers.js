@@ -9,7 +9,7 @@ export default {
 		});
 	},
 	openButtonClicked : function openButtonClicked() {
-		$('body').on('click','#openRequest', function(e) {
+		$('body').on('click','#openRequest', function() {
 			$(this).addClass('progress active progress-striped');
 		});
 	}
