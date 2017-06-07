@@ -78,14 +78,15 @@ export function extensionLength(length, duedate) {
 
 export function validateStage2(length, duedate) {
 	switch($(length).val()) {
-		case '':
-			duedate.prop('disabled', true).val('');
-			length.parent().addClass('sv-mandatory');
-			break;
-		case '0':
-			duedate.val() == '' ? duedate.addClass('sv-mandatory') :duedate.removeClass('sv-mandatory') ;
-		default:
-			length.parent().removeClass('sv-mandatory');
-			extensionLength(length, duedate);
+	case '':
+		duedate.prop('disabled', true).val('');
+		length.parent().addClass('sv-mandatory');
+		break;
+	case '0':
+		duedate.val() == '' ? duedate.addClass('sv-mandatory') :duedate.removeClass('sv-mandatory') ;
+		break;
+	default:
+		length.parent().removeClass('sv-mandatory');
+		extensionLength(length, duedate);
 	}
 }

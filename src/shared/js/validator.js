@@ -6,9 +6,9 @@ export default {
 	validateInputs: function validateInputs(inputs) {
 		inputs.map(a => {
 			if(a.val()) {
-				a.val().replace(/\s/g,'') == '' ? a.addClass('sv-mandatory') : a.removeClass('sv-mandatory')
+				a.val().replace(/\s/g,'') == '' ? a.addClass('sv-mandatory') : a.removeClass('sv-mandatory');
 			} else {
-				a.addClass('sv-mandatory')
+				a.addClass('sv-mandatory');
 			}
 		});
 	},
