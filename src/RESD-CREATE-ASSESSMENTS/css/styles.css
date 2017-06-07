@@ -87,4 +87,6 @@ body{
 
 .syncDocs {display:none;}
 
-#accordion table {margin-bottom:2px;}
+#accordion table {margin-bottom:0;}
+
+.sv-panel {overflow:hidden;}

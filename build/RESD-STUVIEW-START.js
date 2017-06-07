@@ -2832,7 +2832,7 @@ function getContentToolTip() {
 		default:
 			style += 'transform:translate(-104%, -40%)';break;
 	}
-	$('body').append('<div class="sv-hidden-sm sv-hidden-xs sv-hidden-md" id="toolTip" style="' + style + '"><img style="float:right;background-color:white;" class="loading" src="/images/working.gif"/></div>');
+	$('body').append('<div class="sv-hidden-sm sv-hidden-xs sv-hidden-md" id="toolTip" style="' + style + '"><img style="float:right;" class="loading" src="/images/working.gif"/></div>');
 
 	if ($('#toolTip').length > 0) {
 		if (content.filter(function (a) {
