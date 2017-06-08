@@ -17,21 +17,15 @@ describe('Summary Screen', function() {
 
 	it('Show the uploader if the reverse is true', function() {
 		$('input[data-evidenceavailable]').prop('checked',false);
-		evidenceMode();
-		//wait for fade in
-		setTimeout(function() {
-		expect($('[id^="PLUP_uploader"]').css('display')).to.equal('block');
-		},500);
+		evidenceMode(function() {
+			expect($('[id^="PLUP_uploader"]').css('display')).to.equal('block');
+		});
 	});
 
 	it('Show the uploader if the reverse is true', function() {
 		$('input[data-evidenceavailable]').prop('checked',true);
 		$('input[data-evidencereason]').val('')
-		evidenceMode();
-		//wait for fade in
-		setTimeout(function() {
-		expect($('[id^="PLUP_uploader"]').css('display')).to.equal('none');
-		},500);
+		evidenceMode(function() {expect($('[id^="PLUP_uploader"]').css('display')).to.equal('none')});
 	});
 
 

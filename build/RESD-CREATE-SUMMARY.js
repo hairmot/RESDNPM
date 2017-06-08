@@ -10842,6 +10842,7 @@ Object.defineProperty(exports, "__esModule", {
 
 exports.default = function () {
 	var toastr = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : require('toastr');
+	var callback = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : function () {};
 
 	if ($('input[data-evidenceavailable]').prop('checked')) {
 		if (!_validation2.default.filesUploaded()) {
@@ -10853,7 +10854,7 @@ exports.default = function () {
 			$('input[data-evidenceavailable]').prop('checked', false);
 		}
 	} else {
-		$('[id^="PLUP_uploader"]').fadeIn();
+		$('[id^="PLUP_uploader"]').fadeIn(400, callback());
 		$('.evidenceReason').fadeOut();
 		$('input[data-evidencereason]').val('').removeClass('sv-mandatory');
 	}
