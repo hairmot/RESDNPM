@@ -1,25 +1,26 @@
 import validation from './validation';
 
 export default {
+
 	updateCounters: function updateCounters() {
-		this.updateRowsSelected('body','#selectedRows');
+		updateRowsSelected('body','#selectedRows');
 		this.updateSectionRowsSelected();
-		//$('[data-continue]').prop('disabled', !validation.validatePage(true));
-	},
-	updateSectionRowsSelected: function updateSectionRowsSelected() {
-		var _this = this;
-		$('#accordion > div').each(function(i,e) {
-			_this.updateRowsSelected($(e), $(e).find('.sectionSelectedRows'));
-		});
 	},
 
-	updateRowsSelected: function updateRowsSelected(element, outputSelector) {
-		var rows = this.validRowsSelected(element);
+	updateSectionRowsSelected: function updateSectionRowsSelected() {
+		$('#accordion > div').each(urs);
+	}
+};
+
+export function urs(i,e) {
+	return updateRowsSelected($(e), $(e).find('.sectionSelectedRows'));
+}
+export function updateRowsSelected(element, outputSelector) {
+		var rows = validRowsSelected(element);
 		$(outputSelector).html(rows);
 		return rows;
-	},
-
-	validRowsSelected: function validRowsSelected(element) {
+}
+export function validRowsSelected(element) {
 		var count = 0;
 		$(element).find('.requestRow').each(function(i,e) {
 			if(validation.saveButtonSavedState(e))
@@ -32,4 +33,3 @@ export default {
 		});
 		return count;
 	}
-};

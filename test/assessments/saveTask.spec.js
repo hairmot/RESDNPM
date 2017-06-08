@@ -24,6 +24,14 @@ describe('save Task', function() {
 		expect(called).to.be.true;
 	});
 
+	it('submits via postback if enhanced mode is disabled', function() {
+		var called = false;
+		global.enhanced = 'N';
+		saveTask($('.requestRow').first(), function() {called = true;});
+		expect(called).to.be.false;
+	});
+
+
 
      before(() => {
         var dom = new JSDOM(requestRow);
