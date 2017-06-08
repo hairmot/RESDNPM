@@ -15,6 +15,33 @@ describe("process Validation Tests", function(){
 		expect(res).to.be.true;
 	});
 
+	it('invalidates an unknown value', function() {
+		$('.stage2Row [data-extensionlength]').val('X');
+		var res = validation.validateRow($('.requestRow').first());
+		expect(res).to.be.false;
+	});
+
+	it('invalidates no input', function() {
+		$('.stage2Row [data-extensionlength]').val('');
+		var res = validation.validateRow($('.requestRow').first());
+		expect(res).to.be.false;
+	});
+
+	it('invalidates an empty grant', function() {
+		$('.stage2Row [data-extensionlength]').val('0');
+		var res = validation.validateRow($('.requestRow').first());
+		expect(res).to.be.false;
+	});
+
+
+	it('validates a grant with a value provded', function() {
+		$('.stage2Row [data-extensionlength]').val('0');
+		$('.stage2Row [data-extensionduedate]').val('123');
+		var res = validation.validateRow($('.requestRow').first());
+		console.log($('.sv-mandatory').val());
+		expect(res).to.be.true;
+	});
+
 
     before(() =>{
         var dom = new JSDOM(processStage2);

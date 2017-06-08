@@ -10949,7 +10949,7 @@ exports.default = {
 			duedate.removeClass('sv-mandatory');
 		}
 
-		return $(row).find('.sv-mandatory').length === 0;
+		return $(row).find('.sv-mandatory').length + $(row).next('.stage2Row').find('.sv-mandatory').length === 0;
 	},
 	validatePage: function validatePage() {
 		var _this = this;
@@ -10965,9 +10965,6 @@ function extensionLength(length, duedate) {
 			$(duedate).prop('readonly', true);
 			$(duedate).val() === '' ? $(duedate).addClass('sv-mandatory') : $(duedate).removeClass('sv-mandatory');
 			break;
-		case 'X':
-			$(duedate).prop('disabled', true).removeClass('sv-mandatory');
-			break;
 		default:
 			$(duedate).prop('disabled', true).removeClass('sv-mandatory');
 			$(duedate).datepicker('setDate', $(length).val());
@@ -10982,6 +10979,7 @@ function validateStage2(length, duedate) {
 			length.parent().addClass('sv-mandatory');
 			break;
 		case '0':
+			length.parent().removeClass('sv-mandatory');
 			duedate.val() == '' ? duedate.addClass('sv-mandatory') : duedate.removeClass('sv-mandatory');
 			break;
 		default:

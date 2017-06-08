@@ -68,10 +68,10 @@ export default `<div class="">
 								</b><span class="tablesaw-cell-content">Stage 2
 	<!-- Extension -->
 		</span></td><td><b class="tablesaw-cell-label">Task Title
-								</b><span class="tablesaw-cell-content"><select data-extensionlength="" aria-label="grant a stage 2 extension?" class="sv-form-control "><option></option><option selected="" value="0">Grant</option><option 0="" value="16/Jun/2017">Reject</option></select>
+								</b><span class="tablesaw-cell-content"><select data-extensionlength="" aria-label="grant a stage 2 extension?" class="sv-form-control"><option></option><option r="" value="0">Grant</option><option selected="" value="19/Jun/2017">Reject</option></select>
 	<!-- Enter New Due Date-->
 		</span></td><td><b class="tablesaw-cell-label">Task Weighting
-								</b><span class="tablesaw-cell-content"><input class="sv-form-control hasDatepicker" aria-label="please insert a stage 2 extension date" data-extensionduedate="" data-datepick="" value="16/Jun/2017" type="text" id="dp1496844658553" disabled="">
+								</b><span class="tablesaw-cell-content"><input class="sv-form-control hasDatepicker" aria-label="please insert a stage 2 extension date" data-extensionduedate="" data-datepick="" value="19/Jun/2017" type="text" id="dp1496922979631" disabled="">
 
 
 

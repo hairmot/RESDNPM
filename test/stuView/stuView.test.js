@@ -19,6 +19,12 @@ describe('Student View', function() {
 		expect(global.sitsDialogTitleReceived).to.equal('delete title');
 	});
 
+	it('Binds the open function', function() {
+		saveTask.openButtonClicked();
+		$('#openRequest').click();
+		expect($('#openRequest').hasClass('progress-striped')).to.be.true;
+	});
+
 	it('deletes a request by performing an ajax call', function() {
 		var getsCalled = 0;
 		var hrefReceived = '';

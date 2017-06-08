@@ -51,7 +51,9 @@ export default `
 				</thead>
 				<tbody>
 
-    <tr class="requestRow"><td>ER-PC1091_83842101</td><td class="tablesaw-priority-5">2016/7</td><td class="tablesaw-priority-3">23/May/2017</td><td class="tablesaw-priority-4">Awaiting Submission</td><td><div class="sv-col-md-6"><a class="sv-btn-block sv-btn sv-btn-default" id="beginNewRequest" href="../run/SIW_YMHD.start_url?6967C7263F9B11E7tUFenqlplGH68jgK40o2sOoQbDqcvL1PEAdaoiKc6TU7i6B3Oin7tVECPl2jW2WXac5JBFRrcq9WFWv3Dvwj8vSn9bK85Old3VvzSB9xoGWCpoakZjF21OUxH4ftoZJXLp5JsytbY4JC7bV0VTcoGw4TXPfR06k1wqqMrv4sEqfY5nAxCmqj6HeQ5n25KC3NsTvJIB_VvLa5feeXr0B1-g">Open</a></div><div class="sv-col-md-6"><a id="deleteRequest" class="sv-btn-block sv-btn sv-btn-danger" data-delete="" href="delete" target="_blank">Delete</a></div>
+    <tr class="requestRow"><td>ER-PC1091_83842101</td><td class="tablesaw-priority-5">2016/7</td><td class="tablesaw-priority-3">23/May/2017</td><td class="tablesaw-priority-4">Awaiting Submission</td><td><div class="sv-col-md-6">
+	<a class="sv-btn-block sv-btn sv-btn-default" id="openRequest" href="../run/SIW_YMHD.start_url?BF057B7E4C3E11E7p14X9MPvuhypBYt7wApkDuzXljFjcuY6fYkTJgJ5DTtpmMifU6g7WyRAi9G-egD1l8mKvyC8E2eMtd4iPVxn9jbnYbU8TgliXhHQFA8Vgdaw7YeIOBAOoL7Dc7HcVIlu3-VkbEjd_AWgyqYfhETJ0n-IOvl8BC0-thgYR3rM-df1Aj4UmCk5VXWpLYpRMTqlNFZneJU2a96KpVI0c2Vr-g">Open</a>
+		</div><div class="sv-col-md-6"><a id="deleteRequest" class="sv-btn-block sv-btn sv-btn-danger" data-delete="" href="delete" target="_blank">Delete</a></div>
 
 				</td></tr></tbody>
 			</table>
