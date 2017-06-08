@@ -27,14 +27,21 @@ var setGlobals = function setGlobals () {
 
 
 	global.sits_dialog = function(title, message,actions) {
-		global.sitsDialogTitleReceived = title;
-		global.sitsDialogMessageReceived = message;
-		global.sitsDialogActionsReceived = actions;
+
+			global.sitsDialogTitleReceived = title;
+			global.sitsDialogMessageReceived = message;
+			global.sitsDialogActionsReceived = actions;
+
 		return {title: title};
 	}
 
 	global.sits_dialog_close = function(dialog) {
-		global.sitsDialogClosedTitle = dialog.title;
+		try {
+			global.sitsDialogClosedTitle = dialog.title;
+		}
+		catch (e) {
+			global.sitsDialogClosedTitle = 'called';
+		}
 	}
 
 }

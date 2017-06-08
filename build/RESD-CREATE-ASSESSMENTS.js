@@ -13333,14 +13333,33 @@ return Tether;
 Object.defineProperty(exports, "__esModule", {
 	value: true
 });
+
+exports.default = function (curRow) {
+	row = curRow;
+	return {
+		validate24Hours: function validate24Hours() {
+			var result = false;
+			var dueDate = row.find('.dueDate').first().html();
+			var selected = row.find('.selected').first();
+			if (dueDate === (0, _formatDate2.default)(new Date()) && selected.prop('checked')) {
+				result = true;
+			}
+			return result;
+		},
+		FSSTDialog: function FSSTDialog(curCallback) {
+			callback = curCallback;
+			var dialog = sits_dialog(resdDialogs.DUEIN24HOURS.title, resdDialogs.DUEIN24HOURS.message, {
+				No: fsstDialogNoResponse,
+				Yes: fsstDialogYesResponse
+			}, false, false, false);
+		}
+	};
+};
+
 exports.staffNamePromptExit = staffNamePromptExit;
 exports.staffNamePromptSave = staffNamePromptSave;
 exports.fsstDialogNoResponse = fsstDialogNoResponse;
 exports.fsstDialogYesResponse = fsstDialogYesResponse;
-
-var _toastr = require('toastr');
-
-var _toastr2 = _interopRequireDefault(_toastr);
 
 var _saveTask = require('./saveTask');
 
@@ -13352,65 +13371,46 @@ var _formatDate2 = _interopRequireDefault(_formatDate);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-exports.default = {
-	validate24Hours: function validate24Hours(row) {
-		var result = false;
-		var dueDate = row.find('.dueDate').first().html();
-		var selected = row.find('.selected').first();
-		if (dueDate === (0, _formatDate2.default)(new Date()) && selected.prop('checked')) {
-			result = true;
-		}
-		return result;
-	},
-	FSSTDialog: function FSSTDialog(row, callback) {
-		var dialog = sits_dialog(resdDialogs.DUEIN24HOURS.title, resdDialogs.DUEIN24HOURS.message, {
-			No: function No() {
-				fsstDialogNoResponse(dialog, row);
-			},
-			Yes: function Yes() {
-				fsstDialogYesResponse(dialog, row, callback);
-				//go to next dialog
-			}
-		}, false, false, false);
-	}
-};
+var row;
+var callback;
 
+;
 
 function staffNamePrompt(row, callback) {
 	var result = false;
 	var dialog = sits_dialog(resdDialogs.NAMEOFSTAFF.title, resdDialogs.NAMEOFSTAFF.message + ':\n\t\t<br/><br/>\n\t\t<input id="fsstInput" class="sv-form-control" type="text" />', {
-		'Exit': function Exit() {
-			staffNamePromptExit(dialog, row);
-		},
+		'Exit': staffNamePromptExit,
 
-		'Save': function Save() {
-			staffNamePromptSave(dialog, row, callback);
-		}
+		'Save': staffNamePromptSave
 	}, false, false, false);
 	return result;
 }
 
-function staffNamePromptExit(dialog, row) {
+function staffNamePromptExit() {
 	$(row).find('.selected').first().prop('checked', false);
-	sits_dialog_close(dialog);
+	sits_dialog_close();
 	confirmCloseDialog();
 }
 
-function staffNamePromptSave(dialog, row, callback) {
-	if (transferFsstName()) {
-		sits_dialog_close(dialog);
+function staffNamePromptSave() {
+	var messager = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : require('toastr');
+
+	if (transferFsstName(messager)) {
+		sits_dialog_close();
 		return (0, _saveTask2.default)(row, callback);
+	} else {
+		return false;
 	}
 }
 
-function fsstDialogNoResponse(dialog, row) {
+function fsstDialogNoResponse() {
 	row.find('.selected').first().prop('checked', false);
-	sits_dialog_close(dialog);
+	sits_dialog_close();
 	confirmCloseDialog();
 }
 
-function fsstDialogYesResponse(dialog, row, callback) {
-	sits_dialog_close(dialog);
+function fsstDialogYesResponse() {
+	sits_dialog_close();
 	staffNamePrompt(row, callback);
 	return true;
 }
@@ -13421,14 +13421,14 @@ function confirmCloseDialog() {
 	}, false, false, false);
 }
 
-function transferFsstName() {
+function transferFsstName(messager) {
 
 	var inputval = $('#fsstInput').val();
 	if (inputval !== '') {
 		$('[data-fsstname]').first().val(inputval);
 		return true;
 	} else {
-		_toastr2.default.warning(resdErrors.enterName);
+		messager.warning(resdErrors.enterName);
 		return false;
 	}
 }
@@ -13497,13 +13497,14 @@ exports.default = {
 			var row = $(this).closest('.requestRow');
 
 			if (_validation2.default.validateRow(row)) {
-				if (!_check24Hours2.default.validate24Hours(row)) {
+				var val24 = (0, _check24Hours2.default)(row);
+				if (!val24.validate24Hours()) {
 					(0, _saveTask2.default)(row, _this.rowSaveCallback);
 				} else {
 					if ($('[data-fsstname]').first().val() !== '') {
 						(0, _saveTask2.default)(row, _this.rowSaveCallback);
 					} else {
-						_check24Hours2.default.FSSTDialog(row, _this.rowSaveCallback);
+						val24.FSSTDialog(_this.rowSaveCallback);
 					}
 				}
 			}

@@ -1,29 +1,30 @@
-import toastr from 'toastr';
 import saveTask from './saveTask';
 import formatDate from '../shared/js/formatDate';
 
-export default {
-	validate24Hours: function validate24Hours(row) {
-		var result = false;
-		var dueDate = row.find('.dueDate').first().html();
-		var selected = row.find('.selected').first();
-		if(dueDate === formatDate(new Date()) && selected.prop('checked'))
-		{
-			result = true;
+var row;
+var callback;
+
+export default function(curRow) {
+	row = curRow;
+	return {
+		validate24Hours: function validate24Hours() {
+			var result = false;
+			var dueDate = row.find('.dueDate').first().html();
+			var selected = row.find('.selected').first();
+			if(dueDate === formatDate(new Date()) && selected.prop('checked'))
+			{
+				result = true;
+			}
+			return result;
+		},
+		FSSTDialog: function FSSTDialog(curCallback) {
+			callback = curCallback;
+			var dialog = sits_dialog(resdDialogs.DUEIN24HOURS.title,
+				resdDialogs.DUEIN24HOURS.message, {
+					No: fsstDialogNoResponse,
+					Yes: fsstDialogYesResponse
+				},false,false,false);
 		}
-		return result;
-	},
-	FSSTDialog: function FSSTDialog(row, callback) {
-		var dialog = sits_dialog(resdDialogs.DUEIN24HOURS.title,
-			resdDialogs.DUEIN24HOURS.message, {
-				No:() => {
-					fsstDialogNoResponse(dialog, row);
-				},
-				Yes: () => {
-					fsstDialogYesResponse(dialog, row, callback);
-				//go to next dialog
-				}
-			},false,false,false);
 	}
 };
 
@@ -33,35 +34,38 @@ function staffNamePrompt(row, callback) {
 		resdDialogs.NAMEOFSTAFF.message + `:
 		<br/><br/>
 		<input id="fsstInput" class="sv-form-control" type="text" />`, {
-			'Exit': () => { staffNamePromptExit(dialog, row);},
+			'Exit': staffNamePromptExit,
 
-			'Save': () => {staffNamePromptSave(dialog, row, callback);}
+			'Save': staffNamePromptSave
 		},false,false,false);
 	return result;
 }
 
-export function staffNamePromptExit(dialog, row) {
+export function staffNamePromptExit() {
 	$(row).find('.selected').first().prop('checked', false);
-	sits_dialog_close(dialog);
+	sits_dialog_close();
 	confirmCloseDialog();
 }
 
-export function staffNamePromptSave(dialog, row, callback) {
-	if(transferFsstName())
+export function staffNamePromptSave(messager = require('toastr')) {
+	if(transferFsstName(messager))
 	{
-		sits_dialog_close(dialog);
+		sits_dialog_close();
 		return saveTask(row, callback);
+	}
+	else {
+		return false;
 	}
 }
 
-export function fsstDialogNoResponse(dialog, row) {
+export function fsstDialogNoResponse() {
 	row.find('.selected').first().prop('checked', false);
-	sits_dialog_close(dialog);
+	sits_dialog_close();
 	confirmCloseDialog();
 }
 
-export function fsstDialogYesResponse(dialog, row, callback) {
-	sits_dialog_close(dialog);
+export function fsstDialogYesResponse() {
+	sits_dialog_close();
 	staffNamePrompt(row, callback);
 	return true;
 }
@@ -73,7 +77,7 @@ function confirmCloseDialog() {
 			},false,false,false);
 }
 
-function transferFsstName(){
+function transferFsstName(messager){
 
 	var inputval = $('#fsstInput').val();
 	if(inputval !== '')
@@ -83,7 +87,7 @@ function transferFsstName(){
 	}
 	else
 	{
-		toastr.warning(resdErrors.enterName);
+		messager.warning(resdErrors.enterName);
 		return false;
 	}
 }

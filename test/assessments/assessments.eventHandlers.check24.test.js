@@ -24,7 +24,8 @@ describe("Assessments Event handlers Tests - 24 hours branches", function(){
 		var result = false;
 		$('.dueDate').first().html(formatDate(new Date()));
 		$('.selected').first().prop('checked',true);
-		expect(check24Hours.validate24Hours($('.requestRow').first())).to.be.true;
+		var val24 = check24Hours($('.requestRow').first());
+		expect(val24.validate24Hours()).to.be.true;
 		eventHandlers.rowSaveCallback = function() {result = true;}
 		$('.save').first().click();
 		expect(result).to.be.true;
@@ -34,7 +35,8 @@ describe("Assessments Event handlers Tests - 24 hours branches", function(){
 		$('.dueDate').first().html(formatDate(new Date()));
 		$('.selected').first().prop('checked',true);
 		$('[data-fsstname]').first().val('');
-		expect(check24Hours.validate24Hours($('.requestRow').first())).to.be.true;
+		var val24 = check24Hours($('.requestRow').first());
+		expect(val24.validate24Hours()).to.be.true;
 		$('.save').first().click();
 		expect(global.sitsDialogTitleReceived).to.equal(global.resdDialogs.DUEIN24HOURS.title);
 	});

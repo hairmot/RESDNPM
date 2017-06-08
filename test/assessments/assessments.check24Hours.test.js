@@ -17,18 +17,19 @@ describe("check 24 Hours tests", function(){
 	describe('check whether in 24 hours', function() {
 
 		it('ignores assessments over 24 hours away', function() {
-			expect(check24Hours.validate24Hours($('.requestRow').first())).to.equal(false);
+			expect(check24Hours($('.requestRow').first()).validate24Hours()).to.equal(false);
 		})
 
 		it('detects if an assessment is within 24 hours', function() {
 			$('.dueDate').first().html(formatDate(new Date()));
 			$('.selected').first().prop('checked',true);
-			expect(check24Hours.validate24Hours($('.requestRow').first())).to.equal(true);
+			expect(check24Hours($('.requestRow').first()).validate24Hours()).to.equal(true);
 		})
 
 		it('prompts for fsst name if necessary', function() {
 			$('body').append('<input id="fsstInput" value="Test Staff" />');
-			check24Hours.FSSTDialog($('.requestRow').first(), function() {});
+			var val24 = check24Hours($('.requestRow').first())
+			val24.FSSTDialog(function() {});
 
 			expect(global.sitsDialogTitleReceived).to.equal('24hourstitle');
 			expect(global.sitsDialogMessageReceived).to.equal('24hoursmessage');
@@ -38,13 +39,23 @@ describe("check 24 Hours tests", function(){
 
 		it('closes dialog if exit is chosen in staff name prompt dialog', function() {
 			staffNamePromptExit({title:'namePrompt'}, $('<div><input type="checkbox" class="selected"/></div>'));
-			expect(global.sitsDialogClosedTitle).to.equal('namePrompt');
+			expect(global.sitsDialogClosedTitle).to.equal('called');
 		})
 
 		it('closes dialog if exit is chosen in staff name prompt dialog', function() {
-			var saved = staffNamePromptSave({title:'namePrompt'}, $('<div><input type="checkbox" class="selected"/></div>'), () => {});
-			expect(global.sitsDialogClosedTitle).to.equal('namePrompt');
+			global.sitsDialogClosedTitle = null;
+			var saved = staffNamePromptSave($('<div><input type="checkbox" class="selected"/></div>'), () => {}, {warning: () => {}});
+			expect(global.sitsDialogClosedTitle).to.equal('called');
 			expect(saved).to.be.true;
+		})
+
+		it('display error if no fsst is input', function() {
+			$('#fsstInput').val('');
+			global.sitsDialogClosedTitle = 'blank';
+			var saved = false;
+			saved = staffNamePromptSave({warning: function() {}});
+			expect(global.sitsDialogClosedTitle).to.equal('blank');
+			expect(saved).to.be.false;
 		})
 
 		it('closes the fsst dialog if no is selected and deselects the row', function() {
@@ -55,13 +66,13 @@ describe("check 24 Hours tests", function(){
 			var row = $('.requestRow').first()
 			row.find('.selected').first().prop('checked',true);
 			fsstDialogNoResponse({title:'noresponse'}, row);
-			expect(global.sitsDialogClosedTitle).to.equal('noresponse');
+			expect(global.sitsDialogClosedTitle).to.equal('called');
 			expect(row.find('.selected').first().prop('checked')).to.be.false;
 		})
 
 			it('closes the fsst dialog and calls staff name prompt', function() {
 			var result = fsstDialogYesResponse({title:'yesresponse'});
-			expect(global.sitsDialogClosedTitle).to.equal('yesresponse');
+			expect(global.sitsDialogClosedTitle).to.equal('called');
 
 		})
 

@@ -42,7 +42,8 @@ export default {
 			var row = $(this).closest('.requestRow');
 
 			if(validator.validateRow(row)) {
-				if(!check24Hours.validate24Hours(row))
+				var val24 = check24Hours(row);
+				if(!val24.validate24Hours())
 				{
 					saveTask(row, _this.rowSaveCallback);
 				}
@@ -54,7 +55,7 @@ export default {
 					}
 					else
 					{
-						check24Hours.FSSTDialog(row, _this.rowSaveCallback);
+						val24.FSSTDialog(_this.rowSaveCallback);
 					}
 				}
 			}
