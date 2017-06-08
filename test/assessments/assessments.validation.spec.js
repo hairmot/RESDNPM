@@ -56,7 +56,7 @@ describe("Assessments Validation Tests", function(){
             expect(result).to.equal(false);
         });
 
-         it('passes a vaid assessment row', function() {
+         it('passes a valid assessment row', function() {
             var row = $('.requestRow').first();
             row.find('.taskType').first().val("1");
             var result = validation.validateRow(row);
@@ -71,6 +71,42 @@ describe("Assessments Validation Tests", function(){
 		it('detects that a row is in an unsaved state', function() {
 			expect(validation.saveButtonSavedState(`<div><button class="save sv-btn sv-btn-warning"></button></div>`)).to.be.false;
 		});
+
+		it('highlights an invalid selection on page save', function() {
+			var row = $('.requestRow').first();
+			row.find('.taskType').first().val("").keyup();
+			row.find('.selected').first().prop('checked',true);
+			var error = '';
+			expect(validation.validatePage(false, resdErrors, {warning:(a) => {error = a}})).to.equal(false);
+			expect(error).to.equal('INVALID_SELECTION');
+        });
+
+		it('highlights an unsaved row on attempted page save', function() {
+			var row = $('.requestRow').first();
+			row.find('.taskType').first().val("2");
+			row.find('.selected').first().prop('checked',true);
+			var error = '';
+			console.log($('.requestRow .sv-mandatory').attr('class'));
+			expect(validation.validatePage(false, resdErrors, {warning:(a) => {error = a}})).to.equal(false);
+			expect(error).to.equal('UNSAVED_TASK');
+			row.find('.selected').first().prop('checked',false);
+			$('body').append('<div class="requestRow removeme"><input style="checkbox" class="selected" value="checked" checked /></div>');
+			row.find('.save').addClass('sv-btn-warning');
+			validation.validatePage(false, resdErrors, {warning:(a) => {error = a}});
+			expect(error).to.equal('UNSAVED_TASK');
+        });
+
+		it('notifies user of missing evidence', function() {
+			var row = $('.requestRow').first();
+			row.find('.selected').prop('checked',true);
+			$('.removeme').remove();
+			row.find('.save').addClass('sv-btn-success');
+			row.find('.add').parent().parent().css('display','block');
+			var error;
+			validation.validatePage(false, resdErrors, {warning:(a) => {error = a}});
+			expect(error).to.equal('MISSING_EVIDENCE');
+        });
+
 
 
     })
