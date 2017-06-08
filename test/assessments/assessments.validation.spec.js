@@ -105,6 +105,10 @@ describe("Assessments Validation Tests", function(){
 			var error;
 			validation.validatePage(false, resdErrors, {warning:(a) => {error = a}});
 			expect(error).to.equal('MISSING_EVIDENCE');
+			global.staff = 'yes';
+			var bypass = validation.validatePage(false, resdErrors, {warning:(a) => {error = a}});
+			expect(bypass).to.be.true;
+			global.staff = undefined;
         });
 
 

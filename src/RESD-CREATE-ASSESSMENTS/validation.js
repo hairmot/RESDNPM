@@ -57,7 +57,7 @@ export default {
 		}
 		if(!silent)
 			validationErrors.filter((e,i) => validationErrors.indexOf(e) == i).map(a => notifier.warning(resdErrors[a]));
-		return typeof(staff) != 'undefined' ? true : validationErrors.length === 0 ? true: false;
+		return typeof(staff) != 'undefined' ? true : validationErrors.length === 0;
 	},
 	saveButtonSavedState : function saveButtonSavedState(row) {
 		var savebtn = $(row).find('.save');

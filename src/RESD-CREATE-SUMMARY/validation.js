@@ -12,8 +12,7 @@ export default {
 		var summaryText = $('textarea[data-remchar]').first();
 		var evidenceReason = $('input[data-evidencereason]:visible').first();
 		validator.validateInputs([summaryText, evidenceReason]);
-
-		return $('.sv-mandatory:visible').length === 0 ? true : false;
+		return $('.sv-mandatory:visible').length === 0;
 	}
     ,
 	validateEvidence: function validateEvidence() {
