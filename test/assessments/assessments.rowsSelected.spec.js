@@ -16,6 +16,13 @@ describe("Assessments Validation Tests", function(){
             expect(result).to.equal(1);
         });
 
+		it('ignores counting rows with invalid save states', function() {
+			$('.save').first().removeClass('sv-btn-default sv-btn-success');
+            var result = validRowsSelected('#topLevel');
+            expect(result).to.equal(0);
+			$('.save').first().addClass('sv-btn-default');
+        });
+
 		it('updates a counter', function() {
             var result = urs(0, require('../htmlTemplates/singleValidRow'));
             expect(result).to.equal(0);

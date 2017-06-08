@@ -34,6 +34,13 @@ describe("Validator Tests", function(){
         expect($('input.sv-mandatory').length).to.equal(1);
     });
 
+	it("invalidates a whitespace input", () => {
+		var inp = $('input').first();
+		inp.val(' ');
+        validator.validateInputs([inp]);
+        expect($('input.sv-mandatory').length).to.equal(1);
+    });
+
      it("validates a filled in input", () => {
         validator.validateInputs([$('input').first().val('yes')]);
         expect($('input.sv-mandatory').length).to.equal(0);
