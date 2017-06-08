@@ -14,12 +14,19 @@ export default {
 		$('.requestRow input:not([type="file"]), .requestRow select').on('change keyup', function() {
 			var requestRow = $(this).closest('.requestRow');
 			$(requestRow).find('.add').removeClass('sv-mandatory');
+			var btn = $(requestRow).find('.save').first();
+			var removeClasses, addClasses;
 			if (validator.validateRow(requestRow)) {
-				$(requestRow).find('.save').first().val('Save Changes').removeClass('sv-btn-success sv-btn-default sv-btn-primary sv-btn-danger').addClass('sv-btn-warning').prop('disabled',false);
+				removeClasses = 'sv-btn-success sv-btn-default sv-btn-primary sv-btn-danger';
+				addClasses = 'sv-btn-warning';
+				btn.val('Save Changes').prop('disabled',false);
 			}
 			else {
-				$(requestRow).find('.save').first().val('Validation Errors').removeClass('sv-btn-success sv-btn-primary sv-btn-default sv-btn-warning').addClass('sv-btn-danger').prop('disabled',true);
+				removeClasses = 'sv-btn-success sv-btn-primary sv-btn-default sv-btn-warning';
+				addClasses = 'sv-btn-danger';
+				btn.val('Validation Errors').prop('disabled',true);
 			}
+			btn.addClass(addClasses).removeClass(removeClasses);
 		});
 	},
 
