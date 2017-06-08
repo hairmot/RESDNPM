@@ -38,7 +38,6 @@ describe("process Validation Tests", function(){
 		$('.stage2Row [data-extensionlength]').val('0');
 		$('.stage2Row [data-extensionduedate]').val('123');
 		var res = validation.validateRow($('.requestRow').first());
-		console.log($('.sv-mandatory').val());
 		expect(res).to.be.true;
 	});
 

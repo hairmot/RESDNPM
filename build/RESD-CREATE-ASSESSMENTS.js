@@ -13417,9 +13417,7 @@ function fsstDialogYesResponse(dialog, row, callback) {
 
 function confirmCloseDialog() {
 	var dialog = sits_dialog(resdDialogs.QUIT24HRCHECK.title, resdDialogs.QUIT24HRCHECK.message, {
-		Close: function Close() {
-			sits_dialog_close(dialog);
-		}
+		Close: sits_dialog_close
 	}, false, false, false);
 }
 
