@@ -21,7 +21,7 @@ describe('Summary Screen', function() {
 		//wait for fade in
 		setTimeout(function() {
 		expect($('[id^="PLUP_uploader"]').css('display')).to.equal('block');
-		},1000);
+		},500);
 	});
 
 	it('Show the uploader if the reverse is true', function() {
@@ -31,7 +31,7 @@ describe('Summary Screen', function() {
 		//wait for fade in
 		setTimeout(function() {
 		expect($('[id^="PLUP_uploader"]').css('display')).to.equal('none');
-		},1000);
+		},500);
 	});
 
 
