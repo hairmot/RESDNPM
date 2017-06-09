@@ -8,6 +8,7 @@ import tooltips from '../shared/js/tooltips/';
 function RESDInit() {
 	eventHandlers.deleteButtonClicked();
 	eventHandlers.openButtonClicked();
+	eventHandlers.beginButtonClicked();
 	tour.initTour();
 	tooltips.init();
 }

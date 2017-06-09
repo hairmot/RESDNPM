@@ -10,7 +10,9 @@ export default {
 
 function bindSubmitButton() {
 	$('input[value="Submit Request"]').on('click', function() {
-		return validation(toastr).length === 0;
+		var progressClasses = 'progress progress-striped active';
+		$('input[value="Submit Request"]').addClass(progressClasses);
+		return validation(toastr).length === 0 ?  true : ($('input[value="Submit Request"]').removeClass(progressClasses), false);
 	});
 }
 

@@ -20,11 +20,15 @@ export default {
 		});
 
 		$('input[title="Next"]').on('click', function() {
+			var progressClasses = 'progress progress-striped active';
+			$('input[title="Next"]').addClass(progressClasses);
+
 			if(validation.validatePage()) {
 				return true;
 			}
 			else {
 				toastr.warning(resdErrors.missingInputs);
+				$('input[title="Next"]').removeClass(progressClasses);
 				return false;
 			}
 		});

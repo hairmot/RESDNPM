@@ -7,6 +7,7 @@ import './css/styles.css';
 import validation from './validation';
 import hiJackSaveAndExit from '../shared/js/hiJackSaveAndExit';
 import '../shared/css/styles.css';
+import '../shared/css/fancyLoadingButton.css';
 
 function RESDInit() {
     //bind all event handlers

@@ -12,5 +12,13 @@ export default {
 		$('body').on('click','#openRequest', function() {
 			$(this).addClass('progress active progress-striped');
 		});
+	},
+	beginButtonClicked : function beginButtonClicked() {
+		$('body').on('click','#beginNewRequest', function() {
+			$(this).addClass('progress active progress-striped');
+		});
 	}
+
+
+
 };

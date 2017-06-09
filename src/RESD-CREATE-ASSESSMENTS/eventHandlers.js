@@ -62,7 +62,7 @@ export default {
 			}
 		});
 	},
-	rowSaveCallback: function rowSaveCallback (row, toastr) {
+	rowSaveCallback: function rowSaveCallback (row, toastr = toastr) {
 		var saveButton = $(row).find('.save');
 		saveButton.removeClass('sv-btn-primary sv-btn-warning sv-btn-danger progress-striped progress active').addClass('sv-btn-success').val('Saved!');
 		rowSaveCallbackMessager(resdErrors.taskSaved, toastr);
@@ -70,10 +70,12 @@ export default {
 		rowsSelected.updateCounters();
 	},
 	continue : function () {
-		return validator.validatePage(false);
+		var progressClasses = 'progress progress-striped active';
+		$('input[data-continue]').addClass(progressClasses);
+		return validator.validatePage(false) ?  true : ($('input[data-continue]').removeClass(progressClasses), false);
 	}
 };
 
-export function rowSaveCallbackMessager(message, toastr) {
+export function rowSaveCallbackMessager(message, toastr = require('toastr')) {
 	toastr.success(message);
 }
