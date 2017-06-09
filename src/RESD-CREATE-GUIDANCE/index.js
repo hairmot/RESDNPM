@@ -9,7 +9,7 @@ function RESDInit() {
 	tour.initTour();
 	$('input[value="Next"]').on('click', function() {
 		$(this).addClass('progress progress-striped active');
-	})
+	});
 }
 
 sits_attach_event('window','load',function() {
