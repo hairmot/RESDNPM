@@ -110,14 +110,10 @@ describe("Assessments Validation Tests", function(){
 			expect(bypass).to.be.true;
 			global.staff = undefined;
         });
-
-
-
     })
 
-
-     before(() => {
-        var dom = new JSDOM(requestRow);
+    before(() => {
+    	var dom = new JSDOM(requestRow);
         $ = require('jquery')(dom.window);
         global.$ = $;
 		eventHandlers.addValidationOnRowChange();

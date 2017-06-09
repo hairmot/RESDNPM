@@ -1,6 +1,6 @@
 import validation from './validation';
 
-export default function(toastr = require('toastr'), callback = () => {}) {
+export default function(toastr = require('toastr')) {
 	if($('input[data-evidenceavailable]').prop('checked')) {
 		if(!validation.filesUploaded())
         {
@@ -15,7 +15,7 @@ export default function(toastr = require('toastr'), callback = () => {}) {
 		}
 	}
 	else {
-		$('[id^="PLUP_uploader"]').fadeIn(400, callback());
+		$('[id^="PLUP_uploader"]').fadeIn();
 		$('.evidenceReason').fadeOut();
 		$('input[data-evidencereason]').val('').removeClass('sv-mandatory');
 	}
