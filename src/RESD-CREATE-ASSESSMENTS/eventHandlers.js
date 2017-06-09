@@ -2,6 +2,7 @@ import validator from './validation.js';
 import saveTask from  './saveTask.js';
 import check24Hours from './check24Hours';
 import rowsSelected from './rowsSelected';
+import toastr from 'toastr';
 
 export default {
 	init : function init() {
@@ -61,10 +62,11 @@ export default {
 			}
 		});
 	},
-	rowSaveCallback: function rowSaveCallback (row, toastr = require('toastr')) {
+	rowSaveCallback: function rowSaveCallback (row, toastr) {
 		var saveButton = $(row).find('.save');
 		saveButton.removeClass('sv-btn-primary sv-btn-warning sv-btn-danger progress-striped progress active').addClass('sv-btn-success').val('Saved!');
-		toastr.success(resdErrors.taskSaved);
+		rowSaveCallbackMessager(resdErrors.taskSaved, toastr);
+
 		rowsSelected.updateCounters();
 	},
 	continue : function () {
@@ -72,5 +74,6 @@ export default {
 	}
 };
 
-
-
+export function rowSaveCallbackMessager(message, toastr) {
+	toastr.success(message);
+}

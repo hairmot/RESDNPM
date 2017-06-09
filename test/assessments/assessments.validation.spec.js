@@ -96,6 +96,14 @@ describe("Assessments Validation Tests", function(){
 			expect(error).to.equal('UNSAVED_TASK');
         });
 
+		it('only pushes one error if one of two rows is fine', function() {
+			var row = $('.requestRow').first();
+			var errors = [];
+			row.find('.save').removeClass('sv-btn-warning');
+			var res = validation.validatePage(false, resdErrors, {warning:(a) => {errors.push(a)}});
+			expect(errors.length).to.equal(1);
+		})
+
 		it('notifies user of missing evidence', function() {
 			var row = $('.requestRow').first();
 			row.find('.selected').prop('checked',true);
@@ -122,4 +130,3 @@ describe("Assessments Validation Tests", function(){
 
     });
 });
-

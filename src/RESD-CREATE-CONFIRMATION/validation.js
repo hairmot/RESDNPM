@@ -1,5 +1,4 @@
-export default {
-	validatePage: function validatePage(silent = false, toastr = require('toastr')) {
+export default function validatePage(toastr, silent = false) {
 		var errors = [];
 		if($('.requestRow').length === 0)
 			errors.push(resdErrors.noValidTasks);
@@ -10,5 +9,4 @@ export default {
 		}
 
 		return errors;
-	}
-};
+	};

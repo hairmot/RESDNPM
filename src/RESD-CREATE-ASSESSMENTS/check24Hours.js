@@ -1,5 +1,6 @@
 import saveTask from './saveTask';
 import formatDate from '../shared/js/formatDate';
+import messager from 'toastr';
 
 var row;
 var callback;
@@ -47,7 +48,7 @@ export function staffNamePromptExit() {
 	confirmCloseDialog();
 }
 
-export function staffNamePromptSave(messager = require('toastr')) {
+export function staffNamePromptSave(messager) {
 	if(transferFsstName(messager))
 	{
 		sits_dialog_close();

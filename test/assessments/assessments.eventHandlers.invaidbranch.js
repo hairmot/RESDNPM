@@ -10,21 +10,10 @@ import setGlobals from '../aasits_function_mocks';
 describe("Assessments Event handlers Tests", function(){
     var $;
 
-	it("binds event handlers", function() {
-		eventHandlers.init();
-		$('input[data-continue]').prop('disabled',false);
-		$('input[data-continue]').click();
-	});
-
-	it("returns a value on contine", function() {
-		expect(typeof(eventHandlers.continue())).to.equal('boolean');
-	});
-
-	it("can call the callback", function() {
-		var success = false;
-		eventHandlers.rowSaveCallback($('.requestRow').first(), {success: ()  =>  success = true});
-		expect(success).to.be.true;
-
+	it('doesn\'t validate', function() {
+		eventHandlers.addIndividualRowSaveHandlers();
+		$('.taskType').first().val('');
+		$('.save').first().click();
 	});
 
      before(() => {
@@ -32,6 +21,5 @@ describe("Assessments Event handlers Tests", function(){
         $ = require('jquery')(dom.window);
         global.$ = $;
 		setGlobals();
-
     });
 });

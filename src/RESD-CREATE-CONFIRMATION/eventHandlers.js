@@ -1,4 +1,5 @@
 import validation from './validation';
+import toastr from 'toastr';
 
 export default {
 	init: function init() {
@@ -9,7 +10,7 @@ export default {
 
 function bindSubmitButton() {
 	$('input[value="Submit Request"]').on('click', function() {
-		return validation.validatePage().length === 0;
+		return validation(toastr).length === 0;
 	});
 }
 
