@@ -16,20 +16,20 @@ export function urs(i,e) {
 	return updateRowsSelected($(e), $(e).find('.sectionSelectedRows'));
 }
 export function updateRowsSelected(element, outputSelector) {
-		var rows = validRowsSelected(element);
-		$(outputSelector).html(rows);
-		return rows;
+	var rows = validRowsSelected(element);
+	$(outputSelector).html(rows);
+	return rows;
 }
 export function validRowsSelected(element) {
-		var count = 0;
-		$(element).find('.requestRow').each(function(i,e) {
-			if(validation.saveButtonSavedState(e))
+	var count = 0;
+	$(element).find('.requestRow').each(function(i,e) {
+		if(validation.saveButtonSavedState(e))
             {
-				if($(e).find('.selected').first().prop('checked') && validation.validateRow(e))
+			if($(e).find('.selected').first().prop('checked') && validation.validateRow(e))
                 {
-					count++;
-				}
+				count++;
 			}
-		});
-		return count;
-	}
+		}
+	});
+	return count;
+}

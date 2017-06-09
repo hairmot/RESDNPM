@@ -20,18 +20,18 @@ export default function(curRow) {
 		},
 		FSSTDialog: function FSSTDialog(curCallback) {
 			callback = curCallback;
-			var dialog = sits_dialog(resdDialogs.DUEIN24HOURS.title,
+			sits_dialog(resdDialogs.DUEIN24HOURS.title,
 				resdDialogs.DUEIN24HOURS.message, {
 					No: fsstDialogNoResponse,
 					Yes: fsstDialogYesResponse
 				},false,false,false);
 		}
-	}
-};
+	};
+}
 
 function staffNamePrompt(row, callback) {
 	var result = false;
-	var dialog = sits_dialog(resdDialogs.NAMEOFSTAFF.title,
+	sits_dialog(resdDialogs.NAMEOFSTAFF.title,
 		resdDialogs.NAMEOFSTAFF.message + `:
 		<br/><br/>
 		<input id="fsstInput" class="sv-form-control" type="text" />`, {
@@ -72,7 +72,7 @@ export function fsstDialogYesResponse() {
 }
 
 function confirmCloseDialog() {
-	var dialog = sits_dialog(resdDialogs.QUIT24HRCHECK.title,
+	sits_dialog(resdDialogs.QUIT24HRCHECK.title,
 			resdDialogs.QUIT24HRCHECK.message, {
 				Close:sits_dialog_close
 			},false,false,false);

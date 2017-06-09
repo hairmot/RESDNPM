@@ -15,6 +15,7 @@ module.exports = {
             "tab"
         ],
         "linebreak-style": "off",
+		"no-unused-vars":"off",
         "quotes": [
             "error",
             "single"
