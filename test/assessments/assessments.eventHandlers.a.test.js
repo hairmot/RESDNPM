@@ -9,6 +9,9 @@ import setGlobals from '../aasits_function_mocks';
 
 describe("Assessments Event handlers Tests", function(){
     var $;
+	var dataObject = {};
+		dataObject.data = {};
+		dataObject.data.silent = true;
 
 	it("binds event handlers", function() {
 		eventHandlers.init();
@@ -17,13 +20,21 @@ describe("Assessments Event handlers Tests", function(){
 	});
 
 	it("returns a value on contine", function() {
-		expect(typeof(eventHandlers.continue())).to.equal('boolean');
+		expect(typeof(eventHandlers.continue(dataObject))).to.equal('boolean');
+
 	});
 
 	it("can call the callback", function() {
 		var success = false;
 		eventHandlers.rowSaveCallback($('.requestRow').first(), {success: ()  =>  success = true});
 		expect(success).to.be.true;
+
+	});
+
+	it("removes the loading animation if validation fails", function() {
+		$('.taskType').first().val('');
+
+		expect(eventHandlers.continue(dataObject)).to.be.false;
 
 	});
 

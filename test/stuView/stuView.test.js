@@ -25,6 +25,14 @@ describe('Student View', function() {
 		expect($('#openRequest').hasClass('progress-striped')).to.be.true;
 	});
 
+	it('Binds the begin function', function() {
+		saveTask.beginButtonClicked();
+		$('#beginNewRequest').parent().show();
+		$('#beginNewRequest').click();
+
+		expect($('#beginNewRequest').hasClass('progress-striped')).to.be.true;
+	});
+
 	it('deletes a request by performing an ajax call', function() {
 		var getsCalled = 0;
 		var hrefReceived = '';

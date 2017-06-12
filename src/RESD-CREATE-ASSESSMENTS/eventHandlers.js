@@ -33,7 +33,7 @@ export default {
 
 
 	addContinueHandler: function() {
-		$('input[data-continue]').on('click', this.continue);
+		$('input[data-continue]').on('click', null, {silent:false},this.continue);
 	},
 	//populate ajax input, serialize form and submit. Update message in save button
 	addIndividualRowSaveHandlers: function addIndividualRowSaveHandlers() {
@@ -69,10 +69,10 @@ export default {
 
 		rowsSelected.updateCounters();
 	},
-	continue : function () {
+	continue : function (silent) {
 		var progressClasses = 'progress progress-striped active';
 		$('input[data-continue]').addClass(progressClasses);
-		return validator.validatePage(false) ?  true : ($('input[data-continue]').removeClass(progressClasses), false);
+		return validator.validatePage(silent.data.silent) ?  true : ($('input[data-continue]').removeClass(progressClasses), false);
 	}
 };
 

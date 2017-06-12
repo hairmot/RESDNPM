@@ -13492,7 +13492,7 @@ exports.default = {
 	},
 
 	addContinueHandler: function addContinueHandler() {
-		$('input[data-continue]').on('click', this.continue);
+		$('input[data-continue]').on('click', null, { silent: false }, this.continue);
 	},
 	//populate ajax input, serialize form and submit. Update message in save button
 	addIndividualRowSaveHandlers: function addIndividualRowSaveHandlers() {
@@ -13524,10 +13524,10 @@ exports.default = {
 
 		_rowsSelected2.default.updateCounters();
 	},
-	continue: function _continue() {
+	continue: function _continue(silent) {
 		var progressClasses = 'progress progress-striped active';
 		$('input[data-continue]').addClass(progressClasses);
-		return _validation2.default.validatePage(false) ? true : ($('input[data-continue]').removeClass(progressClasses), false);
+		return _validation2.default.validatePage(silent.data.silent) ? true : ($('input[data-continue]').removeClass(progressClasses), false);
 	}
 };
 function rowSaveCallbackMessager(message) {
