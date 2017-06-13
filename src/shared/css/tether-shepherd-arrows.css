@@ -22,6 +22,7 @@
     font-family: inherit;
     background: #efefef;
 		border:1px solid #621b40;
+		box-shadow:0 1px 15px 3px white;
     color: #232323;
     padding: 1em;
     font-size: 1.1em;
@@ -158,7 +159,7 @@
   .shepherd-element.shepherd-theme-square-dark.shepherd-has-cancel-link .shepherd-content header h3 {
     float: left; }
   .shepherd-element.shepherd-theme-square-dark .shepherd-content {
-    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.17);
+
     border-radius: 0;
     padding: 0; }
     .shepherd-element.shepherd-theme-square-dark .shepherd-content * {

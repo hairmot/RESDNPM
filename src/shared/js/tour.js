@@ -18,21 +18,6 @@ function startTour() {
 		}
 	});
 
-	var steps = [];
-	$('[data-tour]').each((i,e) => {
-		var id = $(e).data('tour');
-		// ensure no duplicates - important for areas where dynamically generated rows
-		if(steps.filter(a => a.id === id).length  === 0)
-		{
-			steps.push({
-				id: id,
-				name: $(e).data('tour-name'),
-				text : $(e).data('tour-text'),
-				attachTo:'[data-tour="' + id + '"] top'
-			});
-		}
-	});
-
 	steps.forEach(a => {
 		tour.addStep(a.id, {
 			title: a.name.replace( /(^|\s)([a-z])/g , (m,p1,p2) =>  p1+p2.toUpperCase()),

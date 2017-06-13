@@ -38,6 +38,7 @@ module.exports = {
 	   "sits_collapsible_panel" : true,
 	   "sits_dialog" : true,
 	   "sits_dialog_close" : true,
+	   "steps" : true,
 	   "summaryLength" : true,
    }
 };

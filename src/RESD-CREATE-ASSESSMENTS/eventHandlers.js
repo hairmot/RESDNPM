@@ -10,7 +10,7 @@ export default {
 		this.addContinueHandler();
 		this.addIndividualRowSaveHandlers();
 	},
-//on each input change - check validation, display message on save button.
+	//on each input change - check validation, display message on save button.
 	addValidationOnRowChange: function addValidationOnRowChange() {
 		$('.requestRow input:not([type="file"]), .requestRow select').on('change keyup', function() {
 			var requestRow = $(this).closest('.requestRow');
@@ -30,8 +30,6 @@ export default {
 			btn.addClass(addClasses).removeClass(removeClasses);
 		});
 	},
-
-
 	addContinueHandler: function() {
 		$('input[data-continue]').on('click', null, {silent:false},this.continue);
 	},
