@@ -20,13 +20,12 @@ describe('Student View', function() {
 	});
 
 	it('Binds the open function', function() {
-		saveTask.openButtonClicked();
+		saveTask.animatedButtonClicked(['#beginNewRequest', '#openRequest']);
 		$('#openRequest').click();
 		expect($('#openRequest').hasClass('progress-striped')).to.be.true;
 	});
 
 	it('Binds the begin function', function() {
-		saveTask.beginButtonClicked();
 		$('#beginNewRequest').parent().show();
 		$('#beginNewRequest').click();
 

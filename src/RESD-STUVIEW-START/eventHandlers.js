@@ -8,17 +8,9 @@ export default {
 			return false;
 		});
 	},
-	openButtonClicked : function openButtonClicked() {
-		$('body').on('click','#openRequest', function() {
-			$(this).addClass('progress active progress-striped');
-		});
-	},
-	beginButtonClicked : function beginButtonClicked() {
-		$('body').on('click','#beginNewRequest', function() {
+	animatedButtonClicked : function animatedButtonClicked(selectors) {
+		$('body').on('click',selectors.join(','), function() {
 			$(this).addClass('progress active progress-striped');
 		});
 	}
-
-
-
 };

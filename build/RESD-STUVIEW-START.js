@@ -2719,17 +2719,11 @@ exports.default = {
 			return false;
 		});
 	},
-	openButtonClicked: function openButtonClicked() {
-		$('body').on('click', '#openRequest', function () {
-			$(this).addClass('progress active progress-striped');
-		});
-	},
-	beginButtonClicked: function beginButtonClicked() {
-		$('body').on('click', '#beginNewRequest', function () {
+	animatedButtonClicked: function animatedButtonClicked(selectors) {
+		$('body').on('click', selectors.join(','), function () {
 			$(this).addClass('progress active progress-striped');
 		});
 	}
-
 };
 
 },{"./confirmDelete":4}],8:[function(require,module,exports){
@@ -2757,6 +2751,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function RESDInit() {
 	_eventHandlers2.default.deleteButtonClicked();
+
+	_eventHandlers2.default.animatedButtonClicked(['#beginNewRequest', '#beginNewRequest']);
+
 	_eventHandlers2.default.openButtonClicked();
 	_eventHandlers2.default.beginButtonClicked();
 	_tour2.default.initTour();

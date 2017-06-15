@@ -7,6 +7,9 @@ import tooltips from '../shared/js/tooltips/';
 
 function RESDInit() {
 	eventHandlers.deleteButtonClicked();
+
+	eventHandlers.animatedButtonClicked(['#beginNewRequest', '#beginNewRequest']);
+
 	eventHandlers.openButtonClicked();
 	eventHandlers.beginButtonClicked();
 	tour.initTour();
