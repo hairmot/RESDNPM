@@ -10799,7 +10799,7 @@ exports.default = function (messager) {
 				_validator2.default.validateInputs([$('[data-stage2info]')]);
 				_validator2.default.validateRecordPicker($('[data-recpicker]'));
 				if ($('.sv-mandatory').length > 0) {
-					messager.warning('Please provide require inputs');
+					messager.warning(resdErrors.missingInputs);
 					return false;
 				}
 				return true;

@@ -19,7 +19,7 @@ export default (messager) => {
 				validator.validateInputs([$('[data-stage2info]')]);
 				validator.validateRecordPicker($('[data-recpicker]'));
 				if($('.sv-mandatory').length > 0) {
-					messager.warning('Please provide require inputs');
+					messager.warning(resdErrors.missingInputs);
 					return false;
 				}
 				return true;
