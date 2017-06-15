@@ -10,8 +10,6 @@ function RESDInit() {
 
 	eventHandlers.animatedButtonClicked(['#beginNewRequest', '#beginNewRequest']);
 
-	eventHandlers.openButtonClicked();
-	eventHandlers.beginButtonClicked();
 	tour.initTour();
 	tooltips.init();
 }

@@ -2754,8 +2754,6 @@ function RESDInit() {
 
 	_eventHandlers2.default.animatedButtonClicked(['#beginNewRequest', '#beginNewRequest']);
 
-	_eventHandlers2.default.openButtonClicked();
-	_eventHandlers2.default.beginButtonClicked();
 	_tour2.default.initTour();
 	_tooltips2.default.init();
 }
