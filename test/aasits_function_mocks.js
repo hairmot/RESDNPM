@@ -19,6 +19,8 @@ var setGlobals = function setGlobals () {
 
 	global.enhanced = 'Y';
 
+	global.b = () => true;
+
 	if (global.$) {
 		global.$.post = function(url, data, callback) {callback()};
 		global.$.ajax = function() {};

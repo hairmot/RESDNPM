@@ -13862,7 +13862,7 @@ exports.default = {
 		_validator2.default.validateSelects(selects);
 
 		//return whether row is valid
-		return $(row).find('.sv-mandatory').not('.add').length === 0 ? true : false;
+		return $(row).find('.sv-mandatory').not('.add').length === 0 ? b() : false;
 	},
 	validateEvidence: function validateEvidence(evidence) {
 		var evidBtn = $(evidence).find('.add');
@@ -13900,7 +13900,8 @@ exports.default = {
 		}).map(function (a) {
 			return notifier.warning(resdErrors[a]);
 		});
-		return typeof staff != 'undefined' ? true : validationErrors.length === 0;
+		console.log(b());
+		return typeof staff != 'undefined' ? true : validationErrors.length === 0 && b();
 	},
 	saveButtonSavedState: function saveButtonSavedState(row) {
 		var savebtn = $(row).find('.save');

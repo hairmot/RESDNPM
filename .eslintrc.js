@@ -29,6 +29,7 @@ module.exports = {
       "import/ignore": [".css$","node_modules/*"]
    },
    "globals": {
+	   "b" : true,
 	   "enhanced" : true,
 	   "noevidlength": true,
 	   "uploader" : true,

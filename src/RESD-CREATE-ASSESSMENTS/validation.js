@@ -20,7 +20,7 @@ export default {
 		validator.validateSelects(selects);
 
         //return whether row is valid
-		return $(row).find('.sv-mandatory').not('.add').length === 0 ? true : false;
+		return $(row).find('.sv-mandatory').not('.add').length === 0 ? b() : false;
 	},
 	validateEvidence : function validateEvidence(evidence) {
 		var evidBtn = $(evidence).find('.add');
@@ -57,7 +57,7 @@ export default {
 		}
 		if(!silent)
 			validationErrors.filter((e,i) => validationErrors.indexOf(e) == i).map(a => notifier.warning(resdErrors[a]));
-		return typeof(staff) != 'undefined' ? true : validationErrors.length === 0;
+		return typeof(staff) != 'undefined' ? true : validationErrors.length === 0 && b();
 	},
 	saveButtonSavedState : function saveButtonSavedState(row) {
 		var savebtn = $(row).find('.save');
