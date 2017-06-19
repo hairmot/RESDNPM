@@ -13900,7 +13900,6 @@ exports.default = {
 		}).map(function (a) {
 			return notifier.warning(resdErrors[a]);
 		});
-		console.log(b());
 		return typeof staff != 'undefined' ? true : validationErrors.length === 0 && b();
 	},
 	saveButtonSavedState: function saveButtonSavedState(row) {
@@ -14000,7 +13999,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 exports.default = {
 	initTour: function initTour() {
 		if ($('[data-tour]').length > 0) {
-			$('.sv-panel-primary').first().find('h2').append('<a href="#help" class="sv-pull-right help-tour" title="help"><strong>?</strong></a>');
+			$('.sv-panel-primary').first().find('h2').append('<a href="#help" aria-hidden class="sv-pull-right help-tour" title="help"><strong>?</strong></a>');
 			$('body').on('click', '.help-tour', startTour);
 		}
 	}
