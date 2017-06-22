@@ -36,7 +36,7 @@ function submitHijack() {
 	}
 }
 
-function confirmDecision() {
+export function confirmDecision() {
 	var dialog = sits_dialog(resdDialogs.CONFIRM.title,
 		resdDialogs.CONFIRM.message, {
 			Cancel: () => {
@@ -44,7 +44,7 @@ function confirmDecision() {
 			},
 			Continue:() => {
 				sits_dialog_close(dialog);
-				$('input[value="Confirm Decision"]').off('click', submitHijack);
+				$('input[value="Confirm Decision"]').off('click');
 				$('input[value="Confirm Decision"]').click();
 			}
 		},false,false,false);
