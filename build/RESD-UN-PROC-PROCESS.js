@@ -10893,6 +10893,10 @@ var _validation2 = _interopRequireDefault(_validation);
 
 var _eventHandlers = require('../RESD-PROCESS-PROCESS/eventHandlers');
 
+var _saveRow = require('../RESD-PROCESS-PROCESS/saveRow');
+
+var _saveRow2 = _interopRequireDefault(_saveRow);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = {
@@ -10901,15 +10905,20 @@ exports.default = {
 		this.bindContinueHandler();
 	},
 	bindDecisionChangedHandlers: function bindDecisionChangedHandlers() {
-		$('[data-decision]').on('change', _validation2.default.verifyPage);
+		$('[data-decision]').on('change', function () {
+			var row = $(this).closest('.requestRow');
+			if (_validation2.default.verifyRow(row)) {
+				(0, _saveRow2.default)(row);
+			}
+			_validation2.default.verifyPage();
+		});
 	},
 	bindContinueHandler: function bindContinueHandler() {
 		$('input[value="Confirm Decision"]').on('click', _eventHandlers.confirmDecision);
 	}
-
 };
 
-},{"../RESD-PROCESS-PROCESS/eventHandlers":3,"./validation":8}],7:[function(require,module,exports){
+},{"../RESD-PROCESS-PROCESS/eventHandlers":3,"../RESD-PROCESS-PROCESS/saveRow":4,"./validation":8}],7:[function(require,module,exports){
 'use strict';
 
 var _eventHandlers = require('./eventHandlers');
@@ -10924,6 +10933,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function RESDInit() {
 	_eventHandlers2.default.init();
+	_validation2.default.verifyPage();
 }
 
 sits_attach_event('window', 'load', function () {
@@ -10945,9 +10955,15 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 exports.default = {
 	verifyPage: function verifyPage() {
-		_validator2.default.validateSelects($('[data-decision] option:selected').toArray().map(function (a) {
-			return $(a);
-		}));
+		var _this = this;
+		$('.requestRow').toArray().map(function (a) {
+			return _this.verifyRow(a);
+		});
+		$('input[value="Confirm Decision"]').prop('disabled', $('.sv-mandatory').length !== 0);
+	},
+	verifyRow: function verifyRow(row) {
+		_validator2.default.validateSelects([$(row).find('[data-decision] option:selected')]);
+		return $(row).find('.sv-mandatory').length === 0;
 	}
 };
 

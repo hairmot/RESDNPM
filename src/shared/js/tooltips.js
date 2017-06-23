@@ -18,7 +18,7 @@ function getContentToolTip() {
 	case 'botttom':  style += 'transform:translate(-50%, -104%)';break;
 	case 'top':  style += 'transform:translate(-50%, -4%)';break;
 	default :
-		style += 'transform:translate(-104%, -40%)'; break;
+		style += 'transform:translate(-54%, -104%)'; break;
 	}
 	$('body').append('<div class="sv-hidden-sm sv-hidden-xs sv-hidden-md" id="toolTip" style="' + style + '"><img style="float:right;" class="loading" src="/images/working.gif"/></div>');
 
@@ -40,11 +40,12 @@ function getContentToolTip() {
 	}
 }
 function showToolTip(href) {
-	$('#toolTip').css('background-color','white').html(content.filter(a=> a.href === href)[0].html);
+	$('body').append('<div id="shadow" style="position:absolute;top:0;left:0;background-color:rgba(0, 0, 0, 0.2);pointer-events:none; z-index:5;width:100%;height:100%;"></div>');
+	$('#toolTip').css('background-color','white').css('border','2px solid #621b40').html(content.filter(a=> a.href === href)[0].html);
 }
 
 var content = [];
 
 function destroyContentToolTip() {
-	$('#toolTip').remove();
+	$('#toolTip, #shadow').remove();
 }
