@@ -13,11 +13,12 @@ export default {
 		});
 	},
 	pageSubmit : function pageSubmit() {
-		$('input[value="Confirm Decision"]').on('click', submitHijack);
+		$('input[value="Confirm Decision"]').on('click', function() {
+			submitHijack(validation);
+		});
 	}
 };
-
-function submitHijack() {
+export function submitHijack(validation) {
 	validation.validatePage();
 	if($('.sv-mandatory').length > 0) {
 		toastr.warning(resdErrors.incompleteRows);

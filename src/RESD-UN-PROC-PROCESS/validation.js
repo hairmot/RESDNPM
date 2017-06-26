@@ -1,7 +1,7 @@
 import validator from '../shared/js/validator';
 
 export default {
-	verifyPage: function verifyPage() {
+	validatePage: function validatePage() {
 		var _this = this;
 		$('.requestRow').toArray().map(a => _this.verifyRow(a));
 		$('input[value="Confirm Decision"]').prop('disabled', $('.sv-mandatory').length !== 0);

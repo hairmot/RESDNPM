@@ -1,5 +1,5 @@
 import validation from './validation';
-import {confirmDecision} from '../RESD-PROCESS-PROCESS/eventHandlers';
+import {confirmDecision, submitHijack} from '../RESD-PROCESS-PROCESS/eventHandlers';
 import saveRow from '../RESD-PROCESS-PROCESS/saveRow';
 
 export default {
@@ -13,11 +13,13 @@ export default {
 			if(validation.verifyRow(row)) {
 				saveRow(row);
 			}
-			validation.verifyPage();
+			validation.validatePage();
 
 		});
 	},
 	bindContinueHandler: function bindContinueHandler() {
-		$('input[value="Confirm Decision"]').on('click', confirmDecision);
+		$('input[value="Confirm Decision"]').on('click', function(e) {
+			return submitHijack(validation);
+		});
 	}
 };

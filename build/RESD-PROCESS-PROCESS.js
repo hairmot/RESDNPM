@@ -10775,6 +10775,7 @@ var css = "@media (max-width:767px){.requestRow{border:1px solid #621b40}.tables
 Object.defineProperty(exports, "__esModule", {
 	value: true
 });
+exports.submitHijack = submitHijack;
 exports.confirmDecision = confirmDecision;
 
 var _validation = require('./validation');
@@ -10802,13 +10803,13 @@ exports.default = {
 		});
 	},
 	pageSubmit: function pageSubmit() {
-		$('input[value="Confirm Decision"]').on('click', submitHijack);
+		$('input[value="Confirm Decision"]').on('click', function () {
+			submitHijack(_validation2.default);
+		});
 	}
 };
-
-
-function submitHijack() {
-	_validation2.default.validatePage();
+function submitHijack(validation) {
+	validation.validatePage();
 	if ($('.sv-mandatory').length > 0) {
 		_toastr2.default.warning(resdErrors.incompleteRows);
 		return false;
