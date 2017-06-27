@@ -53,7 +53,7 @@ function waitForSitsInputsToAppear(id)
 }
 
 function populateUploadFields(id) {
-	$('.upname').val(id);
+	$('.upname').val(id + '~' + $('#mhdCode').html());
 	$('.updesc').val(id);
 	$('.upnotes').val($('#mhdCode').html());
 	$('.upkeyw').val($('#stuCode').html());

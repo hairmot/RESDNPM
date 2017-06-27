@@ -2810,6 +2810,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = {
 	init: function init() {
+		$('body').append('<div id="shadow" style="position:absolute;top:0;left:0;background-color:rgba(0, 0, 0, 0.2);pointer-events:none; z-index:5;width:100%;height:100%;display:none;"></div>');
 		$('[data-content-tooltip-target]').hover(getContentToolTip, destroyContentToolTip);
 		$(document).on('mousemove', function (e) {
 			$('#toolTip').css({
@@ -2822,6 +2823,7 @@ exports.default = {
 
 
 function getContentToolTip() {
+	$('#shadow').show();
 	var style = 'position:absolute;width:60%;min-width:120px;z-index:99;';
 	var href = $(this).attr('href');
 	switch ($(this).attr('content-tooltip-target')) {
@@ -2854,7 +2856,7 @@ function getContentToolTip() {
 	}
 }
 function showToolTip(href) {
-	$('body').append('<div id="shadow" style="position:absolute;top:0;left:0;background-color:rgba(0, 0, 0, 0.2);pointer-events:none; z-index:5;width:100%;height:100%;"></div>');
+
 	$('#toolTip').css('background-color', 'white').css('border', '2px solid #621b40').html(content.filter(function (a) {
 		return a.href === href;
 	})[0].html);
@@ -2863,7 +2865,8 @@ function showToolTip(href) {
 var content = [];
 
 function destroyContentToolTip() {
-	$('#toolTip, #shadow').remove();
+	$('#toolTip').remove();
+	$('#shadow').hide();
 }
 
 },{}],15:[function(require,module,exports){
