@@ -10803,6 +10803,7 @@ exports.default = {
 	pageSubmit: function pageSubmit() {
 		$('input[value="Confirm Decision"]').on('click', function () {
 			submitHijack(_validation2.default);
+			return false;
 		});
 	}
 };

@@ -2810,7 +2810,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = {
 	init: function init() {
-		$('body').append('<div id="shadow" style="position:absolute;top:0;left:0;background-color:rgba(0, 0, 0, 0.2);pointer-events:none; z-index:5;width:100%;height:100%;display:none;"></div>');
+		//$('body').append('<div id="shadow" style="position:absolute;top:0;left:0;background-color:rgba(0, 0, 0, 0.2);pointer-events:none; z-index:5;width:100%;height:100%;display:none;"></div>');
 		$('[data-content-tooltip-target]').hover(getContentToolTip, destroyContentToolTip);
 		$(document).on('mousemove', function (e) {
 			$('#toolTip').css({
@@ -2823,7 +2823,6 @@ exports.default = {
 
 
 function getContentToolTip() {
-	$('#shadow').show();
 	var style = 'position:absolute;width:60%;min-width:120px;z-index:99;';
 	var href = $(this).attr('href');
 	switch ($(this).attr('content-tooltip-target')) {
@@ -2834,7 +2833,7 @@ function getContentToolTip() {
 		case 'top':
 			style += 'transform:translate(-50%, -4%)';break;
 		default:
-			style += 'transform:translate(-54%, -104%)';break;
+			style += 'transform:translate(-74%, -104%)';break;
 	}
 	$('body').append('<div class="sv-hidden-sm sv-hidden-xs sv-hidden-md" id="toolTip" style="' + style + '"><img style="float:right;" class="loading" src="/images/working.gif"/></div>');
 
@@ -2866,7 +2865,6 @@ var content = [];
 
 function destroyContentToolTip() {
 	$('#toolTip').remove();
-	$('#shadow').hide();
 }
 
 },{}],15:[function(require,module,exports){

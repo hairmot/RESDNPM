@@ -15,6 +15,7 @@ export default {
 	pageSubmit : function pageSubmit() {
 		$('input[value="Confirm Decision"]').on('click', function() {
 			submitHijack(validation);
+			return false;
 		});
 	}
 };
