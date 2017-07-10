@@ -45,9 +45,10 @@
     "serve": "^6.0.1"
   },
   "dependencies": {
+    "fs-extra": "^3.0.1",
     "jquery": "^3.2.1",
-    "toastr": "^2.1.2",
-    "tether-shepherd": "^1.8.1"
+    "tether-shepherd": "^1.8.1",
+    "toastr": "^2.1.2"
   },
   "browserify-css": {
     "autoInject": true,

@@ -9,7 +9,7 @@ import hiJackSaveAndExit from '../shared/js/hiJackSaveAndExit';
 import '../shared/css/styles.css';
 import '../shared/css/fancyLoadingButton.css';
 
-function RESDInit() {
+export default function RESDInit() {
     //bind all event handlers
 	setInterval(function() {validation.setNextButtonState();}, 300);
 	Object.keys(eventHandlers).map(a => eventHandlers[a]());
