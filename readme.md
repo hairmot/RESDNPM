@@ -10,15 +10,15 @@ npm run all builds all scripts, watches for changes and serves at localhost:5000
 
 ## File Sizes
 
-| File | Size |
-| -----						| ------ 																					|
-| RESD-CREATE-ASSESSMENTS 	| ![](http://img.badgesize.io/hairmot/RESDNPM/master/build/RESD-CREATE-ASSESSMENTS.js) 	|
-| RESD-CREATE-CONFIRMATION 	| ![](http://img.badgesize.io/hairmot/RESDNPM/master/build/RESD-CREATE-CONFIRMATION.js)  	|
-| RESD-CREATE-GUIDANCE 		| ![](http://img.badgesize.io/hairmot/RESDNPM/master/build/RESD-CREATE-GUIDANCE.js) 		|
-| RESD-CREATE-SUMMARY 		| ![](http://img.badgesize.io/hairmot/RESDNPM/master/build/RESD-CREATE-SUMMARY.js)  		|
-| RESD-PROCESS-PROCESS 		| ![](http://img.badgesize.io/hairmot/RESDNPM/master/build/RESD-PROCESS-PROCESS.js)  		|
-| RESD-STAGE2-START 		| ![](http://img.badgesize.io/hairmot/RESDNPM/master/build/RESD-STAGE2-START.js)  			|
-| RESD-STUVIEW-START 		| ![](http://img.badgesize.io/hairmot/RESDNPM/master/build/RESD-STUVIEW-START.js)  		|
-| RESD-UN-PROC-PROCESS 		| ![](http://img.badgesize.io/hairmot/RESDNPM/master/build/RESD-UN-PROC-PROCESS.js)  		|
-| RESD-UNCAP-ASSESSMENTS 	| ![](http://img.badgesize.io/hairmot/RESDNPM/master/build/RESD-UNCAP-ASSESSMENTS.js)  	|
-| RESD-UNCAP-SUMMARY 		| ![](http://img.badgesize.io/hairmot/RESDNPM/master/build/RESD-UNCAP-SUMMARY.js)  		|
+| File | Size | Minified |
+| -----						| ------ 																					| --- | 
+| RESD-CREATE-ASSESSMENTS 	| ![](http://img.badgesize.io/hairmot/RESDNPM/master/build/RESD-CREATE-ASSESSMENTS.js) 	|![](http://img.badgesize.io/hairmot/RESDNPM/master/min/RESD-CREATE-ASSESSMENTS.js)
+| RESD-CREATE-CONFIRMATION 	| ![](http://img.badgesize.io/hairmot/RESDNPM/master/build/RESD-CREATE-CONFIRMATION.js) |![](http://img.badgesize.io/hairmot/RESDNPM/master/min/RESD-CREATE-CONFIRMATION.js) 
+| RESD-CREATE-GUIDANCE 		| ![](http://img.badgesize.io/hairmot/RESDNPM/master/build/RESD-CREATE-GUIDANCE.js) 		| ![](http://img.badgesize.io/hairmot/RESDNPM/master/min/RESD-CREATE-GUIDANCE.js)
+| RESD-CREATE-SUMMARY 		| ![](http://img.badgesize.io/hairmot/RESDNPM/master/build/RESD-CREATE-SUMMARY.js)  		| ![](http://img.badgesize.io/hairmot/RESDNPM/master/min/RESD-CREATE-SUMMARY.js)
+| RESD-PROCESS-PROCESS 		| ![](http://img.badgesize.io/hairmot/RESDNPM/master/build/RESD-PROCESS-PROCESS.js)  		| ![](http://img.badgesize.io/hairmot/RESDNPM/master/min/RESD-PROCESS-PROCESS.js)
+| RESD-STAGE2-START 		| ![](http://img.badgesize.io/hairmot/RESDNPM/master/build/RESD-STAGE2-START.js)  			| ![](http://img.badgesize.io/hairmot/RESDNPM/master/min/RESD-STAGE2-START.js)
+| RESD-STUVIEW-START 		| ![](http://img.badgesize.io/hairmot/RESDNPM/master/build/RESD-STUVIEW-START.js)  		| ![](http://img.badgesize.io/hairmot/RESDNPM/master/min/RESD-STUVIEW-START.js)
+| RESD-UN-PROC-PROCESS 		| ![](http://img.badgesize.io/hairmot/RESDNPM/master/build/RESD-UN-PROC-PROCESS.js)  		|![](http://img.badgesize.io/hairmot/RESDNPM/master/min/RESD-UN-PROC-PROCESS.js) 
+| RESD-UNCAP-ASSESSMENTS 	| ![](http://img.badgesize.io/hairmot/RESDNPM/master/build/RESD-UNCAP-ASSESSMENTS.js)  	| ![](http://img.badgesize.io/hairmot/RESDNPM/master/min/RESD-UNCAP-ASSESSMENTS.js) 
+| RESD-UNCAP-SUMMARY 		| ![](http://img.badgesize.io/hairmot/RESDNPM/master/build/RESD-UNCAP-SUMMARY.js)  		|![](http://img.badgesize.io/hairmot/RESDNPM/master/min/RESD-UNCAP-SUMMARY.js) 

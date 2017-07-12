@@ -1,6 +1,5 @@
 node_modules
 *.log
-min
 .nyc_output
 mochawesome-report
 coverage
