@@ -4,3 +4,4 @@ node_modules
 mochawesome-report
 coverage
 test.1
+package-lock.json
