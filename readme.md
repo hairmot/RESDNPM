@@ -11,9 +11,9 @@ npm run all builds all scripts, watches for changes and serves at localhost:5000
 ## File Sizes
 
 | File | Size | Minified | gzipped |
-| -----						| ------ 																					| --- | 
+| -----						| ------ 																					| --- | ----|
 | RESD-CREATE-ASSESSMENTS 	| ![](http://img.badgesize.io/hairmot/RESDNPM/master/build/RESD-CREATE-ASSESSMENTS.js) 	|![](http://img.badgesize.io/hairmot/RESDNPM/master/min/RESD-CREATE-ASSESSMENTS.js)|![](http://img.badgesize.io/hairmot/RESDNPM/master/min/RESD-CREATE-ASSESSMENTS.js?compression=gzip)
-| RESD-CREATE-CONFIRMATION 	| ![](http://img.badgesize.io/hairmot/RESDNPM/master/build/RESD-CREATE-CONFIRMATION.js) |![](http://img.badgesize.io/hairmot/RESDNPM/master/min/RESD-CREATE-CONFIRMATION.js) |![](http://img.badgesize.io/hairmot/RESDNPM/master/min/RESD-CREATE-CONFIRMATION.js?compression=gzip)
+| RESD-CREATE-CONFIRMATION 	| ![](http://img.badgesize.io/hairmot/RESDNPM/master/build/RESD-CREATE-CONFIRMATION.js) |![](http://img.badgesize.io/hairmot/RESDNPM/master/min/RESD-CREATE-CONFIRMATION.js) |![](http://img.badgesize.io/hairmot/RESDNPM/master/min/RESD-CREATE-CONFIRMATION.js?compression=gzip) |
 | RESD-CREATE-GUIDANCE 		| ![](http://img.badgesize.io/hairmot/RESDNPM/master/build/RESD-CREATE-GUIDANCE.js) 		| ![](http://img.badgesize.io/hairmot/RESDNPM/master/min/RESD-CREATE-GUIDANCE.js)|![](http://img.badgesize.io/hairmot/RESDNPM/master/min/RESD-CREATE-GUIDANCE.js?compression=gzip)
 | RESD-CREATE-SUMMARY 		| ![](http://img.badgesize.io/hairmot/RESDNPM/master/build/RESD-CREATE-SUMMARY.js)  		| ![](http://img.badgesize.io/hairmot/RESDNPM/master/min/RESD-CREATE-SUMMARY.js)|![](http://img.badgesize.io/hairmot/RESDNPM/master/min/RESD-CREATE-SUMMARY.js?compression=gzip)
 | RESD-PROCESS-PROCESS 		| ![](http://img.badgesize.io/hairmot/RESDNPM/master/build/RESD-PROCESS-PROCESS.js)  		| ![](http://img.badgesize.io/hairmot/RESDNPM/master/min/RESD-PROCESS-PROCESS.js)|![](http://img.badgesize.io/hairmot/RESDNPM/master/min/RESD-PROCESS-PROCESS.js?compression=gzip)
