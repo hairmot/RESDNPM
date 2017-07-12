@@ -33,6 +33,7 @@
     "cross-env": "^5.0.1",
     "fs": "0.0.2",
     "gulp": "^3.9.1",
+    "gulp-gzip": "^1.4.0",
     "gulp-uglify": "^3.0.0",
     "istanbul": "^0.4.5",
     "jsdom": "^11.1.0",

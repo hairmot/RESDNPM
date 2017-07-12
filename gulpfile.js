@@ -3,6 +3,7 @@ var babelify = require('babelify');
 var browserify = require( 'browserify');
 var fs = require('fs');
 var uglify = require('gulp-uglify');
+var gzip = require('gulp-gzip');
 
 gulp.task('build', function() {
 
@@ -27,6 +28,14 @@ gulp.task('minify', function() {
 			.pipe(gulp.dest('./min/'))
 		});
 })
+
+gulp.task('gzip', function() {
+		fs.readdirSync('./min/').map(a => {
+			gulp.src('./min/' + a)
+			.pipe(gzip())
+			.pipe(gulp.dest('./gzipped/'))
+		});
+});
 
 
 gulp.task('default', ['build','watch']);
