@@ -29,14 +29,6 @@ gulp.task('minify', function() {
 		});
 })
 
-gulp.task('gzip', function() {
-		fs.readdirSync('./min/').map(a => {
-			gulp.src('./min/' + a)
-			.pipe(gzip())
-			.pipe(gulp.dest('./gzipped/'))
-		});
-});
-
 
 gulp.task('default', ['build','watch']);
 
