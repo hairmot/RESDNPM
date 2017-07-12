@@ -4,6 +4,7 @@ var browserify = require( 'browserify');
 var fs = require('fs');
 var uglify = require('gulp-uglify');
 var gzip = require('gulp-gzip');
+var rename = require('gulp-rename');
 
 gulp.task('build', function() {
 
@@ -15,19 +16,21 @@ gulp.task('build', function() {
 		.transform(babelify)
 		.transform('browserify-css')
 		.bundle()
-		.pipe(fs.createWriteStream(outfile));
-	})
+		.pipe(fs.createWriteStream(outfile)).on('finish', function() {
+			minify(outfile);
 
+		});
+	})
 });
 
-gulp.task('minify', function() {
-		fs.readdirSync('./build/').map(a => {
-			console.log(a);
-			gulp.src('./build/' + a)
-			.pipe(uglify())
-			.pipe(gulp.dest('./min/'))
-		});
-})
+function minify(file) {
+	gulp.src(file)
+		.pipe(uglify())
+		.pipe(rename({
+            suffix: '.min'
+        }))
+		.pipe(gulp.dest('./build/'))
+}
 
 
 gulp.task('default', ['build','watch']);

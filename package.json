@@ -1,8 +1,7 @@
 {
   "name": "resdjavascript",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "Javascript files for RESD solution - includes shared validation and utility functions",
-  "main": "index.js",
   "scripts": {
     "all": "npm-run-all --parallel gulp serve",
     "cover": "cross-env NODE_ENV=test nyc --reporter=lcov --reporter=text --include-all-sources true mocha -S --compilers js:babel-register test/**/*.js",
@@ -34,6 +33,7 @@
     "fs": "0.0.2",
     "gulp": "^3.9.1",
     "gulp-gzip": "^1.4.0",
+    "gulp-rename": "^1.2.2",
     "gulp-uglify": "^3.0.0",
     "istanbul": "^0.4.5",
     "jsdom": "^11.1.0",
@@ -55,5 +55,9 @@
     "autoInject": true,
     "minify": true,
     "rootDir": "."
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hairmot/RESDNPM.git"
   }
 }
