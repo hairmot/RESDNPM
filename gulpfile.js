@@ -3,8 +3,8 @@ var babelify = require('babelify');
 var browserify = require( 'browserify');
 var fs = require('fs');
 var uglify = require('gulp-uglify');
-var gzip = require('gulp-gzip');
 var rename = require('gulp-rename');
+
 
 gulp.task('build', function() {
 
@@ -14,7 +14,7 @@ gulp.task('build', function() {
 		var outfile = './build/' + a + '.js';
 		browserify([infile])
 		.transform(babelify)
-		.transform('browserify-css')
+		.transform(require('browserify-css'))
 		.bundle()
 		.pipe(fs.createWriteStream(outfile)).on('finish', function() {
 			minify(outfile);
