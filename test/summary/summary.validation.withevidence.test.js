@@ -23,15 +23,15 @@ describe('Summary Screen', function() {
 		expect($('input[value="Next"]').prop('disabled')).to.be.false; 	// :visible selector broken but
 	})
 
-	it('sets the next button to disabled  if the page is valid and evidence is uploading', function() {
-		//set window pluploader to ready (mock)
+	// it('sets the next button to disabled  if the page is valid and evidence is uploading', function() {
+	// 	//set window pluploader to ready (mock)
 
-		global.uploader = {a: {state:2}};
+	// 	global.uploader = {a: {state:2}};
 
-		validation.setNextButtonState();
+	// 	validation.setNextButtonState();
 
-		expect($('input[value="Next"]').prop('disabled')).to.be.true; 	// :visible selector broken but
-	})
+	// 	expect($('input[value="Next"]').prop('disabled')).to.be.true; 	// :visible selector broken but
+	// })
 
 	it('fails a validation if summary is missing', function() {
 		global.staff = undefined; //remove staff override switch
