@@ -10810,6 +10810,7 @@ exports.default = {
 		});
 
 		$('input[title="Next"]').on('click', function () {
+
 			var progressClasses = 'progress progress-striped active';
 			$('input[title="Next"]').addClass(progressClasses);
 
@@ -10975,10 +10976,10 @@ exports.default = {
 	setNextButtonState: function setNextButtonState() {
 		var valid = this.validatePage();
 		if (valid && (0, _getPlUploader2.default)().state === 1) {
-			$('input[value="Next"]').prop('disabled', false);
+			//$('input[value="Next"]').prop('disabled', false);
 			return true;
 		} else {
-			$('input[value="Next"]').prop('disabled', true);
+			//$('input[value="Next"]').prop('disabled', true);
 			return false;
 		}
 	}

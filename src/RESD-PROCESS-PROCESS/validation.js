@@ -34,7 +34,11 @@ export default {
 				validateStage2(stage2length, stage2duedate);
 			}
 			else {
-				extensionLength(stage2length, stage2duedate);
+				console.log('test');
+				//extensionLength(stage2length, stage2duedate);
+				// is a stage 1 so we cannot allow
+					stage2length.parent().prop('disabled',true);
+					stage2duedate.prop('disabled',true);
 			}
 
 

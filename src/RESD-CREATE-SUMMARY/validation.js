@@ -16,12 +16,10 @@ export default {
 	}
     ,
 	validateEvidence: function validateEvidence() {
-		if($('input[data-evidenceavailable]').prop('checked'))
-        {
+		if($('input[data-evidenceavailable]').prop('checked')) {
 			return true;
 		}
-		else
-        {
+		else {
 			return this.filesUploaded();
 		}
 	},
@@ -32,11 +30,11 @@ export default {
 	setNextButtonState : function setNextButtonState(){
 		var valid = this.validatePage();
 		if(valid && plUploader().state === 1){
-			$('input[value="Next"]').prop('disabled', false);
+			//$('input[value="Next"]').prop('disabled', false);
 			return true;
 		}
 		else {
-			$('input[value="Next"]').prop('disabled', true);
+			//$('input[value="Next"]').prop('disabled', true);
 			return false;
 		}
 	}
