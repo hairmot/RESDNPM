@@ -104,20 +104,20 @@ describe("Assessments Validation Tests", function(){
 			expect(errors.length).to.equal(1);
 		})
 
-		it('notifies user of missing evidence', function() {
-			var row = $('.requestRow').first();
-			row.find('.selected').prop('checked',true);
-			$('.removeme').remove();
-			row.find('.save').addClass('sv-btn-success');
-			row.find('.add').parent().parent().css('display','block');
-			var error;
-			validation.validatePage(false, resdErrors, {warning:(a) => {error = a}});
-			expect(error).to.equal('MISSING_EVIDENCE');
-			global.staff = 'yes';
-			var bypass = validation.validatePage(false, resdErrors, {warning:(a) => {error = a}});
-			expect(bypass).to.be.true;
-			global.staff = undefined;
-        });
+		// it('notifies user of missing evidence', function() {
+		// 	var row = $('.requestRow').first();
+		// 	row.find('.selected').prop('checked',true);
+		// 	$('.removeme').remove();
+		// 	row.find('.save').addClass('sv-btn-success');
+		// 	row.find('.add').parent().parent().css('display','block');
+		// 	var error;
+		// 	validation.validatePage(false, resdErrors, {warning:(a) => {error = a}});
+		// 	expect(error).to.equal('MISSING_EVIDENCE');
+		// 	global.staff = 'yes';
+		// 	var bypass = validation.validatePage(false, resdErrors, {warning:(a) => {error = a}});
+		// 	expect(bypass).to.be.true;
+		// 	global.staff = undefined;
+        // });
     })
 
     before(() => {
