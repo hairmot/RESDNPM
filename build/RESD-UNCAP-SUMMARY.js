@@ -10961,7 +10961,6 @@ exports.default = {
 		_validator2.default.validateInputs([summaryText, evidenceReason]);
 		return $('.sv-mandatory:visible').length === 0;
 	},
-
 	validateEvidence: function validateEvidence() {
 		if ($('input[data-evidenceavailable]').prop('checked')) {
 			return true;

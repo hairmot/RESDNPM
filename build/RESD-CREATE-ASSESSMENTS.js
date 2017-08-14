@@ -13470,6 +13470,18 @@ exports.default = {
 		this.addValidationOnRowChange();
 		this.addContinueHandler();
 		this.addIndividualRowSaveHandlers();
+		this.addValidationOnEvidenceReason();
+	},
+	addValidationOnEvidenceReason: function addValidationOnEvidenceReason() {
+		$('[data-noevidencereason]').on('change keyup', function () {
+			if ($('[data-noevidencereason]').val() === '') {
+				$('[data-noevidencereason]').addClass('sv-mandatory');
+				return false;
+			} else {
+				$('[data-noevidencereason]').removeClass('sv-mandatory');
+				return true;
+			}
+		});
 	},
 	//on each input change - check validation, display message on save button.
 	addValidationOnRowChange: function addValidationOnRowChange() {
@@ -13867,13 +13879,38 @@ exports.default = {
 	validateEvidence: function validateEvidence(evidence) {
 		var evidBtn = $(evidence).find('.add');
 		//if(evidBtn.length === 0) return false; //checks that evidence is in DOM
-		return $(evidBtn).parent().parent().css('display') === 'block' ? ($(evidBtn).addClass('sv-mandatory'), false) : ($(evidBtn).removeClass('sv-mandatory'), true);
+		var result = $(evidBtn).parent().parent().css('display') === 'block' ? ($(evidBtn).addClass('sv-mandatory'), false) : ($(evidBtn).removeClass('sv-mandatory'), true);
+		if (!result) {
+			$('[data-noevidencereason]').show();
+			if ($('[data-noevidencereason]').val() === '') {
+				$('[data-noevidencereason]').addClass('sv-mandatory');
+				return false;
+			} else {
+				$('[data-noevidencereason]').removeClass('sv-mandatory');
+				return true;
+			}
+		} else {
+			return result;
+		}
 	},
 	validatePage: function validatePage() {
 		var silent = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
 		var resdErrors = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : global.resdErrors;
 		var notifier = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : require('toastr');
 
+		var validationErrors = this.getValidationErrors();
+		if (!silent) validationErrors.filter(function (e, i) {
+			return validationErrors.indexOf(e) == i;
+		}).map(function (a) {
+			return notifier.warning(resdErrors[a]);
+		});
+		return typeof staff != 'undefined' ? true : validationErrors.length === 0 && b();
+	},
+	saveButtonSavedState: function saveButtonSavedState(row) {
+		var savebtn = $(row).find('.save');
+		return savebtn.is('.sv-btn-default, .sv-btn-success');
+	},
+	getValidationErrors: function getValidationErrors() {
 		var validationErrors = [];
 		var _this = this;
 		if ($('.requestRow').find('.selected:checked').length === 0) {
@@ -13895,16 +13932,7 @@ exports.default = {
 				}
 			});
 		}
-		if (!silent) validationErrors.filter(function (e, i) {
-			return validationErrors.indexOf(e) == i;
-		}).map(function (a) {
-			return notifier.warning(resdErrors[a]);
-		});
-		return typeof staff != 'undefined' ? true : validationErrors.length === 0 && b();
-	},
-	saveButtonSavedState: function saveButtonSavedState(row) {
-		var savebtn = $(row).find('.save');
-		return savebtn.is('.sv-btn-default, .sv-btn-success');
+		return validationErrors;
 	}
 };
 

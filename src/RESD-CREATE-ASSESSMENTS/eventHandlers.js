@@ -9,6 +9,19 @@ export default {
 		this.addValidationOnRowChange();
 		this.addContinueHandler();
 		this.addIndividualRowSaveHandlers();
+		this.addValidationOnEvidenceReason();
+	},
+	addValidationOnEvidenceReason: function addValidationOnEvidenceReason() {
+		$('[data-noevidencereason]').on('change keyup', function() {
+			if($('[data-noevidencereason]').val() === '') {
+				$('[data-noevidencereason]').addClass('sv-mandatory')
+				return false;
+			}
+			else {
+				$('[data-noevidencereason]').removeClass('sv-mandatory')
+				return true;
+			}
+		})
 	},
 	//on each input change - check validation, display message on save button.
 	addValidationOnRowChange: function addValidationOnRowChange() {
