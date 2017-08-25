@@ -10882,7 +10882,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 exports.default = {
 	validateRow: function validateRow(row) {
-
+		var LC = $('LC').html() === "MRA";
 		var decision = $(row).find('[data-decision] option:selected').first();
 		var length = $(row).find('[data-extensionlength="validate"] option:selected').first();
 		var duedate = $(row).find('[data-extensionduedate="validate"]').first();
@@ -10892,10 +10892,10 @@ exports.default = {
 		if (decision.text() === 'Declined') {
 			//clear everything
 			decision.parent().removeClass('sv-mandatory');
-			length.parent().removeClass('sv-mandatory').prop('disabled', true);
-			duedate.removeClass('sv-mandatory').prop('disabled', true);
-			stage2length.parent().removeClass('sv-mandatory').prop('disabled', true);
-			stage2duedate.removeClass('sv-mandatory').prop('disabled', true);
+			length.parent().removeClass('sv-mandatory').prop('disabled', true).val('');
+			duedate.removeClass('sv-mandatory').prop('disabled', true).val('');
+			stage2length.parent().removeClass('sv-mandatory').prop('disabled', true).val('');
+			stage2duedate.removeClass('sv-mandatory').prop('disabled', true).val('');
 		} else {
 			//validate stage 1
 
@@ -10911,11 +10911,12 @@ exports.default = {
 				//this is a stage 2 request (identified by the disabled prop on decision) so we must have a stage 2 decision
 				validateStage2(stage2length, stage2duedate);
 			} else {
-				console.log('test');
 				//extensionLength(stage2length, stage2duedate);
 				// is a stage 1 so we cannot allow
-				stage2length.parent().prop('disabled', true);
-				stage2duedate.prop('disabled', true);
+				if (!LC) {
+					stage2length.parent().prop('disabled', true);
+					stage2duedate.prop('disabled', true);
+				}
 			}
 		}
 

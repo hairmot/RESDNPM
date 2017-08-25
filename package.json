@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "Javascript files for RESD solution - includes shared validation and utility functions",
   "scripts": {
-    "all": "npm-run-all --parallel gulp serve",
+    "start": "npm-run-all --parallel gulp serve",
     "cover": "cross-env NODE_ENV=test nyc --reporter=lcov --reporter=text --include-all-sources true mocha -S --compilers js:babel-register test/**/*.js",
     "gulp": "gulp",
     "postcover": "node ./tools/openCoverageReport.js",

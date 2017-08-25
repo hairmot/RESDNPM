@@ -13491,8 +13491,8 @@ exports.default = {
 			var btn = $(requestRow).find('.save').first();
 			var removeClasses, addClasses;
 			if (_validation2.default.validateRow(requestRow)) {
-				removeClasses = 'sv-btn-success sv-btn-default sv-btn-primary sv-btn-danger';
-				addClasses = 'sv-btn-warning';
+				removeClasses = 'sv-btn-success sv-btn-default sv-btn-warning sv-btn-danger';
+				addClasses = 'sv-btn-primary';
 				btn.val('Save Changes').prop('disabled', false);
 			} else {
 				removeClasses = 'sv-btn-success sv-btn-primary sv-btn-default sv-btn-warning';
@@ -13530,7 +13530,7 @@ exports.default = {
 		var toastr = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : toastr;
 
 		var saveButton = $(row).find('.save');
-		saveButton.removeClass('sv-btn-primary sv-btn-warning sv-btn-danger progress-striped progress active').addClass('sv-btn-success').val('Saved!');
+		saveButton.removeClass('sv-btn-primary sv-btn-primary sv-btn-warning sv-btn-danger progress-striped progress active').addClass('sv-btn-success').val('Saved!');
 		rowSaveCallbackMessager(resdErrors.taskSaved, toastr);
 
 		_rowsSelected2.default.updateCounters();

@@ -14,14 +14,14 @@ export default {
 	addValidationOnEvidenceReason: function addValidationOnEvidenceReason() {
 		$('[data-noevidencereason]').on('change keyup', function() {
 			if($('[data-noevidencereason]').val() === '') {
-				$('[data-noevidencereason]').addClass('sv-mandatory')
+				$('[data-noevidencereason]').addClass('sv-mandatory');
 				return false;
 			}
 			else {
-				$('[data-noevidencereason]').removeClass('sv-mandatory')
+				$('[data-noevidencereason]').removeClass('sv-mandatory');
 				return true;
 			}
-		})
+		});
 	},
 	//on each input change - check validation, display message on save button.
 	addValidationOnRowChange: function addValidationOnRowChange() {
@@ -31,8 +31,8 @@ export default {
 			var btn = $(requestRow).find('.save').first();
 			var removeClasses, addClasses;
 			if (validator.validateRow(requestRow)) {
-				removeClasses = 'sv-btn-success sv-btn-default sv-btn-primary sv-btn-danger';
-				addClasses = 'sv-btn-warning';
+				removeClasses = 'sv-btn-success sv-btn-default sv-btn-warning sv-btn-danger';
+				addClasses = 'sv-btn-primary';
 				btn.val('Save Changes').prop('disabled',false);
 			}
 			else {
@@ -75,7 +75,7 @@ export default {
 	},
 	rowSaveCallback: function rowSaveCallback (row, toastr = toastr) {
 		var saveButton = $(row).find('.save');
-		saveButton.removeClass('sv-btn-primary sv-btn-warning sv-btn-danger progress-striped progress active').addClass('sv-btn-success').val('Saved!');
+		saveButton.removeClass('sv-btn-primary sv-btn-primary sv-btn-warning sv-btn-danger progress-striped progress active').addClass('sv-btn-success').val('Saved!');
 		rowSaveCallbackMessager(resdErrors.taskSaved, toastr);
 
 		rowsSelected.updateCounters();

@@ -2,7 +2,7 @@ import validator from '../shared/js/validator';
 
 export default {
 	validateRow : function(row) {
-
+		var LC = $('LC').html()=== "MRA";
 		var decision = $(row).find('[data-decision] option:selected').first();
 		var length = $(row).find('[data-extensionlength="validate"] option:selected').first();
 		var duedate = $(row).find('[data-extensionduedate="validate"]').first();
@@ -13,10 +13,10 @@ export default {
         {
 			//clear everything
 			decision.parent().removeClass('sv-mandatory');
-			length.parent().removeClass('sv-mandatory').prop('disabled', true);
-			duedate.removeClass('sv-mandatory').prop('disabled', true);
-			stage2length.parent().removeClass('sv-mandatory').prop('disabled', true);
-			stage2duedate.removeClass('sv-mandatory').prop('disabled', true);
+			length.parent().removeClass('sv-mandatory').prop('disabled', true).val('');
+			duedate.removeClass('sv-mandatory').prop('disabled', true).val('');
+			stage2length.parent().removeClass('sv-mandatory').prop('disabled', true).val('');
+			stage2duedate.removeClass('sv-mandatory').prop('disabled', true).val('');
 		}
 		else {
 			//validate stage 1
@@ -34,11 +34,12 @@ export default {
 				validateStage2(stage2length, stage2duedate);
 			}
 			else {
-				console.log('test');
 				//extensionLength(stage2length, stage2duedate);
 				// is a stage 1 so we cannot allow
-					stage2length.parent().prop('disabled',true);
-					stage2duedate.prop('disabled',true);
+				if (!LC) {
+				stage2length.parent().prop('disabled',true);
+				stage2duedate.prop('disabled',true);
+				}
 			}
 
 

@@ -28,11 +28,11 @@ export default {
 		if(!result) {
 			$('[data-noevidencereason]').show();
 			if($('[data-noevidencereason]').val() === '') {
-				$('[data-noevidencereason]').addClass('sv-mandatory')
+				$('[data-noevidencereason]').addClass('sv-mandatory');
 				return false;
 			}
 			else {
-				$('[data-noevidencereason]').removeClass('sv-mandatory')
+				$('[data-noevidencereason]').removeClass('sv-mandatory');
 				return true;
 			}
 		}
