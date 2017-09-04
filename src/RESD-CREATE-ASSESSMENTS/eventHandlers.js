@@ -3,6 +3,7 @@ import saveTask from  './saveTask.js';
 import check24Hours from './check24Hours';
 import rowsSelected from './rowsSelected';
 import toastr from 'toastr';
+import validateEvidenceReason from './validateNoEvidence';
 
 export default {
 	init : function init() {
@@ -13,14 +14,7 @@ export default {
 	},
 	addValidationOnEvidenceReason: function addValidationOnEvidenceReason() {
 		$('[data-noevidencereason]').on('change keyup', function() {
-			if($('[data-noevidencereason]').val() === '') {
-				$('[data-noevidencereason]').addClass('sv-mandatory');
-				return false;
-			}
-			else {
-				$('[data-noevidencereason]').removeClass('sv-mandatory');
-				return true;
-			}
+			validateEvidenceReason();
 		});
 	},
 	//on each input change - check validation, display message on save button.

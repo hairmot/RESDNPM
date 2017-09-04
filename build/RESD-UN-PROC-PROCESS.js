@@ -10882,7 +10882,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 exports.default = {
 	validateRow: function validateRow(row) {
-		var LC = $('LC').html() === "MRA";
+		var LC = $('LC').html() === 'MRA';
 		var decision = $(row).find('[data-decision] option:selected').first();
 		var length = $(row).find('[data-extensionlength="validate"] option:selected').first();
 		var duedate = $(row).find('[data-extensionduedate="validate"]').first();

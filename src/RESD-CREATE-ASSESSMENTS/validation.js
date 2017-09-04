@@ -1,4 +1,5 @@
 import validator from '../shared/js/validator';
+import validateEvidenceReason from './validateNoEvidence';
 //import toastr from 'toastr';
 
 export default {
@@ -27,14 +28,7 @@ export default {
 		var result = $(evidBtn).parent().parent().css('display') === 'block' ? ($(evidBtn).addClass('sv-mandatory'), false) : ($(evidBtn).removeClass('sv-mandatory'), true);
 		if(!result) {
 			$('[data-noevidencereason]').show();
-			if($('[data-noevidencereason]').val() === '') {
-				$('[data-noevidencereason]').addClass('sv-mandatory');
-				return false;
-			}
-			else {
-				$('[data-noevidencereason]').removeClass('sv-mandatory');
-				return true;
-			}
+			return validateEvidenceReason();
 		}
 		else {
 			return result;
