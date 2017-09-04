@@ -1,4 +1,4 @@
 module.exports = {
-    "autoInject": true,
-    "rootDir": "."
+	'autoInject': true,
+	'rootDir': '.'
 };
