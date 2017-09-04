@@ -2,7 +2,7 @@ import validator from '../shared/js/validator';
 
 export default {
 	validateRow : function(row) {
-		var LC = $('LC').html()=== "MRA";
+		var LC = $('LC').html()=== 'MRA';
 		var decision = $(row).find('[data-decision] option:selected').first();
 		var length = $(row).find('[data-extensionlength="validate"] option:selected').first();
 		var duedate = $(row).find('[data-extensionduedate="validate"]').first();
@@ -37,8 +37,8 @@ export default {
 				//extensionLength(stage2length, stage2duedate);
 				// is a stage 1 so we cannot allow
 				if (!LC) {
-				stage2length.parent().prop('disabled',true);
-				stage2duedate.prop('disabled',true);
+					stage2length.parent().prop('disabled',true);
+					stage2duedate.prop('disabled',true);
 				}
 			}
 

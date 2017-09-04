@@ -11024,7 +11024,10 @@ exports.default = function (limit, selector, outputSelector) {
 	input.on('keyup', function () {
 		remaining = limit - input.val().length;
 		output.html(Math.max(0, remaining));
-		input.text(input.text().substring(0, limit));
+		var text = input.text();
+		if (text.length > limit) {
+			input.text(text.substring(0, limit));
+		}
 	});
 };
 
