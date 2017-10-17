@@ -11,7 +11,7 @@ describe("process Validation Tests", function(){
 	it('validates the page', function() {
 		global.$.prototype.datepicker = function(name, opts) {};
 		validation.validatePage();
-		//expect($('.sv-mandatory').length).to.equal(0);
+		expect($('.sv-mandatory').length).to.equal(1);
 	});
 
 	it('clears out inputs if decline is selected', function() {

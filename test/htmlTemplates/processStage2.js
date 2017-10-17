@@ -78,5 +78,5 @@ export default `<div class="">
 						</span></td></tr></tbody>
 					</table>
 				</div>
-			</div>
+			</div><div id="LC"></div>
 		</div>`;

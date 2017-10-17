@@ -10809,12 +10809,11 @@ exports.default = {
 			_validation2.default.setNextButtonState();
 		});
 
-		$('input[title="Next"]').on('click', function () {
-
+		$('input[title="Next"]').on('click', function (e) {
 			var progressClasses = 'progress progress-striped active';
 			$('input[title="Next"]').addClass(progressClasses);
-
 			if (_validation2.default.validatePage()) {
+
 				return true;
 			} else {
 				_toastr2.default.warning(resdErrors.missingInputs);
@@ -10973,6 +10972,7 @@ exports.default = {
 		return files > 0;
 	},
 	setNextButtonState: function setNextButtonState() {
+
 		var valid = this.validatePage();
 		if (valid && (0, _getPlUploader2.default)().state === 1) {
 			//$('input[value="Next"]').prop('disabled', false);

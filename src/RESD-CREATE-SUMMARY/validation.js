@@ -27,6 +27,7 @@ export default {
 		return (files > 0);
 	},
 	setNextButtonState : function setNextButtonState(){
+
 		var valid = this.validatePage();
 		if(valid && plUploader().state === 1){
 			//$('input[value="Next"]').prop('disabled', false);

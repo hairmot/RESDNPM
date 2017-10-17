@@ -10809,12 +10809,11 @@ exports.default = {
 			_validation2.default.setNextButtonState();
 		});
 
-		$('input[title="Next"]').on('click', function () {
-
+		$('input[title="Next"]').on('click', function (e) {
 			var progressClasses = 'progress progress-striped active';
 			$('input[title="Next"]').addClass(progressClasses);
-
 			if (_validation2.default.validatePage()) {
+
 				return true;
 			} else {
 				_toastr2.default.warning(resdErrors.missingInputs);
@@ -10973,6 +10972,7 @@ exports.default = {
 		return files > 0;
 	},
 	setNextButtonState: function setNextButtonState() {
+
 		var valid = this.validatePage();
 		if (valid && (0, _getPlUploader2.default)().state === 1) {
 			//$('input[value="Next"]').prop('disabled', false);
@@ -11003,7 +11003,7 @@ var _index2 = _interopRequireDefault(_index);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 sits_attach_event('window', 'load', function () {
-	(0, _index2.default)();
+	//RESDInit();
 });
 
 },{"../RESD-CREATE-SUMMARY/css/styles.css":4,"../RESD-CREATE-SUMMARY/index":7,"../shared/css/fancyLoadingButton.css":10,"../shared/css/styles.css":11,"../shared/css/toastr.css":12}],10:[function(require,module,exports){

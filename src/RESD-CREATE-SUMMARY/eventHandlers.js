@@ -10,6 +10,7 @@ export default {
 
 	addChangeHandlers : function addInputChangeHandlers() {
 
+
 		$('input, select, textarea').on('keyup change', function() {
 			validation.setNextButtonState();
 		});
@@ -19,12 +20,11 @@ export default {
 			validation.setNextButtonState();
 		});
 
-		$('input[title="Next"]').on('click', function() {
-
+		$('input[title="Next"]').on('click', function(e) {
 			var progressClasses = 'progress progress-striped active';
 			$('input[title="Next"]').addClass(progressClasses);
-
 			if(validation.validatePage()) {
+
 				return true;
 			}
 			else {

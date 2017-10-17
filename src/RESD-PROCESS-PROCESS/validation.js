@@ -2,7 +2,7 @@ import validator from '../shared/js/validator';
 
 export default {
 	validateRow : function(row) {
-		var LC = $('LC').html()=== 'MRA';
+		var LC = $('#LC').html().trim() === 'MRA';
 		var decision = $(row).find('[data-decision] option:selected').first();
 		var length = $(row).find('[data-extensionlength="validate"] option:selected').first();
 		var duedate = $(row).find('[data-extensionduedate="validate"]').first();

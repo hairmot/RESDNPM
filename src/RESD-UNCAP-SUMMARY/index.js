@@ -6,6 +6,6 @@ import RESDInit from '../RESD-CREATE-SUMMARY/index';
 
 
 sits_attach_event('window','load',function() {
-	RESDInit();
+	//RESDInit();
 });
 
