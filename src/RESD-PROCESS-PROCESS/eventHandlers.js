@@ -10,6 +10,14 @@ export default {
 			if(validation.validateRow(row)) {
 				saveRow(row);
 			}
+
+			if($(this).attr('data-decision') === 'validate') {
+				if($(this).val() === '3') {
+					$('#pendingEmail').show();
+				} else {
+					$('#pendingEmail').hide();
+				}
+			}
 		});
 	},
 	pageSubmit : function pageSubmit() {

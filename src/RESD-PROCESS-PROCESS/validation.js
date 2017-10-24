@@ -9,7 +9,7 @@ export default {
 		var stage2length = $(row).next('.stage2Row').find('[data-extensionlength] option:selected');
 		var stage2duedate = $(row).next('.stage2Row').find('[data-extensionduedate]');
 
-		if(decision.text() === 'Declined')
+		if(decision.text().substring(0,8) === 'Declined')
         {
 			//clear everything
 			decision.parent().removeClass('sv-mandatory');

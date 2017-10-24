@@ -10800,6 +10800,14 @@ exports.default = {
 			if (_validation2.default.validateRow(row)) {
 				(0, _saveRow2.default)(row);
 			}
+
+			if ($(this).attr('data-decision') === 'validate') {
+				if ($(this).val() === '3') {
+					$('#pendingEmail').show();
+				} else {
+					$('#pendingEmail').hide();
+				}
+			}
 		});
 	},
 	pageSubmit: function pageSubmit() {
@@ -10921,7 +10929,7 @@ exports.default = {
 		var stage2length = $(row).next('.stage2Row').find('[data-extensionlength] option:selected');
 		var stage2duedate = $(row).next('.stage2Row').find('[data-extensionduedate]');
 
-		if (decision.text() === 'Declined') {
+		if (decision.text().substring(0, 8) === 'Declined') {
 			//clear everything
 			decision.parent().removeClass('sv-mandatory');
 			length.parent().removeClass('sv-mandatory').prop('disabled', true).val('');
