@@ -17,7 +17,8 @@ Javascript for the RESD solution.
 ## Commands
 | Output | Command | Description |
 |----|----|----|
-|Build Javascript|gulp-build|Builds javascript into single file - outputs to ./build |
+|Lint Javascript|npm run lint|Automatically cleans up all javascript according to style rules |
+|Build Javascript|npm run build|Builds javascript into single file - outputs to ./build |
 |Run Tests|npm run test | Runs all automated tests - outputs to ./mochawesome-report/mochawesome.html|
 |Generate Code Coverage| npm run cover |Generates coverage report - outputs to ./coverage/lcov-report/index.html|
 |Host code locally| npm run serve |Hosts code at localhost:5000 - useful for quick dev testing|
